@@ -83,7 +83,7 @@
     .photo {
       width: 80px;
       height: 100px;
-      background: url('https://randomuser.me/api/portraits/men/75.jpg') no-repeat center/cover;
+      background:  no-repeat center/cover;
       border-radius: 4px;
       position: absolute;
       top: 45px;
@@ -172,12 +172,14 @@
         </div>
         <div class="campus">Wah Campus</div>
         <div class="info">
-          <span>Session: Spring 2022</span>
+          <span>Session: <%= RESS1.semester_name %></span>
           <span>Bus No: RLC 8960</span>
         </div>
-        <div class="photo"></div>
-        <div class="name">Sharabeel Mustafa Mehmood</div>
-        <div class="student-info">CIIT/SP21-BCS-054/WAH</div>
+        <div >
+          <img  class="photo" src="uploads/<%=student.profile_img %>" alt="">
+        </div>
+        <div class="name"><%= student.name %></div>
+        <div class="student-info">CIIT/<%= student.reg_number %>/WAH</div>
         <div class="footer">
           <div class="dept">Department of Computer Science</div>
         </div>
