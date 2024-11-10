@@ -245,6 +245,13 @@ async function SetStuData(req, res) {
   
 }
 
+function EditStuData(req, res) {
+  const n_Id = req.params.N_Id;
+  con.query('DELETE FROM  WHERE sin_id = ?', [n_Id], (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ message: 'Notification deleted successfully' });
+  });
+}
 
 function getFacalityBusData(req, res) {
   con.query('SELECT * FROM facality', function (err, result) {
@@ -334,6 +341,9 @@ async function SetBusData(req, res){
   });
 
 }
+
+
+
 
 function getDriverData(req, res) {
   con.query('SELECT * FROM driver', function (err, result) {

@@ -23,8 +23,6 @@ const upload = multer({ storage: storage });
 
 
 function  index (req, res) {
-
-  
     con.query('SELECT bus.*,driver.name AS driver_name ,driver.contact AS driver_con FROM bus JOIN driver ON Bus.driver_emp_id = Driver.emp_id;', function (err, result) {
       if (err) throw err;
       con.query('SELECT * FROM route', function (err, result1) {
