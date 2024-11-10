@@ -211,6 +211,39 @@ function ShowDashbord(req, res) {
 }
 
 
+
+function ShowFeePage(req, res) {
+  const userId = req.session.userId;
+  //console.log(userId);
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  con.query(selectQuery_student, [userId], (err, result) => {
+    if (err) throw err;
+    //console.log(result);
+      const currentDate = new Date()
+      console.log(RESS);
+      res.render("fee_page", { student: result[0], currentDate });
+   
+  });
+
+}
+
+function ShowStuEcard(req, res) {
+  const userId = req.session.userId;
+  //console.log(userId);
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  con.query(selectQuery_student, [userId], (err, result) => {
+    if (err) throw err;
+    //console.log(result);
+      const currentDate = new Date()
+      console.log(RESS);
+      res.render("student_e_card", { student: result[0], currentDate });
+   
+  });
+
+}
+
 function Logout(req, res) {
     req.session.destroy((err) => {
       if (err) {
@@ -242,4 +275,6 @@ module.exports = {
     ShowChallan,
     Logout,
     SetRegistration,
+    ShowFeePage,
+    ShowStuEcard,
 };
