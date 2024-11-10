@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="Style/panal_style.css">
+  <title>Demo 2</title>
+
+
+</head>
+
+<body>
+  <!-- Bars -->
+  <div class="container-fluid p-0" id="some-menu"></div>
+  <!--*** BARS END ***-->
+
+  <div class="page-wrapper px-3">
+
+    <div class="container-fluid rounded-2 px-0">
+
+      <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+        <div class="py-3">
+          <% let fullString=currentDate.toString(); %>
+            <% let desiredPart=fullString.substring(0, 21); %>
+
+              <p class="small text-white my-5">
+                <%= desiredPart %>
+              </p>
+              <h2 class="mb-0 text-white">Welcome ,<%= student.name %>!</h2>
+              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+        </div>
+        <div class="e-card-container">
+          <div class="card shadow-sm" style="width: 18rem;">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image">
+            <div class="card-body">
+              <h5 class="card-title">Student Name: <%= student.name %>
+              </h5>
+              <p class="card-text">Bus Route: <%= student.busRoute %>
+              </p>
+              <p class="card-text">Current Location: <%= student.location %>
+              </p>
+              <a href="#" class="btn btn-primary">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <input type="hidden" id="show-signup" class="mxc1 text-danger" value="<%=RESS %>">
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery-3.6.3.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/Toggels.js"></script>
+  <script>
+
+    $("#some-menu").load("navbars_stu.ejs");
+
+
+    const b = document.getElementById('show-signup');
+    const a = b.value;
+
+    if (a == 0) {
+      document.getElementById('signup-overlay').style.display = 'none';
+    } else {
+
+      document.getElementById('signup-overlay').style.display = 'flex';
+    }
+
+
+    document.getElementById('routeSelect').addEventListener('change', function () {
+      const selectedRoute = this.value;
+      const stopSelect = document.getElementById('stopSelect');
+      const options = stopSelect.querySelectorAll('option');
+
+      options.forEach(option => {
+        if (option.getAttribute('data-rid') === selectedRoute) {
+          option.style.display = 'block';
+        } else {
+          option.style.display = 'none';
+        }
+      });
+
+      // Optionally, reset the stop selection if the current selection is hidden
+      if (stopSelect.value && stopSelect.querySelector(`option[value="${stopSelect.value}"]`).style.display === 'none') {
+        stopSelect.value = '';
+      }
+    });
+
+    // Trigger change event on page load to filter stops based on the initial route selection
+    document.getElementById('routeSelect').dispatchEvent(new Event('change'));
+
+  </script>
+
+  <footer class="mxc">
+    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+      <h5 class="text-white">CUI BUS Portal</h5>
+    </div>
+  </footer>
+
+</body>
+
+
+</html>

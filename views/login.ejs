@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="Style/login_style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay-content {
+      position: relative;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      /* Increased width */
+      height: 90%;
+      /* overflow-y: auto;*/
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center my-3">
+      <img height="93px" src="src/CUIWah-Website-Logo.png" alt="">
+    </div>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="bg-white px-5 py-3 my-5 rounded-3 h-97">
+          <h2>Powered By</h2>
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/images/logo1.png" class="border-2" height="250px" alt="">
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <h3>Campus Wheel Comsats</h3>
+          </div>
+
+          <!-- Marquee Notification Slider -->
+          <div class="d-flex justify-content-center align-items-center mt-3">
+            <marquee
+              style="width: 100%; font-size: 18px; color: #ff4500; font-weight: bold; background-color: #f0f0f0; padding: 10px; border-radius: 5px;"
+              behavior="scroll" direction="left" scrollamount="5">
+              🚍 Registrations are open for transport. | 💵 Transport fee installment is now ongoing. | 📅 New bus
+              schedules have been updated.
+            </marquee>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 rounded-3 busImg">
+        <div class="mxc myc border-dark w-50">
+          <button type="button" class="btn btn-primary" id="admin-btn">Admin</button>
+          <button type="button" class="btn btn-primary" id="faculty-btn">Faculty</button>
+          <button type="button" class="btn btn-primary" id="student-btn">Student</button>
+        </div>
+
+        <!-- Student Form -->
+        <div id="stu_form">
+          <form action="/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="reg_number" name="reg_number" required
+                placeholder="Registration Number">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="password" name="password" required
+              placeholder="Password">
+            <br>
+            <span><a href="#" id="show-signup" class="mxc1 text-danger">SignUp Here</a></span>
+            <input type="submit" class="mxc0 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+
+        <!-- Admin Form -->
+        <div id="admin_form" class="hidden">
+          <form action="/admin/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="admin_username" name="username" required
+                placeholder="Admin Username">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="admin_password" name="password" required
+              placeholder="Admin Password">
+            <br>
+            <input type="submit" class="mxc2 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+
+        <!-- Faculty Form -->
+        <div id="faculty_form" class="hidden">
+          <form action="/faculty/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="faculty_username" name="username" required
+                placeholder="Faculty Username">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="faculty_password" name="password" required
+              placeholder="Faculty Password">
+            <br>
+            <input type="submit" class="mxc2 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Route Info Container -->
+      <div class="col-7 rounded-3 p-3" style="border: 2px solid white;">
+        <div class="border-bottom border-white mb-2">
+          <h1 style="color: #FFFFFF;">Route Info</h1>
+        </div>
+        <div class="row overflow-auto flex-nowrap slider-container" style="height: 250px;">
+          <% route.forEach((r)=> { %>
+            <a href="/show_rount/<%= r.r_id %>"
+              class="text-decoration-none border mx-2 my-3 rounded-3 bg-white d-flex justify-content-center align-items-center"
+              style="width: 150px; height: 200px;">
+              <h3 style="color: black;">Route.<%= r.r_id %>
+              </h3>
+            </a>
+            <% }); %>
+        </div>
+      </div>
+
+      <!-- Driver Info Container -->
+      <div class="col-4 mx-3 rounded-3 p-3" style="border: 2px solid white;">
+        <div class="border-bottom border-white mb-2">
+          <h1 style="color: #FFFFFF;">Driver Info</h1>
+        </div>
+        <div class="overflow-y-scroll driver-container" style="height: 250px;">
+          <% driver.forEach((d)=> { %>
+            <div class="d-flex mx-4 my-4 bg-white p-2 rounded-3  align-items-center">
+              <img height="90px" class="rounded-3 mx-2" src="./src/driver.jpeg" alt="Driver">
+              <div>
+                <h4>
+                  <%= d.driver_name %>
+                </h4>
+                <p>Contact: <%= d.driver_con %>
+                </p>
+                <p><b>Bus:</b>
+                  <%= d.bus_id %>
+                </p>
+              </div>
+            </div>
+            <% }); %>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* Route and Driver Containers Scroll Styling */
+      .slider-container,
+      .driver-container {
+        scrollbar-width: thin;
+        /* For Firefox */
+        scrollbar-color: #888 #f1f1f1;
+      }
+
+      .slider-container::-webkit-scrollbar,
+      .driver-container::-webkit-scrollbar {
+        height: 8px;
+        /* Horizontal scrollbar for route */
+        width: 8px;
+        /* Vertical scrollbar for driver */
+      }
+
+      .slider-container::-webkit-scrollbar-thumb,
+      .driver-container::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 10px;
+      }
+
+      .slider-container::-webkit-scrollbar-thumb:hover,
+      .driver-container::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+      }
+
+      .slider-container::-webkit-scrollbar-track,
+      .driver-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+
+
+      /* Route Items Styling */
+      a {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      a:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Driver Info Item Styling */
+      .driver-container div {
+        transition: background-color 0.3s;
+      }
+
+      .driver-container div:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
+
+    <!-- Signup Overlay -->
+    <div class="overlay" id="signup-overlay">
+      <div class="overlay-content">
+        <button class="close-btn" id="close-signup">&times;</button>
+        <div class="row m-0" style="height: 100%;">
+          <div class="col-lg-6 d-none d-lg-block login-bg ">
+            <div class="">
+              <div class="text-center">
+                <img src="./assets/images/CUIWah-Website-Logo.png" class="object-fit-contain " width="400px"
+                  height="300px" alt="" />
+              </div>
+              <div class="text-center text-white ">
+                <img src="./assets/images/Pak-map.png" height="250px" alt="">
+                <h5 class="fw-bold">National Ranking</h5>
+                <p class="small">#2 in Pakistan - 2024.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6  p-sm-5">
+            <div class="text-center">
+              <img src="./assets/images/logo1.png" width="100px" height="100px`" alt="">
+              <h2 class="">Create a new account</h2>
+              <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in
+                    here</a></span></p>
+            </div>
+            <form action="/stu_singup" method="post" enctype="multipart/form-data">
+              <div class="row">
+
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Please Enter" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Registration Number</label>
+                    <input type="text" class="form-control" name="reg_no" id="reg_number" placeholder="Please Enter" />
+                  </div>
+
+                </div>
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Email Address</label>
+                    <input type="text" class="form-control" name="email" placeholder="Please Enter" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Phone Number</label>
+                    <input type="number" class="form-control" name="contact" placeholder="Please Enter" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Please Enter" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label for="" class="form-label regular small">Upload Profile Image</label>
+                    <input type="file" class="form-control" id="profileImage" name="profileImage" />
+
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-evenly align-items-center mt-3 pt-3 ">
+                  <input class="btn btn-danger px-5 w-75 text-white bg-color" type="submit" value="SignUp">
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('admin-btn').addEventListener('click', function () {
+      document.getElementById('stu_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.add('hidden');
+      document.getElementById('admin_form').classList.remove('hidden');
+    });
+
+    document.getElementById('student-btn').addEventListener('click', function () {
+      document.getElementById('admin_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.add('hidden');
+      document.getElementById('stu_form').classList.remove('hidden');
+    });
+
+    document.getElementById('faculty-btn').addEventListener('click', function () {
+      document.getElementById('admin_form').classList.add('hidden');
+      document.getElementById('stu_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.remove('hidden');
+    });
+
+    document.getElementById('show-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'flex';
+    });
+
+    document.getElementById('close-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'none';
+    });
+
+    document.getElementById('hide-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'none';
+    });
+    function validateForm(event) {
+      const regNumber = document.getElementById('reg_number').value;
+      const regExp = /^(SP|FA)\d{2}-(B|M|P)(SE|CS|EE|CE|ME|BB)-\d{3}$/;
+
+      if (!regExp.test(regNumber)) {
+        alert('Invalid Registration Number. It should be in the form of SP21-BCS-054.');
+        event.preventDefault(); // Prevent form submission
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector('form');
+      form.addEventListener('submit', validateForm);
+    });
+
+
+  </script>
+  <footer class="mxc12">
+    <div class="mtc rounded-3 p-1 gap-2 bg-white d-flex justify-content-center align-items-center">
+      <h5 class="text-black">CUI BUS Portal</h5>
+    </div>
+  </footer>
+
+</body>
+
+</html>

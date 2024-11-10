@@ -1,0 +1,15 @@
+ <svg id="icons-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <defs>
+                                <clipPath id="hy918p560a">
+                                    <path data-name="Rectangle 555"   d="M0 0h20v20H0z" />
+                                </clipPath>
+                            </defs>
+                            <g data-name="Group 11279">
+                                <g data-name="Group 11280" style="clip-path: url(#hy918p560a)">
+                                    <g data-name="Group 11279">
+                                        <path data-name="Path 5831" d="M765.061 534.514a9.712 9.712 0 1 1 9.139-9.144h-5.633a4.133 4.133 0 0 0-4.291-4.569 4.051 4.051 0 1 0 .785 8.06zm-1.15-1.151a.906.906 0 0 0 .038-.162c0-1 0-2 .007-3 0-.255-.146-.268-.334-.3a5.159 5.159 0 1 1 5.981-5.937c.04.224.124.294.342.291.656-.01 1.314 0 1.971 0h1.125a8.557 8.557 0 0 0-17.082.09 8.576 8.576 0 0 0 7.952 9.017z" transform="translate(-754.521 -514.819)"   />
+                                        <path data-name="Path 5832" d="M772.191 532.514h-8.181V524.3h8.181zm-1.153-7.021h-5.854v5.828h5.854z" transform="translate(-752.223 -512.519)"   />
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <g data-name="Name=Arrow-2-down">
+        <path d="M0 0h20v20H0z" style="fill:none" transform="rotate(180 10 10)"/>
+        <path data-name="Vector" d="M5.65 2.511 1.255 6.9 0 5.65 5.65 0l5.65 5.65-1.256 1.25z" transform="rotate(180 7.824 6.726)" style="fill:#797979"/>
+    </g>
+</svg>

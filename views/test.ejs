@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="Style/login_style.css">
+  <link rel="stylesheet" href="Style/panal_style.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center my-3">
+      <img width="503px" height="93px" src="src/CUIWah-Website-Logo.png" alt="">
+    </div>
+
+    <div class="row">
+      <div class="col-7">
+        <div class="bg-white px-5 py-3 my-5 rounded-3 h-75">
+          <h2>Power By </h2>
+          <div class="d-flex justify-content-center align-items-center">
+            <img src="assets/images/logo1.png" class="border-2" width="250px" height="250px" alt="">
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <h3>Campus Wheel Comsats</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-5 rounded-3 busImg">
+        <div class="mxc myc border-bottom border-dark w-50">
+          <button type="button" class="btn btn-primary" id="admin-btn">Admin</button>
+          <button type="button" class="btn btn-primary" id="faculty-btn">Faculty</button>
+          <button type="button" class="btn btn-primary" id="student-btn">Student</button>
+        </div>
+
+        <!-- Student Form -->
+        <div id="stu_form">
+          <form action="/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="reg_number" name="reg_number" required
+                placeholder="Registration Number">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="password" name="password" required
+              placeholder="Password">
+            <br>
+            <span><a href="#" id="show-signup" class="mxc1 text-danger">SignUp here</a></span>
+            <input type="submit" class="mxc0 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+
+        <!-- Admin Form -->
+        <div id="admin_form" class="hidden">
+          <form action="/admin/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="admin_username" name="username" required
+                placeholder="Admin Username">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="admin_password" name="password" required
+              placeholder="Admin Password">
+            <br>
+            <input type="submit" class="mxc2 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+
+        <!-- Faculty Form -->
+        <div id="faculty_form" class="hidden">
+          <form action="/faculty/login/confirm" method="POST">
+            <div class="gap-3 my-3">
+              <input type="text" class="mxc1 my-2 rounded-1 px-4" id="faculty_username" name="username" required
+                placeholder="Faculty Username">
+            </div>
+            <input type="password" class="mxc1 my-2 rounded-1 px-4" id="faculty_password" name="password" required
+              placeholder="Faculty Password">
+            <br>
+            <input type="submit" class="mxc2 my-2 rounded-1" value="Log in">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-7 rounded-3">
+        <div class="border-bottom border-white">
+          <h1 class="color-white">Route Info</h1>
+        </div>
+        <div class="row overflow-auto flex-nowrap overflow-x-scroll" style="height: 300px;">
+          <% route.forEach( r=> { %>
+            <div class="border mx-2 my-3 bg-white d-flex justify-content-center align-items-center"
+              style="width:170px; height: 250px;">
+              <h3>Route.<%= r.r_id %>
+              </h3>
+            </div>
+            <% }); %>
+        </div>
+      </div>
+      <div class="col-4 mx-3 rounded-3">
+        <div class="border-bottom border-white">
+          <h1 class="color-white">Driver Info</h1>
+        </div>
+        <div class="overflow-y-scroll" style="height: 300px;">
+          <% driver.forEach(d=> { %>
+            <div class="d-flex mx-2 my-3 bg-white p-2">
+              <div><img width="80px" height="90px" class="rounded-3 mx-2" src="./src/driver.jpeg" alt=""></div>
+              <div>
+                <h4>
+                  <%= d.name %>
+                </h4>
+                <p>
+                  <%= d.contact %>
+                </p>
+              </div>
+            </div>
+            <% }); %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Overlay -->
+  <div class="overlay" id="signup-overlay">
+    <div class="overlay-content">
+      <button class="close-btn" id="close-signup">&times;</button>
+      <div class="text-center">
+        <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
+        <h2 class="mb-0">Create a new account</h2>
+        <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in
+              here</a></span></p>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">First Name</label>
+            <input type="text" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">Last Name</label>
+            <input type="text" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">Username or email address</label>
+            <input type="text" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">Phone Number</label>
+            <input type="text" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">Password</label>
+            <input type="password" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="" class="form-label regular small">Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Please Enter" />
+          </div>
+        </div>
+        <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
+          <button class="btn btn-danger px-5 w-75 text-white bg-color">SignUp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('admin-btn').addEventListener('click', function () {
+      document.getElementById('stu_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.add('hidden');
+      document.getElementById('admin_form').classList.remove('hidden');
+    });
+
+    document.getElementById('student-btn').addEventListener('click', function () {
+      document.getElementById('admin_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.add('hidden');
+      document.getElementById('stu_form').classList.remove('hidden');
+    });
+
+    document.getElementById('faculty-btn').addEventListener('click', function () {
+      document.getElementById('admin_form').classList.add('hidden');
+      document.getElementById('stu_form').classList.add('hidden');
+      document.getElementById('faculty_form').classList.remove('hidden');
+    });
+
+    document.getElementById('show-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'flex';
+    });
+
+    document.getElementById('close-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'none';
+    });
+
+    document.getElementById('hide-signup').addEventListener('click', function () {
+      document.getElementById('signup-overlay').style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>

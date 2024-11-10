@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Demo 2</title>
+</head>
+
+<body>
+    <!-- Bars -->
+    <div class="container-fluid p-0" id="some-menu"></div>
+    <!--*** BARS END ***-->
+
+
+
+    <div class="page-wrapper px-3 px-md-4">
+
+
+
+        <!--          -->
+
+        <div class="row flex-nowrap mt-3">
+            <div class="col-2">
+                <a href="/add_stu_data" class="text-decoration-none">
+                    <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
+                        <div class="mx-2">
+                            <h44 class="text-white">Student</h44>
+                        </div>
+                        <div class="me-2">
+                            <img width="40px" height="30px" src="assets/images/Student.png" />
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/add_driver_data" class="text-decoration-none">
+                    <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                        <div class="mx-2">
+                            <h44 class="text-white">Driver</h44>
+                        </div>
+                        <div class="me-2">
+                            <img width="40px" height="30px" src="assets/images/arcticons_messages.png" alt="" />
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/add_faculty_data" class="text-decoration-none">
+                    <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                        <div class="mx-2">
+                            <h44 class="text-white">Faculty</h44>
+                        </div>
+                        <div class="me-2">
+                            <img width="40px" height="30px" src="assets/images/2.png" alt="" />
+                        </div>
+                    </div>
+                </a>
+                <a href="/add_bus_data" class="text-decoration-none">
+                    <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                        <div class="mx-2">
+                            <h44 class="text-white">Bus</h44>
+                        </div>
+                        <div class="me-2">
+                            <img width="40px" height="30px" src="assets/images/buslogo.png" alt="" />
+                        </div>
+                    </div>
+                </a>
+
+                <a href="/add_route_data" class="text-decoration-none">
+                    <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                        <div class="mx-2">
+                            <h44 class="text-white">Route</h44>
+                        </div>
+                        <div class="me-2">
+                            <img width="40px" height="30px" src="assets/images/Frame 35.png" alt="" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+
+            <div class="col-10">
+                <div class="container-fluid mt-1 bg-white card-Shadow rounded-2 px-0">
+                    <div class="d-flex justify-content-between flex-wrap align-items-center p-4 pb-0">
+                        <div class="input mb-3">
+                            <input type="text" class="search-box ps-3 py-1" placeholder="Please Enter"
+                                aria-label="Recipient's username" aria-describedby="button-addon2" id="search-box" />
+
+
+                            <button class="btn bg-color mb-1" type="button" id="button-addon2">
+                                <span>
+                                    <svg class="SearchIcon mb-1">
+                                        <use href="assets/images/listing/search-icon.svg#search-icon"></use>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="mb-3 d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary px-3 py-2" data-bs-toggle="modal"
+                                data-bs-target="#createticket">
+                                <svg class="PlusIcon">
+                                    <use href="assets/images/listing/plus.svg#plus-icon"></use>
+                                </svg>
+                                Add Route
+                            </button>
+                            <button type="button" class="btn btn-primary px-3 py-2" data-bs-toggle="modal"
+                                data-bs-target="#createstops">
+                                <svg class="PlusIcon">
+                                    <use href="assets/images/listing/plus.svg#plus-icon"></use>
+                                </svg>
+                                Add Stops
+                            </button>
+                        </div>
+                    </div>
+                    <!-- model -->
+
+                    <div class="modal fade" id="createticket" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        style="display: none;" aria-hidden="true">
+
+
+
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add new Route</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body p-4 pb-0">
+                                    <div class="row g-3">
+
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                            <form action="/signup_route_by_admin" method="POST">
+
+
+                                                <label class="form-label mb-1">Route Name</label>
+                                                <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                    placeholder="Please Enter" name="route_name">
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Route Fee</label>
+                                            <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                placeholder="Please Enter" name="route_fee">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0 p-4 pt-0">
+                                    <input type="submit" class="btn btn-primary" value="Create">
+                                    </form>
+                                    <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="createstops" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Add new Stop</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-4 pb-0">
+                                    <div id="additionalFieldsContainer" class="row g-3">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <form action="/signup_stops_by_admin" method="POST">
+                                                <label class="form-label mb-1">Route Number</label>
+                                                <select class="form-control mb-1 border-0 bg-body" name="route_no">
+                                                    <% rou.forEach( b=>{ %>
+                                                        <option>
+                                                            <%=b.r_id%>
+                                                        </option>
+                                                        <% }); %>
+                                                </select>
+                                                <div id="stopsContainer"></div>
+                                                <div class="col-lg-12 col-md-12 col-12">
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="addFields()">Add Stops</button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0 p-4 pt-0">
+                                    <input type="submit" class="btn btn-primary" value="Create">
+                                    </form>
+                                    <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <% rou.forEach( r=>{ %>
+
+                        <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
+                            <table class="table Search-Employees table-borderless table-striped table-hover">
+                                <div class="d-flex justify-content-center">
+                                    <div class="border p-3 w-100 bg-color text-white rounded"
+                                        style="min-width: 150px;">
+                                        <h3 class="text-center">Route No. <%=r.r_id%>
+                                        </h3>
+                                        <h5 class="text-center">
+                                            <%=r.route_name%>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
+                                    <tr class="small">
+                                        <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
+                                        <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Stops
+                                        </th>
+                                        <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">
+                                            PickUp Time
+                                        </th>
+                                        <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Drop
+                                            Time
+                                        </th>
+                                        <th scope="col" class="pb-3 text-end dashed-border-bottom">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="small" id="student-table-body">
+                                    <% let a=0; %>
+                                        <% stu.forEach( s=>{ %>
+                                            <% if(s.r_id==r.r_id ){ %>
+                                                <tr class="mt-4 student-row">
+
+                                                    <th scope="row" class="ps-4 pe-2">
+                                                        <%= ++a %>
+                                                    </th>
+                                                    <td>
+                                                        <%=s.stop_name %>
+                                                    </td>
+                                                    <td>
+                                                        <%=s.pickup_time %>
+                                                    </td>
+                                                    <td>
+                                                        <%=s.drop_time %>
+                                                    </td>
+                                                    <td class="d-flex justify-content-evenly">
+                                                        <button
+                                                            class="btn btn-light-success d-flex justify-content-center align-items-center border-0 px-2"
+                                                            href="#">
+                                                            <svg class="svg-light-btn m-0" width="14" height="14">
+                                                                <use
+                                                                    href="assets/images/listing/edit-pen.svg#edit-icon">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-light-danger d-flex justify-content-center align-items-center border-0 px-2"
+                                                            href="#">
+                                                            <svg class="svg-light-btn m-0" width="14" height="14">
+                                                                <use
+                                                                    href="assets/images/listing/delete.svg#delete-icon">
+                                                                </use>
+                                                            </svg>
+                                                        </button>
+
+
+                                                        <%} }); %>
+                                                            <ul class="dropdown-menu border-0 Shadow"
+                                                                style="font-size: 10px; min-width: 73px !important">
+                                                                <li><a class="dropdown-item dropdown-menu-hover"
+                                                                        href="#">Action</a></li>
+                                                                <li><a class="dropdown-item dropdown-menu-hover"
+                                                                        href="#">Action</a></li>
+                                                            </ul>
+                                                    </td>
+                                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% }); %>
+
+                            <div
+                                class="employee-displaying d-flex flex-wrap-reverse align-items-center justify-content-between p-3 border-top">
+                                <div class="d-flex flex-wrap-reverse align-items-center mt-md-0 mt-3">
+                                    <p class="mb-0 mt-sm-0 mt-1 displaying-records">Displaying 10 out of 230 records</p>
+                                    <div class="d-flex justify-content-center align-items-center ms-sm-0 ms-2">
+                                        <select class="ms-sm-4 form-select input-flied gray border-0">
+                                            <option>5</option>
+                                            <option>10</option>
+                                            <option>20</option>
+                                            <option>30</option>
+                                            <option>40</option>
+                                            <option>50</option>
+                                        </select>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-sm-3 ms-2">
+                                                <div class="loader"></div>
+                                            </div>
+                                            <div class="displaying-records ms-2">
+                                                <label for="loader">loading...</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pagination-nav">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination align-items-center mb-0 gap-2">
+                                            <li class="page-item">
+                                                <a class="page-link p-1 p-sm-2 py-2" href="#">previous</a>
+                                            </li>
+                                            <li class="page-item active" aria-current="page"><a class="page-link"
+                                                    href="#">1</a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link p-1 p-sm-2 py-2" href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-3.6.3.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/Toggels.js"></script>
+    <script>
+        $("#some-menu").load("navbars.ejs");
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('search-box');
+            const tableBody = document.getElementById('student-table-body');
+            const rows = tableBody.getElementsByClassName('student-row');
+
+            searchBox.addEventListener('keyup', function () {
+                const searchTerm = searchBox.value.toLowerCase();
+
+                Array.from(rows).forEach(function (row) {
+                    const rowText = row.textContent.toLowerCase();
+                    row.style.display = rowText.includes(searchTerm) ? '' : 'none';
+                });
+            });
+        });
+
+
+
+        let stopCounter = 1;
+
+        function addFields() {
+            const container = document.getElementById('stopsContainer');
+
+            const fieldWrapper = document.createElement('div');
+            fieldWrapper.className = 'col-lg-12 col-md-12 col-12 mb-4 border border-dark rounded-3';
+
+            const label = document.createElement('label');
+            label.className = 'form-label mb-1';
+            label.innerText = `Stop ${stopCounter}`;
+
+            const inputStopName = document.createElement('input');
+            inputStopName.type = 'text';
+            inputStopName.className = 'form-control mb-1 border-0 bg-body';
+            inputStopName.placeholder = `Enter text for stop ${stopCounter}`;
+            inputStopName.name = `stops[${stopCounter - 1}][stop_name]`;
+
+            const inputPickupTime = document.createElement('input');
+            inputPickupTime.type = 'time';
+            inputPickupTime.className = 'form-control mb-1 border-0 bg-body';
+            inputPickupTime.placeholder = `Pickup time for stop ${stopCounter}`;
+            inputPickupTime.name = `stops[${stopCounter - 1}][pickup_time]`;
+
+            const inputDropTime = document.createElement('input');
+            inputDropTime.type = 'time';
+            inputDropTime.className = 'form-control mb-1 border-0 bg-body';
+            inputDropTime.placeholder = `Drop time for stop ${stopCounter}`;
+            inputDropTime.name = `stops[${stopCounter - 1}][drop_time]`;
+
+            fieldWrapper.appendChild(label);
+            fieldWrapper.appendChild(inputStopName);
+            fieldWrapper.appendChild(inputPickupTime);
+            fieldWrapper.appendChild(inputDropTime);
+            container.appendChild(fieldWrapper);
+
+            stopCounter++;
+        }
+
+        function deleteLastField() {
+            if (stopCounter > 1) {
+                stopCounter--;
+                const lastFieldWrapper = document.getElementById(`stopWrapper${stopCounter}`);
+                if (lastFieldWrapper) {
+                    lastFieldWrapper.remove();
+                }
+            }
+        }
+
+        function deleteAllFields() {
+            const container = document.getElementById('additionalFieldsContainer');
+            for (let i = stopCounter - 1; i > 0; i--) {
+                const fieldWrapper = document.getElementById(`stopWrapper${i}`);
+                if (fieldWrapper) {
+                    container.removeChild(fieldWrapper);
+                }
+            }
+            stopCounter = 1;
+        }
+
+
+    </script>
+    <footer class="mxc">
+        <div class="mtc rounded-3 p-1 gap-2 bg-color">
+            <h5 class="text-white">CUI BUS portal</h5>
+        </div>
+    </footer>
+
+</body>
+
+</html>

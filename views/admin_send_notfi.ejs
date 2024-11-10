@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Demo 2</title>
+</head>
+
+<body>
+    <!-- Bars -->
+    <div class="container-fluid p-0" id="some-menu"></div>
+    <!--*** BARS END ***-->
+
+    <div class="page-wrapper px-3 ">
+        <div class="container-fluid rounded-2 px-0">
+
+            <div class="row flex-nowrap mt-5">
+                <div class="col-2">
+                    <a href="/admin_sn" class=" text-decoration-none">
+                        <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
+                            <div class="mx-2">
+                                <h44 class="text-white">To Student</h44>
+                            </div>
+                            <div class="me-2">
+                                <img width="40px" height="30px" src="assets/images/Student.png" />
+                            </div>
+                        </div>
+                    </a>
+
+             
+                    <a href="/admin_sn_fc" class="text-decoration-none">
+                        <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                            <div class="mx-2">
+                                <h44 class="text-white">To Faculty</h44>
+                            </div>
+                            <div class="me-2">
+                                <img width="40px" height="30px" src="assets/images/2.png" alt="" />
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/admin_sn_bc" class="text-decoration-none">
+                        <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                            <div class="mx-2">
+                                <h44 class="text-white">On Bus</h44>
+                            </div>
+                            <div class="me-2">
+                                <img width="40px" height="30px" src="assets/images/buslogo.png" alt="" />
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/admin_sn_rc" class="text-decoration-none">
+                        <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
+                            <div class="mx-2">
+                                <h44 class="text-white">On Route</h44>
+                            </div>
+                            <div class="me-2">
+                                <img width="40px" height="30px" src="assets/images/Frame 35.png" alt="" />
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-6" bis_skin_checked="1">
+                    <div class="bg-color card-Shadow rounded-2 p-1 py-4 px-4">
+                        <div class="flex-between">
+                            <h4 class="text-white">Select</h4>
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="mt-1">
+                                        <form class="form-inline">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search"
+                                                    aria-label="Search" aria-describedby="button-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit"
+                                                        id="button-addon2">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" bis_skin_checked="1">
+                            <div class="row" bis_skin_checked="1">
+                                <div class="my-3">
+                                    <div class="bg-white card-Shadow rounded-2 p-2 overflow-scroll"
+                                        style="height:470px;" bis_skin_checked="1">
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" value=""
+                                                    aria-label="Checkbox for following text input" id="selectAll">
+                                            </div>
+                                            <div class="form-control" aria-label="Text input with checkbox">
+                                                <h5 id="selectAllText">Select all</h5>
+                                            </div>
+                                        </div>
+
+                                        <form action="/send_notification_sc" method="post">
+                                            <% dat.forEach(s => { %>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-text">
+                                                    <input class="form-check-input mt-0 individual-checkbox"
+                                                        type="checkbox" name="reg_numbers" value="<%= s.reg_number %>"
+                                                        aria-label="Checkbox for following text input">
+                                                </div>
+                                                <div class="form-control" aria-label="Text input with checkbox">
+                                                    <h5 class="selectable-text"><%= s.reg_number %></h5>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4" bis_skin_checked="1">
+                    <div class="bg-color card-Shadow rounded-2 p-1 py-4 px-4" bis_skin_checked="1">
+                        <div class="flex-between" bis_skin_checked="1">
+                            <h4 class="mb-0 text-white">Send Notification !</h4>
+                        </div>
+                        <div class="" bis_skin_checked="1">
+                            <div class="row" bis_skin_checked="1">
+                                <div class="col-12 my-3">
+                                    <div class="bg-white card-Shadow rounded-2 p-2" style="height: 480px;"
+                                        bis_skin_checked="1">
+                                        <div class="row-gap-2">
+                                            <input name="heading" type="text" class="my-2 border-0 col-12"
+                                                style="background-color: #D9D9D9;">
+                                        </div>
+
+                                        <div class="row-gap-2">
+                                            <textarea name="note" class="my-2 border-0 col-12"
+                                                style="height: 350px;; background-color: #D9D9D9;"></textarea>
+                                        </div>
+
+                                        <div class="row-gap-2">
+                                            <button type="submit" class="col-4 rounded-5 mt-2" style="margin-left: 220px;">
+                                                send
+                                                <img src="assets/images/Send.png" height="25px" width="25px" alt="">
+                                            </button>
+                                        </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-3.6.3.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/Toggels.js"></script>
+    <script>
+        $("#some-menu").load("navbars.ejs");
+
+        // Select all checkboxes functionality
+        document.getElementById('selectAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('.individual-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Click on <h5> to toggle checkbox in front of it
+        document.querySelectorAll('.selectable-text').forEach(item => {
+            item.addEventListener('click', function () {
+                const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+            });
+        });
+
+        // Click on Select All <h5> text to toggle the Select All checkbox
+        document.getElementById('selectAllText').addEventListener('click', function () {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            selectAllCheckbox.checked = !selectAllCheckbox.checked;
+            const event = new Event('change');
+            selectAllCheckbox.dispatchEvent(event);
+        });
+    </script>
+    <!-- <footer class="mxc">
+        <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+           <h5 class="text-white">CU BSU portal</h5>
+        </div>
+    </footer> -->
+</body>
+
+</html>

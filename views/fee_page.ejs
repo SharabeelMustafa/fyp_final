@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="Style/panal_style.css">
+  <title>Demo 2</title>
+</head>
+
+<body>
+
+  <!-- Bars -->
+  <div class="container-fluid p-0" id="some-menu"></div>
+  <!--*** BARS END ***-->
+  <div class="page-wrapper px-3">
+
+    <div class="container-fluid rounded-2 px-0">
+
+      <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+        <div class="py-3">
+          <% let fullString=currentDate.toString(); %>
+            <% let desiredPart=fullString.substring(0, 21); %>
+
+              <p class="small text-white my-5">
+                <%= desiredPart %>
+              </p>
+              <h2 class="mb-0 text-white">Welcome ,<%= student.name %>!</h2>
+              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+        </div>
+
+        <!-- Fee Info Section (Second Div) -->
+        <div class="fee-info-card bg-light rounded-3 p-4 card-shadow">
+          <h4 class="text-center text-primary mb-3">Fee Information</h4>
+
+          <!-- Fee Status Section -->
+          <div class="fee-status mb-4">
+            <h5 class="text-dark">Fee Status:</h5>
+            <p class="text-success">Paid</p> <!-- Change 'Paid' or 'Pending' dynamically as per status -->
+          </div>
+
+          <!-- Installment Option Section -->
+          <div class="installment-option mb-4">
+            <h5 class="text-dark">Fee Installment:</h5>
+            <p>If you're unable to pay the full fee at once, you can apply for an installment plan.</p>
+            <button class="btn btn-primary btn-block">Apply for Installment</button>
+          </div>
+
+          <!-- Pending Fee/Installment Section -->
+          <div class="pending-fee">
+            <h5 class="text-dark">Pending Installment/Fee:</h5>
+            <p class="text-danger">No pending fees</p> <!-- Change the message based on the student's fee status -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

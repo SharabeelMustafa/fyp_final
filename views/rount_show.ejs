@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style_singup.css" />
+    <title>Demo 2</title>
+</head>
+
+<body>
+
+    <di class="row m-0" style="height: 100vh;">
+        <div class="col-lg-6 d-none d-lg-block login-bg">
+            <div class="">
+                <div class="mt-2 text-center">
+                    <img src="assets/images/CUIWah-Website-Logo.png" class="object-fit-contain my-5" width="570px"
+                        height="100px" alt="" />
+                </div>
+                <div class="text-center text-white  px-3">
+                    <img src="assets/images/Pak-map.png" alt="">
+                    <h5 class="fw-bold ">National Ranking</h5>
+                    <p class="small ">#2 in Pakistan - 2024.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6  p-sm-5">
+            <% rou.forEach( r=>{ %>
+
+                <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
+                    <table class="table Search-Employees table-borderless table-striped table-hover">
+                        <div class="d-flex justify-content-center">
+                            <div class="border p-3 w-100 bg-primary text-white rounded" style="min-width: 150px;">
+                                <h3 class="text-center">Route No. <%=r.r_id%>
+                                </h3>
+                                <h5 class="text-center">
+                                    <%=r.route_name%>
+                                </h5>
+                            </div>
+                        </div>
+                        <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
+                            <tr class="small">
+                                <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
+                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Stops
+                                </th>
+                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">
+                                    PickUp Time
+                                </th>
+                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Drop
+                                    Time
+                                </th>
+
+                        </thead>
+                        <tbody class="small" id="student-table-body">
+                            <% let a=0; %>
+                                <% stu.forEach( s=>{ %>
+                                    <% if(s.r_id==r.r_id ){ %>
+                                        <tr class="mt-4 student-row">
+
+                                            <th scope="row" class="ps-4 pe-2">
+                                                <%= ++a %>
+                                            </th>
+                                            <td>
+                                                <%=s.stop_name %>
+                                            </td>
+                                            <td>
+                                                <%=s.pickup_time %>
+                                            </td>
+                                            <td>
+                                                <%=s.drop_time %>
+                                            </td>
+
+
+                                            <%} }); %>
+                                                <ul class="dropdown-menu border-0 Shadow"
+                                                    style="font-size: 10px; min-width: 73px !important">
+                                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a>
+                                                    </li>
+                                                </ul>
+                                                </td>
+                                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <% }); %>
+
+        </div>
+
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/moment.min.js"></script>
+        <script src="assets/js/Toggels.js"></script>
+
+
+</body>
+
+</html>
