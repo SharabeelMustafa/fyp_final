@@ -9,70 +9,337 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="Style/panal_style.css">
   <title>Demo 2</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    .card {
+      width: 400px;
+      height: 240px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      position: relative;
+      margin-top: 30px;
+      padding: 115px;
+      margin-left: 500px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
 
+    .logo {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .header-text {
+      color: #d64541;
+      font-weight: bold;
+      font-size: 18px;
+      position: absolute;
+      top: 15px;
+      left: 80px;
+      padding-left: 55px;
+    }
+
+    .logo-image {
+      position: absolute;
+      top: 50px;
+      left: 30px;
+    }
+
+    .campus {
+      font-size: 12px;
+      position: absolute;
+      top: 110px;
+      left: 8px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      width: 100px;
+    }
+
+    .info {
+      font-size: 14px;
+      position: absolute;
+      top: 60px;
+      left: 80px;
+      line-height: 1.6;
+      margin-left: 60px;
+    }
+
+    .info span {
+      display: block;
+    }
+
+    .photo {
+      width: 80px;
+      height: 100px;
+      background: url('https://randomuser.me/api/portraits/men/75.jpg') no-repeat center/cover;
+      border-radius: 4px;
+      position: absolute;
+      top: 45px;
+      right: 15px;
+      border: 1px solid #ddd;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      margin-top: 15px;
+      position: absolute;
+      top: 140px;
+      left: 30px;
+      padding-left: 130px;
+    }
+
+    .student-info {
+      font-size: 13px;
+      color: #333;
+      margin-top: 3px;
+      position: absolute;
+      top: 172px;
+      left: 30px;
+      padding-left: 208px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 30px;
+      left: 60px;
+      font-size: 12px;
+      color: #333;
+      width: calc(100% - 40px);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer .dept {
+      font-weight: bold;
+      font-size: 13px;
+      padding-left: 115px;
+    }
+
+    .corner-triangle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 70px solid #98c23e;
+      border-top: 70px solid transparent;
+    }
+  </style>
 </head>
 
 <body>
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
-  <!--*** BARS END ***-->
 
   <div class="page-wrapper px-3">
-
     <div class="container-fluid rounded-2 px-0">
-
       <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
         <div class="py-3">
           <% let fullString=currentDate.toString(); %>
             <% let desiredPart=fullString.substring(0, 21); %>
-
               <p class="small text-white my-5">
                 <%= desiredPart %>
               </p>
-              <h2 class="mb-0 text-white">Welcome ,<%= student.name %>!</h2>
+              <h2 class="mb-0 text-white">Welcome, <%= student.name %>!</h2>
               <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
         </div>
-        <div class="e-card-container">
-          <div class="card shadow-sm" style="width: 18rem;">
-            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image">
-            <div class="card-body">
-              <h5 class="card-title">Student Name: <%= student.name %>
-              </h5>
-              <p class="card-text">Bus Route: <%= student.busRoute %>
-              </p>
-              <p class="card-text">Current Location: <%= student.location %>
-              </p>
-              <a href="#" class="btn btn-primary">View More</a>
-            </div>
-          </div>
+        <div class="me-2">
+
+          <img src="uploads/<%=student.profile_img %>" class="r-img" alt="" width="200px" height="200px" />
         </div>
       </div>
-    </div>
 
+      <!-- Transport Card -->
+      <div class="card" onclick="openInNewTab()">
+        <div class="logo"></div>
+        <div class="header-text">Transport Card</div>
+        <div class="logo-image">
+          <img src="assets/images/logo1.png" alt="Campus Logo" height="60px" width="60px">
+        </div>
+        <div class="campus">Wah Campus</div>
+        <div class="info">
+          <span>Session: Spring 2022</span>
+          <span>Bus No: RLC 8960</span>
+        </div>
+        <div class="photo"></div>
+        <div class="name">Sharabeel Mustafa Mehmood</div>
+        <div class="student-info">CIIT/SP21-BCS-054/WAH</div>
+        <div class="footer">
+          <div class="dept">Department of Computer Science</div>
+        </div>
+        <div class="corner-triangle"></div>
+      </div>
+    </div>
   </div>
 
-
-  
-
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
   <script src="assets/js/jquery-3.6.3.min.js"></script>
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/moment.min.js"></script>
   <script src="assets/js/Toggels.js"></script>
+
   <script>
     $("#some-menu").load("navbars_stu.ejs");
+
+
+
+    function openInNewTab() {
+      const cardContent = document.querySelector('.card').outerHTML;
+      const newWindow = window.open("", "_blank");
+
+      newWindow.document.write(`
+    <html>
+      <head>
+        <title>Transport Card</title>
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/Style/panal_style.css">
+        <style>
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+          }
+          .card {
+            width: 400px;
+            height: 240px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            padding: 115px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+          }
+          .logo {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+          }
+          .header-text {
+            color: #d64541;
+      font-weight: bold;
+      font-size: 18px;
+      position: absolute;
+      top: 15px;
+      left: 80px;
+      padding-left: 55px;
+          }
+          .logo-image {
+            position: absolute;
+            top: 50px;
+            left: 30px;
+          }
+          .campus {
+            font-size: 12px;
+            position: absolute;
+            top: 110px;
+            left: 8px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            width: 100px;
+          }
+          .info {
+            font-size: 14px;
+            position: absolute;
+            top: 60px;
+            left: 80px;
+            line-height: 1.6;
+            margin-left: 60px;
+          }
+          .info span {
+            display: block;
+          }
+          .photo {
+            width: 80px;
+            height: 100px;
+            background: url('https://randomuser.me/api/portraits/men/75.jpg') no-repeat center/cover;
+            border-radius: 4px;
+            position: absolute;
+            top: 45px;
+            right: 15px;
+            border: 1px solid #ddd;
+          }
+          .name {
+                font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      margin-top: 15px;
+      position: absolute;
+      top: 140px;
+      left: 30px;
+      padding-left: 130px;
+          }
+          .student-info {
+            font-size: 13px;
+      color: #333;
+      margin-top: 3px;
+      position: absolute;
+      top: 172px;
+      left: 30px;
+      padding-left: 208px;
+          }
+          .footer {
+         position: absolute;
+      bottom: 30px;
+      left: 60px;
+      font-size: 12px;
+      color: #333;
+      width: calc(100% - 40px);
+      display: flex;
+      justify-content: space-between;
+          }
+          .footer .dept {
+            font-weight: bold;
+      font-size: 13px;
+      padding-left: 115px;
+          }
+          .corner-triangle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 70px solid #98c23e;
+            border-top: 70px solid transparent;
+          }
+        </style>
+      </head>
+      <body>${cardContent}</body>
+    </html>
+  `);
+
+      newWindow.document.close();
+      newWindow.focus();
+
+    }
   </script>
 
   <footer class="mxc">
-    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+    <div class="mtc rounded-3 p-1 gap-2 bg-color">
       <h5 class="text-white">CUI BUS Portal</h5>
     </div>
   </footer>
-
 </body>
-
 
 </html>
