@@ -2,6 +2,7 @@ const multer = require('multer');
 const {ConnactMysql}= require('../connection');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const { count } = require('console');
 
 let RESS3;
 let RESS;
@@ -129,6 +130,38 @@ function CheckStuReg(req, res) {
   });
 }
 
+function ShowStuEcard(req, res) {
+  const userId = req.session.userId;
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
+  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
+
+  con.query(selectQuery_semName, function (err, semResult) {
+    if (err) throw err;
+    const sem_name = semResult[0].semester_name;
+
+    con.query(selectQuery_student, [userId], (err, studentResult) => {
+      if (err) throw err;
+
+      con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
+        if (err) throw err;
+
+        let RESS1 = regResult.length > 0 ? regResult[0] : null;
+        const currentDate = new Date();
+
+        res.render("student_e_card", {
+          student: studentResult[0],
+          RESS1,
+          currentDate
+        });
+      });
+    });
+  });
+}
+
+
+
 function SetRegistration(req, res) {
   const { route, stop } = req.body;
   const userId = req.session.userId;
@@ -201,7 +234,7 @@ function ShowDashbord(req, res) {
   
         
         const currentDate = new Date()
-        console.log(RESS);
+        //console.log(RESS);
         res.render("student_dashboard", { student: result[0], notification: result1,rou:RESS1,stop:RESS3,RESS, currentDate });
       });
     });
@@ -226,21 +259,6 @@ function ShowFeePage(req, res) {
 
 }
 
-function ShowStuEcard(req, res) {
-  const userId = req.session.userId;
-  //console.log(userId);
-
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
-  con.query(selectQuery_student, [userId], (err, result) => {
-    if (err) throw err;
-    //console.log(result);
-      const currentDate = new Date()
-      console.log(RESS);
-      res.render("student_e_card", { student: result[0], currentDate });
-   
-  });
-
-}
 
 function Logout(req, res) {
     req.session.destroy((err) => {
