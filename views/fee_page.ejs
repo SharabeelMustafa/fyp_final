@@ -59,11 +59,13 @@
         <div class="pending-fee">
           <h5 class="text-dark">Pending Installment/Fee:</h5>
           <p class="text-danger">No pending fees</p> <!-- Change the message based on the student's fee status -->
+          <h5 class="text-dark">View Challan:</h5>
+          <a href="/challan"><button id="view-challan-btn" class="btn btn-success btn-block">View Challan</button>
+          </a>
         </div>
-      </div>
 
+      </div>
     </div>
-  </div>
 
   </div>
   <script src="js/jquery.js"></script>
@@ -77,11 +79,12 @@
     $("#some-menu").load("navbars_stu.ejs");
   </script>
 
-  <footer class="mxc14">
-    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-      <h5 class="text-white">CUI BUS Portal</h5>
-    </div>
-  </footer>
+  <div class="container">
+    <footer class="mxc12">
+      <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+        <h5 class="text-white">CUI BUS portal</h5>
+      </div>
+    </footer>
 </body>
 
 </html>

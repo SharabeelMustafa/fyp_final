@@ -320,6 +320,15 @@ h5 {
   box-shadow: 2px 0 10px 2px rgba(164, 181, 168, 0.2);
 }
 
+.raja {
+  padding-top: 45px;
+}
+
+.raja1 {
+  padding-top: 65px;
+}
+
+
 .card-Shadow {
   box-shadow: 0 4px 13px 2px hsla(133, 22%, 75%, 0.13);
 }
@@ -1133,7 +1142,7 @@ h5 {
 }
 
 .page-wrapper {
-  padding-top: 20px;
+  padding-top: 35px;
   padding-left: calc(103px + 2.25rem) !important;
   padding-right: calc(63px + 1rem) !important;
 
@@ -1194,6 +1203,8 @@ a:hover {
 
 .mxc {
   margin-top: 27px;
+  padding-left: calc(103px + 2.25rem) !important;
+  padding-right: calc(63px + 1rem) !important;
   /* background-color:#1E1F4A; */
 }
 
@@ -1202,7 +1213,7 @@ a:hover {
 }
 
 .mxc2 {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .button-with-image {
@@ -1362,8 +1373,10 @@ img {
   width: 1305px;
 }
 
-.mxc14 {
+.mxc12 {
   margin-top: 27px;
-  margin-left: 140px;
-  width: 1305px;
+  padding-left: calc(103px + 2.25rem) !important;
+  padding-right: calc(63px + 1rem) !important;
+  margin-bottom: 20px;
+  /* background-color:#1E1F4A; */
 }

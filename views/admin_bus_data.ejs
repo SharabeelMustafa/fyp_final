@@ -11,7 +11,7 @@
 </head>
 
 <body>
-      <!-- Bars -->
+    <!-- Bars -->
     <div class="container-fluid p-0" id="some-menu"></div>
     <!--*** BARS END ***-->
 
@@ -24,7 +24,7 @@
         <!--          -->
 
         <div class="row flex-nowrap mt-3">
-            <div class="col-2">
+            <div class="raja col-2">
                 <a href="/add_stu_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
                         <div class="mx-2">
@@ -79,195 +79,212 @@
                     </div>
                 </a>
 
-                
+
             </div>
 
 
 
-        <div class="col-10">
-        <div class="container-fluid mt-1 bg-white card-Shadow rounded-2 px-0">
-            <div class="d-flex justify-content-between flex-wrap align-items-center p-4 pb-0">
-                <div class="input mb-3">
-                    <input type="text" class="search-box ps-3 py-1" placeholder="Please Enter"
-                        aria-label="Recipient's username" aria-describedby="button-addon2"  id="search-box" />
+            <div class="col-10">
+                <div class="container-fluid mt-1 bg-white card-Shadow rounded-2 px-0">
+                    <div class="d-flex justify-content-between flex-wrap align-items-center p-4 pb-0">
+                        <div class="input mb-3">
+                            <input type="text" class="search-box ps-3 py-1" placeholder="Please Enter"
+                                aria-label="Recipient's username" aria-describedby="button-addon2" id="search-box" />
 
-                        
-                    <button class="btn bg-color mb-1"  type="button" id="button-addon2">
-                        <span>
-                            <svg class="SearchIcon mb-1">
-                                <use href="assets/images/listing/search-icon.svg#search-icon"></use>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-                <div class="mb-3 d-flex flex-wrap gap-2">
-                    <button type="button" class="btn btn-primary px-3 py-2" data-bs-toggle="modal"
-                        data-bs-target="#createticket">
-                        <svg class="PlusIcon">
-                            <use href="assets/images/listing/plus.svg#plus-icon"></use>
-                        </svg>
-                        Add Bus
-                    </button>
-                </div>
-            </div>
-            <!-- model -->
-            
-            <div class="modal fade" id="createticket" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                style="display: none;" aria-hidden="true">
 
-                
-
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header p-4">
-                            <h5 class="modal-title" id="staticBackdropLabel">Create Bus Data</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button class="btn bg-color mb-1" type="button" id="button-addon2">
+                                <span>
+                                    <svg class="SearchIcon mb-1">
+                                        <use href="assets/images/listing/search-icon.svg#search-icon"></use>
+                                    </svg>
+                                </span>
+                            </button>
                         </div>
-                        
-                        <div class="modal-body p-4 pb-0">
-                            <div class="row g-3">
-                              
-                                
-                                <div class="col-lg-6 col-md-6 col-12">
-                                  
-                                    <form action="/signup_bus_by_admin"  method="POST"  enctype="multipart/form-data" > 
-                                     
-                                    
-                                        <label class="form-label mb-1">Bus Id</label>
-                                       <input type="text" class="form-control mb-1 border-0 bg-body"
-                                        placeholder="Please Enter" name="bus_id">
-                                        
+                        <div class="mb-3 d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary px-3 py-2" data-bs-toggle="modal"
+                                data-bs-target="#createticket">
+                                <svg class="PlusIcon">
+                                    <use href="assets/images/listing/plus.svg#plus-icon"></use>
+                                </svg>
+                                Add Bus
+                            </button>
+                        </div>
+                    </div>
+                    <!-- model -->
+
+                    <div class="modal fade" id="createticket" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        style="display: none;" aria-hidden="true">
+
+
+
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Create Bus Data</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <label class="form-label mb-1">Driver Employee Id</label>
-                                    <select class="form-control mb-1 border-0 bg-body" name="driver_emp_id">
-                                        <% driver.forEach( b=>{ %>
-                                            <option>
-                                                <%=b.emp_id%>
-                                            </option>
-                                            <% }); %>
-                                    </select>
+
+                                <div class="modal-body p-4 pb-0">
+                                    <div class="row g-3">
+
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                            <form action="/signup_bus_by_admin" method="POST"
+                                                enctype="multipart/form-data">
+
+
+                                                <label class="form-label mb-1">Bus Id</label>
+                                                <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                    placeholder="Please Enter" name="bus_id">
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Driver Employee Id</label>
+                                            <select class="form-control mb-1 border-0 bg-body" name="driver_emp_id">
+                                                <% driver.forEach( b=>{ %>
+                                                    <option>
+                                                        <%=b.emp_id%>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Route Id</label>
+                                            <select class="form-control mb-1 border-0 bg-body" name="route_id">
+                                                <% route.forEach( b=>{ %>
+                                                    <option>
+                                                        <%=b.r_id%>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <label class="form-label mb-1">Route Id</label>
-                                    <select class="form-control mb-1 border-0 bg-body" name="route_id">
-                                        <% route.forEach( b=>{ %>
-                                            <option>
-                                                <%=b.r_id%>
-                                            </option>
-                                            <% }); %>
-                                    </select>
+                                <div class="modal-footer border-0 p-4 pt-0">
+                                    <input type="submit" class="btn btn-primary" value="Create">
+                                    </form>
+                                    <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
+
+
                                 </div>
+
                             </div>
                         </div>
-                        <div class="modal-footer border-0 p-4 pt-0">
-                            <input type="submit" class="btn btn-primary"  value="Create" >
-                        </form>
-                            <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
-                           
-                      
-                        </div>
-                  
-                    </div>
-                </div>
-           
-            </div>
-      
 
-            <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
-                <table class="table Search-Employees table-borderless table-striped table-hover">
-                    <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
-                        <tr class="small">
-                            <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
-                            <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Bus Id
-                            </th>
-                            <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Driver Employee Id
-                            </th>
-                            <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Driver Name
-                            </th>
-                            <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Route Id
-                            </th>
-                            <th scope="col" class="pb-3 text-end dashed-border-bottom">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="small" id="student-table-body">
-                        <% let a=0; %>
-                        <% stu.forEach( s =>{  %>
-                        <tr class="mt-4 student-row" >
-                           
-                            <th scope="row" class="ps-4 pe-2"><%= ++a %></th>
-                            <td><%=s.bus_id %></td>
-                            <td><%=s.driver_emp_id %></td>
-                            <td><%=s.driver_name%></td>
-                            <td><%=s.route_id %></td>
-                            <td class="d-flex justify-content-evenly">
-                                <button
-                                    class="btn btn-light-success d-flex justify-content-center align-items-center border-0 px-2"
-                                    href="#">
-                                    <svg class="svg-light-btn m-0" width="14" height="14">
-                                        <use href="assets/images/listing/edit-pen.svg#edit-icon"></use>
-                                    </svg>
-                                </button>
-                                <!-- <button
+                    </div>
+
+
+                    <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
+                        <table class="table Search-Employees table-borderless table-striped table-hover">
+                            <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
+                                <tr class="small">
+                                    <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
+                                    <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Bus Id
+                                    </th>
+                                    <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Driver
+                                        Employee Id
+                                    </th>
+                                    <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Driver
+                                        Name
+                                    </th>
+                                    <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Route Id
+                                    </th>
+                                    <th scope="col" class="pb-3 text-end dashed-border-bottom">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="small" id="student-table-body">
+                                <% let a=0; %>
+                                    <% stu.forEach( s=>{ %>
+                                        <tr class="mt-4 student-row">
+
+                                            <th scope="row" class="ps-4 pe-2">
+                                                <%= ++a %>
+                                            </th>
+                                            <td>
+                                                <%=s.bus_id %>
+                                            </td>
+                                            <td>
+                                                <%=s.driver_emp_id %>
+                                            </td>
+                                            <td>
+                                                <%=s.driver_name%>
+                                            </td>
+                                            <td>
+                                                <%=s.route_id %>
+                                            </td>
+                                            <td class="d-flex justify-content-evenly">
+                                                <button
+                                                    class="btn btn-light-success d-flex justify-content-center align-items-center border-0 px-2"
+                                                    href="#">
+                                                    <svg class="svg-light-btn m-0" width="14" height="14">
+                                                        <use href="assets/images/listing/edit-pen.svg#edit-icon"></use>
+                                                    </svg>
+                                                </button>
+                                                <!-- <button
                                     class="btn btn-light-danger d-flex justify-content-center align-items-center border-0 px-2"
                                     href="#">
                                     <svg class="svg-light-btn m-0" width="14" height="14">
                                         <use href="assets/images/listing/delete.svg#delete-icon"></use>
                                     </svg>
                                 </button> -->
-                                <% }); %>
-                                <ul class="dropdown-menu border-0 Shadow"
-                                    style="font-size: 10px; min-width: 73px !important">
-                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a></li>
-                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a></li>
+                                                <% }); %>
+                                                    <ul class="dropdown-menu border-0 Shadow"
+                                                        style="font-size: 10px; min-width: 73px !important">
+                                                        <li><a class="dropdown-item dropdown-menu-hover"
+                                                                href="#">Action</a></li>
+                                                        <li><a class="dropdown-item dropdown-menu-hover"
+                                                                href="#">Action</a></li>
+                                                    </ul>
+                                            </td>
+                                        </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="employee-displaying d-flex flex-wrap-reverse align-items-center justify-content-between p-3 border-top">
+                        <div class="d-flex flex-wrap-reverse align-items-center mt-md-0 mt-3">
+                            <p class="mb-0 mt-sm-0 mt-1 displaying-records">Displaying 10 out of 230 records</p>
+                            <div class="d-flex justify-content-center align-items-center ms-sm-0 ms-2">
+                                <select class="ms-sm-4 form-select input-flied gray border-0">
+                                    <option>5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>40</option>
+                                    <option>50</option>
+                                </select>
+                                <div class="d-flex align-items-center">
+                                    <div class="ms-sm-3 ms-2">
+                                        <div class="loader"></div>
+                                    </div>
+                                    <div class="displaying-records ms-2">
+                                        <label for="loader">loading...</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-nav">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination align-items-center mb-0 gap-2">
+                                    <li class="page-item">
+                                        <a class="page-link p-1 p-sm-2 py-2" href="#">previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link p-1 p-sm-2 py-2" href="#">Next</a>
+                                    </li>
                                 </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="employee-displaying d-flex flex-wrap-reverse align-items-center justify-content-between p-3 border-top">
-                <div class="d-flex flex-wrap-reverse align-items-center mt-md-0 mt-3">
-                    <p class="mb-0 mt-sm-0 mt-1 displaying-records">Displaying 10 out of 230 records</p>
-                    <div class="d-flex justify-content-center align-items-center ms-sm-0 ms-2">
-                        <select class="ms-sm-4 form-select input-flied gray border-0">
-                            <option>5</option>
-                            <option>10</option>
-                            <option>20</option>
-                            <option>30</option>
-                            <option>40</option>
-                            <option>50</option>
-                        </select>
-                        <div class="d-flex align-items-center">
-                            <div class="ms-sm-3 ms-2">
-                                <div class="loader"></div>
-                            </div>
-                            <div class="displaying-records ms-2">
-                                <label for="loader">loading...</label>
-                            </div>
+                            </nav>
                         </div>
                     </div>
                 </div>
-                <div class="pagination-nav">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination align-items-center mb-0 gap-2">
-                            <li class="page-item">
-                                <a class="page-link p-1 p-sm-2 py-2" href="#">previous</a>
-                            </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link p-1 p-sm-2 py-2" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
         </div>
-     </div>
-    </div>
     </div>
 
 
@@ -285,7 +302,7 @@
     <script>
         $("#some-menu").load("navbars.ejs");
 
-     
+
         document.addEventListener('DOMContentLoaded', function () {
             const searchBox = document.getElementById('search-box');
             const tableBody = document.getElementById('student-table-body');
@@ -300,13 +317,14 @@
                 });
             });
         });
- 
+
     </script>
-    <footer class="mxc">
-        <div class="mtc rounded-3 p-1 gap-2 bg-color">
-            <h5 class="text-white">CUI BUS Portal</h5>
-        </div>
-    </footer>
+    <div class="container">
+        <footer class="mxc">
+            <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+                <h5 class="text-white">CUI BUS portal</h5>
+            </div>
+        </footer>
 
 </body>
 

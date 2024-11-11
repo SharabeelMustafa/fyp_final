@@ -17,14 +17,12 @@
 
 
 
-    <div class="page-wrapper px-3 px-md-4">
-
-
+    <div class="page-wrapper px-3 px-md-4 ">
 
         <!--          -->
 
-        <div class="row flex-nowrap mt-3">
-            <div class="col-2">
+        <div class=" row flex-nowrap mt-3">
+            <div class="raja col-2">
                 <a href="/add_stu_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
                         <div class="mx-2">
@@ -219,80 +217,80 @@
                         </div>
 
                     </div>
-                  <!-- model for eided stu -->
+                    <!-- model for eided stu -->
 
-                  <div class="modal fade" id="editstu" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                  style="display: none;" aria-hidden="true">
-
-
-
-                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-                      <div class="modal-content">
-                          <div class="modal-header p-4">
-                              <h5 class="modal-title" id="staticBackdropLabel">Create Student Data</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                  aria-label="Close"></button>
-                          </div>
-
-                          <div class="modal-body p-4 pb-0">
-                              <div class="row g-3">
+                    <div class="modal fade" id="editstu" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                        style="display: none;" aria-hidden="true">
 
 
-                                  <div class="col-lg-6 col-md-6 col-12">
 
-                                      <form action="/signup_stu_by_admin" method="POST"
-                                          enctype="multipart/form-data">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header p-4">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Create Student Data</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
-
-                                          <label class="form-label mb-1">Student Name</label>
-                                          <input type="text" class="form-control mb-1 border-0 bg-body"
-                                              placeholder="Please Enter" name="name">
-
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                      <label class="form-label mb-1">Registration Number</label>
-                                      <input type="text" class="form-control mb-1 border-0 bg-body"
-                                          placeholder="Please Enter" name="reg_no">
+                                <div class="modal-body p-4 pb-0">
+                                    <div class="row g-3">
 
 
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                      <label class="form-label mb-1">Email</label>
-                                      <input type="text" class="form-control mb-1 border-0 bg-body"
-                                          placeholder="Please Enter" name="email">
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                      <label class="form-label mb-1">Contact</label>
-                                      <input type="text" class="form-control mb-1 border-0 bg-body"
-                                          placeholder="Please Enter" name="contact">
-                                  </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
 
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                      <label class="form-label mb-1">BUS</label>
-                                      <select class="form-control mb-1 border-0 bg-body" name="bus_id">
-                                          <% bus.forEach( b=>{ %>
-                                              <option>
-                                                  <%=b.bus_id%>
-                                              </option>
-                                              <% }); %>
-                                      </select>
-
-                                  </div>
-
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                      <label class="form-label mb-1">Password</label>
-                                      <input type="password" class="form-control mb-1 border-0 bg-body"
-                                          placeholder="Please Enter" name="password">
-
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-12">
-
-                                      <label class="form-label text-dark mb-1">Upload Image</label>
-                                      <input type="file" class="form-control" id="profileImage"
-                                          name="profileImage" required>
+                                            <form action="/signup_stu_by_admin" method="POST"
+                                                enctype="multipart/form-data">
 
 
-                                      <!-- <div class=" d-flex gap-2">
+                                                <label class="form-label mb-1">Student Name</label>
+                                                <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                    placeholder="Please Enter" name="name">
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Registration Number</label>
+                                            <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                placeholder="Please Enter" name="reg_no">
+
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Email</label>
+                                            <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                placeholder="Please Enter" name="email">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Contact</label>
+                                            <input type="text" class="form-control mb-1 border-0 bg-body"
+                                                placeholder="Please Enter" name="contact">
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">BUS</label>
+                                            <select class="form-control mb-1 border-0 bg-body" name="bus_id">
+                                                <% bus.forEach( b=>{ %>
+                                                    <option>
+                                                        <%=b.bus_id%>
+                                                    </option>
+                                                    <% }); %>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="form-label mb-1">Password</label>
+                                            <input type="password" class="form-control mb-1 border-0 bg-body"
+                                                placeholder="Please Enter" name="password">
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+
+                                            <label class="form-label text-dark mb-1">Upload Image</label>
+                                            <input type="file" class="form-control" id="profileImage"
+                                                name="profileImage" required>
+
+
+                                            <!-- <div class=" d-flex gap-2">
                                   <div class="">
                                       <label class="btn upload-img-container btn-file border-0 p-3 position-relative">
 
@@ -312,21 +310,21 @@
                                       </div>
                                   </div>
                               </div> -->
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="modal-footer border-0 p-4 pt-0">
-                              <input type="submit" class="btn btn-primary" value="Create">
-                              </form>
-                              <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer border-0 p-4 pt-0">
+                                    <input type="submit" class="btn btn-primary" value="Create">
+                                    </form>
+                                    <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
 
 
-                          </div>
+                                </div>
 
-                      </div>
-                  </div>
+                            </div>
+                        </div>
 
-              </div>
+                    </div>
 
 
                     <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
@@ -385,7 +383,7 @@
                                                         <use href="assets/images/listing/edit-pen.svg#edit-icon"></use>
                                                     </svg>
                                                 </button>
-                                               
+
                                                 <% }); %>
                                                     <ul class="dropdown-menu border-0 Shadow"
                                                         style="font-size: 10px; min-width: 73px !important">
@@ -476,11 +474,13 @@
         });
 
     </script>
-    <footer class="mxc">
-        <div class="mtc rounded-3 p-1 gap-2 bg-color">
-            <h5 class="text-white">CUI BUS Portal</h5>
-        </div>
-    </footer>
+    <div class="container">
+        <footer class="mxc">
+            <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+                <h5 class="text-white">CUI BUS portal</h5>
+            </div>
+        </footer>
+        </footer>
 
 </body>
 

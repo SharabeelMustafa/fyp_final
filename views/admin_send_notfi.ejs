@@ -19,7 +19,7 @@
         <div class="container-fluid rounded-2 px-0">
 
             <div class="row flex-nowrap mt-5">
-                <div class="col-2">
+                <div class="raja1 col-2">
                     <a href="/admin_sn" class=" text-decoration-none">
                         <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
                             <div class="mx-2">
@@ -31,7 +31,7 @@
                         </div>
                     </a>
 
-             
+
                     <a href="/admin_sn_fc" class="text-decoration-none">
                         <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                             <div class="mx-2">
@@ -104,18 +104,21 @@
                                         </div>
 
                                         <form action="/send_notification_sc" method="post">
-                                            <% dat.forEach(s => { %>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-text">
-                                                    <input class="form-check-input mt-0 individual-checkbox"
-                                                        type="checkbox" name="reg_numbers" value="<%= s.reg_number %>"
-                                                        aria-label="Checkbox for following text input">
+                                            <% dat.forEach(s=> { %>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-text">
+                                                        <input class="form-check-input mt-0 individual-checkbox"
+                                                            type="checkbox" name="reg_numbers"
+                                                            value="<%= s.reg_number %>"
+                                                            aria-label="Checkbox for following text input">
+                                                    </div>
+                                                    <div class="form-control" aria-label="Text input with checkbox">
+                                                        <h5 class="selectable-text">
+                                                            <%= s.reg_number %>
+                                                        </h5>
+                                                    </div>
                                                 </div>
-                                                <div class="form-control" aria-label="Text input with checkbox">
-                                                    <h5 class="selectable-text"><%= s.reg_number %></h5>
-                                                </div>
-                                            </div>
-                                            <% }); %>
+                                                <% }); %>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +147,8 @@
                                         </div>
 
                                         <div class="row-gap-2">
-                                            <button type="submit" class="col-4 rounded-5 mt-2" style="margin-left: 220px;">
+                                            <button type="submit" class="col-4 rounded-5 mt-2"
+                                                style="margin-left: 220px;">
                                                 send
                                                 <img src="assets/images/Send.png" height="25px" width="25px" alt="">
                                             </button>
@@ -163,42 +167,42 @@
             </div>
         </div>
     </div>
-    </body>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery-3.6.3.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/Toggels.js"></script>
-    <script>
-        $("#some-menu").load("navbars.ejs");
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-3.6.3.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/moment.min.js"></script>
+<script src="assets/js/Toggels.js"></script>
+<script>
+    $("#some-menu").load("navbars.ejs");
 
-        // Select all checkboxes functionality
-        document.getElementById('selectAll').addEventListener('change', function () {
-            const checkboxes = document.querySelectorAll('.individual-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
-            });
+    // Select all checkboxes functionality
+    document.getElementById('selectAll').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('.individual-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
         });
+    });
 
-        // Click on <h5> to toggle checkbox in front of it
-        document.querySelectorAll('.selectable-text').forEach(item => {
-            item.addEventListener('click', function () {
-                const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
-                checkbox.checked = !checkbox.checked;
-            });
+    // Click on <h5> to toggle checkbox in front of it
+    document.querySelectorAll('.selectable-text').forEach(item => {
+        item.addEventListener('click', function () {
+            const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
         });
+    });
 
-        // Click on Select All <h5> text to toggle the Select All checkbox
-        document.getElementById('selectAllText').addEventListener('click', function () {
-            const selectAllCheckbox = document.getElementById('selectAll');
-            selectAllCheckbox.checked = !selectAllCheckbox.checked;
-            const event = new Event('change');
-            selectAllCheckbox.dispatchEvent(event);
-        });
-    </script>
-    <!-- <footer class="mxc">
+    // Click on Select All <h5> text to toggle the Select All checkbox
+    document.getElementById('selectAllText').addEventListener('click', function () {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        selectAllCheckbox.checked = !selectAllCheckbox.checked;
+        const event = new Event('change');
+        selectAllCheckbox.dispatchEvent(event);
+    });
+</script>
+<!-- <footer class="mxc">
         <div class=" mtc rounded-3 p-1 gap-2 bg-color">
            <h5 class="text-white">CU BSU portal</h5>
         </div>

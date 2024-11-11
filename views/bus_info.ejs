@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <title>Demo 2</title>
+
+  <style>
+    .info-card {
+      margin-top: 10px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .info-card h4 {
+      color: #007bff;
+      text-align: center;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: #343a40;
+      flex: 0 0 150px;
+    }
+
+    .info-value {
+      color: #495057;
+    }
+
+    .driver-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-right: 15px;
+    }
+
+    .contact-btn {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Bars -->
+  <div class="container-fluid p-0" id="some-menu"></div>
+
+  <div class="page-wrapper px-3">
+    <div class="container-fluid rounded-2 px-0">
+      <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+        <div class="py-3">
+          <% let fullString=currentDate.toString(); %>
+            <% let desiredPart=fullString.substring(0, 21); %>
+              <p class="small text-white my-5">
+                <%= desiredPart %>
+              </p>
+              <h2 class="mb-0 text-white">Welcome, <%= student.name %>!</h2>
+              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+        </div>
+        <div class="me-2">
+
+          <img src="uploads/<%=student.profile_img %>" class="r-img" alt="" width="200px" height="200px" />
+        </div>
+      </div>
+
+      <!-- Route Information Section -->
+      <div class="info-card bg-light rounded-3 p-4 card-shadow">
+        <h4 class="text-center text-primary mb-3">Bus Route Information</h4>
+
+        <!-- Route Number -->
+        <div class="info-item mb-3">
+          <span class="info-label fw-bold">Route Number:</span>
+          <span class="info-value">[Your Route Number Here]</span>
+        </div>
+
+        <!-- Driver Information -->
+        <div class="info-item mb-3 d-flex align-items-center gap-3">
+          <!-- Placeholder for Driver Image -->
+          <img src="uploads/driver-placeholder.jpg" class="driver-img rounded-circle" alt="Driver Image" width="100"
+            height="100" />
+
+          <div>
+            <div class="info-label fw-bold">Driver Name:</div>
+            <div class="info-value">[Your Driver Name Here]</div>
+
+            <div class="info-label fw-bold">Driver Phone:</div>
+            <div class="info-value">[Your Driver Phone Here]</div>
+          </div>
+        </div>
+
+        <!-- Student Pickup Information -->
+        <div class="info-item mb-3">
+          <span class="info-label fw-bold">Pickup Time:</span>
+          <span class="info-value">[Your Pickup Time Here]</span>
+        </div>
+
+        <!-- Student Stop Information -->
+        <div class="info-item mb-3">
+          <span class="info-label fw-bold">Pickup Stop:</span>
+          <span class="info-value">[Your Pickup Stop Here]</span>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-3.6.3.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/Toggels.js"></script>
+    <script>
+      $("#some-menu").load("navbars_stu.ejs");
+    </script>
+
+    <div class="container">
+      <footer class="mxc">
+        <div class="mtc rounded-3 p-1 gap-2 bg-color">
+          <h5 class="text-white">CUI BUS portal</h5>
+        </div>
+      </footer>
+</body>
+
+</html>

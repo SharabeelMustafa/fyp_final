@@ -83,7 +83,7 @@
     .photo {
       width: 80px;
       height: 100px;
-      background:  no-repeat center/cover;
+      background: no-repeat center/cover;
       border-radius: 4px;
       position: absolute;
       top: 45px;
@@ -98,9 +98,10 @@
       margin-top: 15px;
       position: absolute;
       top: 140px;
-      left: 30px;
-      padding-left: 130px;
+      right: 20px;
+      /* Changed from left to right */
     }
+
 
     .student-info {
       font-size: 13px;
@@ -175,10 +176,12 @@
           <span>Session: <%= RESS1.semester_name %></span>
           <span>Bus No: RLC 8960</span>
         </div>
-        <div >
-          <img  class="photo" src="uploads/<%=student.profile_img %>" alt="">
+        <div>
+          <img class="photo" src="uploads/<%=student.profile_img %>" alt="">
         </div>
-        <div class="name"><%= student.name %></div>
+        <div class="name">
+          <%= student.name %>
+        </div>
         <div class="student-info">CIIT/<%= student.reg_number %>/WAH</div>
         <div class="footer">
           <div class="dept">Department of Computer Science</div>
@@ -336,12 +339,13 @@
 
     }
   </script>
-
-  <footer class="mxc13">
-    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-      <h5 class="text-white">CUI BUS Portal</h5>
-    </div>
-  </footer>
+  <div class="container">
+    <footer class=" mxc">
+      <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+        <h5 class="text-white">CUI BUS portal</h5>
+      </div>
+    </footer>
+  </div>
 </body>
 
 </html>
