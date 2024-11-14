@@ -34,52 +34,137 @@ function index(req, res) {
   });
 }
 
+function getDriverInfo(req, res) {
+  const busId = req.query.id;
+
+  if (!busId) {
+    return res.status(400).json({ error: "bus ID is required" });
+  }
+
+  con.query('SELECT * FROM bus WHERE bus_id = ?', [busId], function (err, busResult) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (busResult.length === 0) {
+      return res.status(404).json({ error: "Bus not found" });
+    }
+
+    const routeId = busResult[0].route_id;
+    con.query('SELECT * FROM route WHERE r_id = ?', [routeId], function (err, routeResult) {
+      if (err) return res.status(500).json({ error: err.message });
+      if (routeResult.length === 0) {
+        return res.status(404).json({ error: "Route not found" });
+      }
+
+      const driverEmpId = busResult[0].driver_emp_id;
+      con.query('SELECT * FROM driver WHERE emp_id = ?', [driverEmpId], function (err, driverResult) {
+        if (err) return res.status(500).json({ error: err.message });
+        if (driverResult.length === 0) {
+          return res.status(404).json({ error: "Driver not found" });
+        }
+
+        res.json({ driver: driverResult[0], route: routeResult[0] });
+      });
+    });
+  });
+}
+
+
+function getNotifications(req, res) {
+  const userId = req.query.id;
+  const role = req.query.role;
+
+  if (!role || !['student', 'faculty'].includes(role)) {
+    return res.status(400).json({ error: 'Invalid role specified' });
+  }
+
+  const tableName = role === 'faculty' ? 'fi_notification' : 'si_notification';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+  const selectQuery_notification = `SELECT * FROM ${tableName} WHERE ${idField} = ?`;
+
+  con.query(selectQuery_notification, [userId], (err, result1) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    const currentDate = new Date();
+    res.json({
+      notification: result1,
+      currentDate
+    });
+  });
+}
+
+
+
 async function StuSingUp(req, res) {
   const { name, reg_no, email, contact, password } = req.body;
   const profileImage = req.file.filename;
-
-  // Hash the password before saving it
-  // const hashedPassword = await bcrypt.hash(password, 10);
   const bus_id = 0;
   const sql = 'INSERT INTO student (reg_number, name, contact, email, password , bus_id , profile_img, is_approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   const values = [reg_no, name, contact, email, password, bus_id, profileImage, 1];
-  
-
-
   con.query(sql, values, (err, result) => {
     if (err) {
       console.error('Error inserting data into the database:', err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-    res.status(201).json({ message: 'Student signed up successfully', studentId: result.insertId });
+    res.status(201).json({ success: true, message: 'Student signed up successfully', studentId: result.insertId });
   });
 }
 
 function DellNotificantion(req, res) {
   const n_Id = req.params.N_Id;
-  con.query('DELETE FROM si_notification WHERE sin_id = ?', [n_Id], (err) => {
+  const role = req.query.role;
+
+  if (!role || !['student', 'faculty'].includes(role)) {
+    return res.status(400).json({ error: 'Invalid role specified' });
+  }
+
+  const tableName = role === 'faculty' ? 'fi_notification' : 'si_notification';
+  const idField = role === 'faculty' ? 'fin_id' : 'sin_id';
+  const selectQuery_notification = `DELETE FROM ${tableName} WHERE ${idField} = ?`;
+
+  con.query(selectQuery_notification, [n_Id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ message: 'Notification deleted successfully' });
   });
 }
 
 function ConfirmLogin(req, res) {
-  const { reg_number, password } = req.body;
-  const selectQuery = 'SELECT * FROM student WHERE reg_number = ?';
+  const { reg_number, password, role } = req.body;
+
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
+
   con.query(selectQuery, [reg_number], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
 
     if (result.length > 0) {
-      bcrypt.compare(password, result[0].password, (err, bcryptResult) => {
-        if (err) return res.status(500).json({ error: err.message });
+      bcrypt.compare(password, result[0].password, (bcryptErr, bcryptResult) => {
+        if (bcryptErr) return res.status(500).json({ error: bcryptErr.message });
 
-        if (bcryptResult) {
-          const userId = result[0].reg_number;
-          req.session.userId = userId;
-          res.json({ message: 'Login successful', userId });
-        } else {
+        if (result.length > 0)  {
+          if (password == result[0].password) {
+            const userInfo = {
+              name: result[0].name,
+              email: result[0].email,
+              contact: result[0].contact,
+              busId: result[0].bus_id,
+              profileImage: result[0].profile_img
+              ? `${req.protocol}://${req.get('host')}/uploads/${result[0].profile_img}`
+              : null,
+            };
+            if (role === 'student') {
+              userInfo.reg_number = result[0].reg_number;
+            } else if (role === 'faculty') {
+              userInfo.emp_id = result[0].emp_id;
+            }
+
+            req.session.userId = role === 'student' ? result[0].reg_number : result[0].emp_id;
+            res.json({ success: true, message: 'Login successful', user: userInfo });
+          } 
+         else {
           res.status(401).json({ error: 'Incorrect password' });
         }
+       }
       });
     } else {
       res.status(404).json({ error: 'User not found' });
@@ -152,6 +237,8 @@ function ShowChallan(req, res) {
 
 module.exports = {
   index,
+  getDriverInfo,
+  getNotifications,
   upload,
   StuSingUp,
   DellNotificantion,
