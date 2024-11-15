@@ -20,13 +20,13 @@
     <div class="container-fluid rounded-2 px-0">
       <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
         <div class="py-3">
-          <% let fullString = currentDate.toString(); %>
-          <% let desiredPart = fullString.substring(0, 21); %>
-          <p class="small text-white my-5">
-            <%= desiredPart %>
-          </p>
-          <h2 class="mb-0 text-white">Welcome, <%= student.name %>!</h2>
-          <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+          <% let fullString=currentDate.toString(); %>
+            <% let desiredPart=fullString.substring(0, 21); %>
+              <p class="small text-white my-5">
+                <%= desiredPart %>
+              </p>
+              <h2 class="mb-0 text-white">Welcome, <%= student.name %>!</h2>
+              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
         </div>
         <div class="me-2">
           <img src="uploads/<%= student.profile_img %>" class="r-img" alt="" width="200px" height="200px" />
@@ -60,7 +60,7 @@
             </div>
             <div>
               <div class="row overflow-auto flex-nowrap" style="height: 250px;">
-                <% notification.forEach(notif => { %>
+                <% notification.forEach(notif=> { %>
                   <div class="col-lg-3 my-3">
                     <div class="bg-white card-shadow rounded-2 mb-3 p-2" style="height: 200px; width: 200px;">
                       <a href="/dell_si_notif/<%= notif.sin_id %>">
@@ -74,15 +74,15 @@
                           <%= notif.note %>
                         </p>
                         <br>
-                        <% let fullString = notif.update_at.toString(); %>
-                        <% let desiredPart = fullString.substring(0, 21); %>
-                        <p>
-                          <%= desiredPart %>
-                        </p>
+                        <% let fullString=notif.update_at.toString(); %>
+                          <% let desiredPart=fullString.substring(0, 21); %>
+                            <p>
+                              <%= desiredPart %>
+                            </p>
                       </div>
                     </div>
                   </div>
-                <% }); %>
+                  <% }); %>
               </div>
             </div>
           </div>
@@ -101,11 +101,11 @@
               <div class="mb-3">
                 <label for="routeSelect" class="form-label regular small">Select Route</label>
                 <select name="route" id="routeSelect" class="form-control">
-                  <% rou.forEach(r => { %>
+                  <% rou.forEach(r=> { %>
                     <option value="<%= r.r_id %>">
                       <%= r.route_name %>
                     </option>
-                  <% }); %>
+                    <% }); %>
                 </select>
                 <div class="col-6">
                   <div class="mb-3">
@@ -149,7 +149,7 @@
       document.addEventListener('DOMContentLoaded', () => {
         const routeSelect = document.getElementById('routeSelect');
         const stopSelect = document.getElementById('stopSelect');
-        const stops = <%- JSON.stringify(stu) %>; // Assuming `stu` contains stops data
+        const stops = <% - JSON.stringify(stu) %>; // Assuming `stu` contains stops data
 
         routeSelect.addEventListener('change', () => {
           const selectedRouteId = routeSelect.value;
@@ -172,7 +172,7 @@
 
     <footer class="mxc">
       <div class="mtc rounded-3 p-1 gap-2 bg-color">
-        <h5 class="text-white">CU BSU portal</h5>
+        <h5 class="text-white">CUI Bus Portal</h5>
       </div>
     </footer>
   </div>
