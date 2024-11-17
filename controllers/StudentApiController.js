@@ -180,7 +180,12 @@ function CheckStuReg(req, res) {
   con.query(selectQuery_reg, [userId], function (err, result) {
     if (err) return res.status(500).json({ error: err.message });
 
-    RESS = result.length > 0 ? 0 : 1;
+    if (result.length > 0) {
+      req.session.regId = result[0].s_reg_id;
+      RESS = 0;
+    } else {
+      RESS = 1;
+    }
 
     con.query('SELECT * FROM route', function (err, result1) {
       if (err) return res.status(500).json({ error: err.message });
