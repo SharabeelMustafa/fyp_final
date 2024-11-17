@@ -31,7 +31,7 @@
                         </div>
                     </a>
 
-             
+
                     <a href="/admin_sn_fc" class="text-decoration-none">
                         <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                             <div class="mx-2">
@@ -104,18 +104,20 @@
                                         </div>
 
                                         <form action="/send_notification_bc" method="post">
-                                            <% dat.forEach(s => { %>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-text">
-                                                    <input class="form-check-input mt-0 individual-checkbox"
-                                                        type="checkbox" name="bus_id" value="<%=s.bus_id %>"
-                                                        aria-label="Checkbox for following text input">
+                                            <% dat.forEach(s=> { %>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-text">
+                                                        <input class="form-check-input mt-0 individual-checkbox"
+                                                            type="checkbox" name="bus_id" value="<%=s.bus_id %>"
+                                                            aria-label="Checkbox for following text input">
+                                                    </div>
+                                                    <div class="form-control" aria-label="Text input with checkbox">
+                                                        <h5 class="selectable-text">
+                                                            <%= s.bus_id %>
+                                                        </h5>
+                                                    </div>
                                                 </div>
-                                                <div class="form-control" aria-label="Text input with checkbox">
-                                                    <h5 class="selectable-text"><%= s.bus_id %></h5>
-                                                </div>
-                                            </div>
-                                            <% }); %>
+                                                <% }); %>
                                     </div>
                                 </div>
                             </div>
@@ -148,20 +150,23 @@
                                                 send
                                                 <img src="assets/images/Send.png" height="25px" width="25px" alt="">
                                             </button> -->
-                                            
+
 
 
                                             <button type="submit" class="btn_sned" style="margin-left: 220px;">
                                                 <div class="svg-wrapper-1">
-                                                  <div class="svg-wrapper">
-                                                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                      <path d="M0 0h24v24H0z" fill="none"></path>
-                                                      <path d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z" fill="currentColor"></path>
-                                                    </svg>
-                                                  </div>
+                                                    <div class="svg-wrapper">
+                                                        <svg height="24" width="24" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path
+                                                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                                                fill="currentColor"></path>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                                 <span>Send</span>
-                                              </button>
+                                            </button>
 
 
                                         </div>
@@ -179,46 +184,46 @@
             </div>
         </div>
     </div>
-    </body>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery-3.6.3.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/Toggels.js"></script>
-    <script>
-        $("#some-menu").load("navbars.ejs");
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-3.6.3.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/moment.min.js"></script>
+<script src="assets/js/Toggels.js"></script>
+<script>
+    $("#some-menu").load("navbars.ejs");
 
-        // Select all checkboxes functionality
-        document.getElementById('selectAll').addEventListener('change', function () {
-            const checkboxes = document.querySelectorAll('.individual-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
-            });
+    // Select all checkboxes functionality
+    document.getElementById('selectAll').addEventListener('change', function () {
+        const checkboxes = document.querySelectorAll('.individual-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
         });
+    });
 
-        // Click on <h5> to toggle checkbox in front of it
-        document.querySelectorAll('.selectable-text').forEach(item => {
-            item.addEventListener('click', function () {
-                const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
-                checkbox.checked = !checkbox.checked;
-            });
+    // Click on <h5> to toggle checkbox in front of it
+    document.querySelectorAll('.selectable-text').forEach(item => {
+        item.addEventListener('click', function () {
+            const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
         });
+    });
 
-        // Click on Select All <h5> text to toggle the Select All checkbox
-        document.getElementById('selectAllText').addEventListener('click', function () {
-            const selectAllCheckbox = document.getElementById('selectAll');
-            selectAllCheckbox.checked = !selectAllCheckbox.checked;
-            const event = new Event('change');
-            selectAllCheckbox.dispatchEvent(event);
-        });
-    </script>
-    <!-- <footer class="mxc">
-        <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-           <h5 class="text-white">CU BSU portal</h5>
-        </div>
-    </footer> -->
+    // Click on Select All <h5> text to toggle the Select All checkbox
+    document.getElementById('selectAllText').addEventListener('click', function () {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        selectAllCheckbox.checked = !selectAllCheckbox.checked;
+        const event = new Event('change');
+        selectAllCheckbox.dispatchEvent(event);
+    });
+</script>
+<footer class="mxc">
+    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+        <h5 class="text-white">CUI Bus Portal</h5>
+    </div>
+</footer>
 </body>
 
 </html>
