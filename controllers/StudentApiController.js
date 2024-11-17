@@ -235,6 +235,148 @@ function ShowChallan(req, res) {
   res.json({ message: 'Show challan' });
 }
 
+function ShowBusInfo(req, res) {
+  const userId = req.session.userId;
+  const regId = req.session.regId;
+
+  if (!userId || !regId) {
+    return res.status(400).json({ error: 'Missing user session data' });
+  }
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  const selectQuery_bus = 'SELECT * FROM bus WHERE bus_id = ?';
+  const selectQuery_route = 'SELECT route_name FROM route WHERE r_id = ?';
+  const selectQuery_stopid_reg = 'SELECT s_id FROM s_registration WHERE s_reg_id = ?';
+  const selectQuery_stopName = 'SELECT * FROM stops WHERE s_id = ?';
+  const selectQuery_driver = 'SELECT * FROM driver WHERE emp_id = ?';
+
+  // Fetch student info
+  con.query(selectQuery_student, [userId], (err, studentResult) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    if (studentResult.length === 0) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    const busId = studentResult[0].bus_id;
+
+    // Fetch bus info
+    con.query(selectQuery_bus, [busId], (err, busResult) => {
+      if (err) return res.status(500).json({ error: err.message });
+
+      if (busResult.length === 0) {
+        return res.status(404).json({ error: 'Bus not found' });
+      }
+
+      const routeId = busResult[0].route_id;
+      const driverId = busResult[0].driver_emp_id;
+
+      // Fetch route info
+      con.query(selectQuery_route, [routeId], (err, routeResult) => {
+        if (err) return res.status(500).json({ error: err.message });
+
+        if (routeResult.length === 0) {
+          return res.status(404).json({ error: 'Route not found' });
+        }
+
+        // Fetch stop info
+        con.query(selectQuery_stopid_reg, [regId], (err, regStopIdResult) => {
+          if (err) return res.status(500).json({ error: err.message });
+
+          if (regStopIdResult.length === 0) {
+            return res.status(404).json({ error: 'Stop registration not found' });
+          }
+
+          const stopId = regStopIdResult[0].s_id;
+
+          // Fetch stop name
+          con.query(selectQuery_stopName, [stopId], (err, stopResult) => {
+            if (err) return res.status(500).json({ error: err.message });
+
+            if (stopResult.length === 0) {
+              return res.status(404).json({ error: 'Stop not found' });
+            }
+
+            // Fetch driver info
+            con.query(selectQuery_driver, [driverId], (err, driverResult) => {
+              if (err) return res.status(500).json({ error: err.message });
+
+              if (driverResult.length === 0) {
+                return res.status(404).json({ error: 'Driver not found' });
+              }
+
+              // Respond with JSON data
+              const currentDate = new Date();
+              res.json({
+                student: studentResult[0],
+                bus: busResult[0],
+                route: routeResult[0],
+                stop: stopResult[0],
+                driver: driverResult[0],
+                currentDate,
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+}
+
+function ShowStuEcard(req, res) {
+  const userId = req.session.userId;
+
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
+  }
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
+  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
+
+  con.query(selectQuery_semName, function (err, semResult) {
+    if (err) {
+      console.error('Error fetching semester:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    if (semResult.length === 0) {
+      return res.status(404).json({ error: 'No semester found.' });
+    }
+
+    const sem_name = semResult[0].semester_name;
+
+    con.query(selectQuery_student, [userId], (err, studentResult) => {
+      if (err) {
+        console.error('Error fetching student:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      if (studentResult.length === 0) {
+        return res.status(404).json({ error: 'Student not found.' });
+      }
+
+      con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
+        if (err) {
+          console.error('Error fetching registration:', err);
+          return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        const registrationInfo = regResult.length > 0 ? regResult[0] : null;
+        const currentDate = new Date();
+
+        res.json({
+          student: studentResult[0],
+          registration: registrationInfo,
+          currentDate
+        });
+      });
+    });
+  });
+}
+
+
+
 module.exports = {
   index,
   getDriverInfo,
@@ -246,5 +388,7 @@ module.exports = {
   CheckStuReg,
   ShowDashbord,
   ShowChallan,
+  ShowBusInfo,
+  ShowStuEcard,
   Logout
 };

@@ -1,6 +1,7 @@
 const multer = require('multer');
 const {ConnactMysql}= require('../connection');
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 let RESS3;
 let RESS;
@@ -18,8 +19,6 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage: storage });
-
-
 
 function ConfirmLogin(req, res) {
     const { username, password } = req.body;
@@ -231,7 +230,7 @@ async function SetStuData(req, res) {
   
   
   
-    const sql = 'INSERT INTO student (reg_number, name, contact, email, password , bus_id , profile_img, is_routerroved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const sql = 'INSERT INTO student (reg_number, name, contact, email, password , bus_id , profile_img, is_approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [reg_no, name, contact, email, password, bus_id, pImage, 1];
   
   
@@ -357,8 +356,8 @@ function getDriverData(req, res) {
 
 async function SetDriverData (req, res)  {
   
-  // console.log(req.body);
-  // console.log(req.file);
+  console.log(req.body);
+  console.log(req.file);
 
   // return res.redirect("/add_stu_data");
 

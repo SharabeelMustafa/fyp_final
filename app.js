@@ -10,8 +10,8 @@ const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const studentRouter = require('./routes/student');
 const AdminRouter = require('./routes/admin');
+const studentRouter = require('./routes/student');
 const studentAPI = require('./API/StudentAPI');
 
 const app = express();

@@ -107,6 +107,7 @@ function CheckStuReg(req, res) {
     con.query(selectQuery_reg, [userId, sem_name], function (err, result) {
       if (err) throw err;
       if (result.length > 0) {
+        req.session.regId = result[0].s_reg_id;
         RESS = 0;
       } else {
         RESS = 1;
@@ -146,7 +147,7 @@ function ShowStuEcard(req, res) {
 
       con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
         if (err) throw err;
-
+      
         let RESS1 = regResult.length > 0 ? regResult[0] : null;
         const currentDate = new Date();
 
@@ -159,19 +160,69 @@ function ShowStuEcard(req, res) {
     });
   });
 }
+
+
 function ShowBusInfo(req, res) {
   const userId = req.session.userId;
-
+  const regId=req.session.regId;
   const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
-  con.query(selectQuery_student, [userId], (err, result) => {
-    if (err) throw err;
-    //console.log(result);
-    const currentDate = new Date()
-    console.log(RESS);
-    res.render("bus_info", { student: result[0], currentDate });
+  const selectQuery_bus = 'SELECT * FROM bus WHERE bus_id = ?';
+  const selectQuery_route = 'SELECT route_name FROM route WHERE r_id = ?';
+  const selectQuery_stopid_reg='SELECT s_id FROM s_registration where s_reg_id = ? ';
+  const selectQuery_stopName = 'SELECT * FROM stops WHERE s_id = ?';
+  const selectQuery_driver = 'SELECT * FROM driver WHERE emp_id = ?';
 
+  // Fetch student info
+  con.query(selectQuery_student, [userId], (err, studentResult) => {
+    if (err) throw err;
+    
+    const busId = studentResult[0].bus_id;
+
+    // Fetch bus info
+    con.query(selectQuery_bus, [busId], (err, busResult) => {
+      if (err) throw err;
+
+      const routeId = busResult[0].route_id;
+      const driverId = busResult[0].driver_emp_id;
+
+      // Fetch route info
+      con.query(selectQuery_route, [routeId], (err, routeResult) => {
+        if (err) throw err;
+
+        
+
+        // Fetch stop info
+        con.query(selectQuery_stopid_reg, [regId], (err, regStopIdResult) => {
+          if (err) throw err;
+          const stopId = regStopIdResult[0].s_id;
+          // Fetch driver info
+          con.query(selectQuery_stopName, [stopId], (err, stopResult) => {
+            if (err) throw err;
+           con.query(selectQuery_driver, [driverId], (err, driverResult) => {
+             if (err) throw err;
+
+             // Render the bus_info page with all collected data
+             const currentDate = new Date();
+           
+            
+             console.log("Driver : ", driverResult[0]);
+
+             res.render("bus_info", {
+               student: studentResult[0],
+               bus: busResult[0],
+               route: routeResult[0],
+               stop: stopResult[0],
+               driver: driverResult[0],
+               currentDate
+             });
+           });
+         });
+       });
+     });
+   });
   });
 }
+
 
 
 

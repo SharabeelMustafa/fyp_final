@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { index, upload, StuSingUp, DellNotificantion, ConfirmLogin, CheckStuReg, ShowDashbord, ShowChallan, Logout, getDriverInfo, getNotifications } = require('../controllers/StudentApiController');
+const { index, upload, StuSingUp, DellNotificantion, ConfirmLogin, CheckStuReg, ShowDashbord, ShowChallan, Logout, getDriverInfo, getNotifications,ShowBusInfo,ShowStuEcard } = require('../controllers/StudentApiController');
 
 router.get('/', index);
 router.post('/stu_signup', upload.single('profileImage'), StuSingUp);
@@ -12,5 +12,7 @@ router.post('/student/logout', Logout);
 router.get('/challan', ShowChallan);
 router.get('/getdriverinfo', getDriverInfo);
 router.get('/getnotifications', getNotifications);
+router.get('/show_bus_info', ShowBusInfo);
+router.get('/show_student_ecard', ShowStuEcard);
 
 module.exports = router;

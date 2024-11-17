@@ -86,35 +86,35 @@
 
         <!-- Route Number -->
         <div class="info-item mb-3">
-          <span class="info-label fw-bold">Route Number:</span>
-          <span class="info-value">[Your Route Number Here]</span>
+          <span class="info-label fw-bold">Route Name:   </span>
+          <span class="info-value"><%=route.route_name %></span>
         </div>
 
         <!-- Driver Information -->
         <div class="info-item mb-3 d-flex align-items-center gap-3">
           <!-- Placeholder for Driver Image -->
-          <img src="uploads/driver-placeholder.jpg" class="driver-img rounded-circle" alt="Driver Image" width="100"
+          <img src="uploads/<%=driver.profile_img %>" class="driver-img rounded-circle" alt="Driver Image" width="100"
             height="100" />
 
           <div>
             <div class="info-label fw-bold">Driver Name:</div>
-            <div class="info-value">[Your Driver Name Here]</div>
+            <div class="info-value"><%=driver.name%></div>
 
             <div class="info-label fw-bold">Driver Phone:</div>
-            <div class="info-value">[Your Driver Phone Here]</div>
+            <div class="info-value"><%=driver.contact %></div>
           </div>
         </div>
 
         <!-- Student Pickup Information -->
         <div class="info-item mb-3">
           <span class="info-label fw-bold">Pickup Time:</span>
-          <span class="info-value">[Your Pickup Time Here]</span>
+          <span class="info-value"><%=stop.pickup_time %></span>
         </div>
 
         <!-- Student Stop Information -->
         <div class="info-item mb-3">
           <span class="info-label fw-bold">Pickup Stop:</span>
-          <span class="info-value">[Your Pickup Stop Here]</span>
+          <span class="info-value"><%=stop.stop_name %></span>
         </div>
 
 
