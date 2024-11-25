@@ -28,7 +28,7 @@
                 <a href="/add_stu_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
                         <div class="mx-2">
-                            <h44 class="text-white">Student</h44>
+                            <h44 class="text-black">Student</h44>
                         </div>
                         <div class="me-2">
                             <img width="40px" height="30px" src="assets/images/Student.png" />
@@ -39,7 +39,7 @@
                 <a href="/add_driver_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                         <div class="mx-2">
-                            <h44 class="text-white">Driver</h44>
+                            <h44 class="text-black">Driver</h44>
                         </div>
                         <div class="me-2">
                             <img width="40px" height="30px" src="assets/images/arcticons_messages.png" alt="" />
@@ -50,7 +50,7 @@
                 <a href="/add_faculty_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                         <div class="mx-2">
-                            <h44 class="text-white">Faculty</h44>
+                            <h44 class="text-black">Faculty</h44>
                         </div>
                         <div class="me-2">
                             <img width="40px" height="30px" src="assets/images/2.png" alt="" />
@@ -60,7 +60,7 @@
                 <a href="/add_bus_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                         <div class="mx-2">
-                            <h44 class="text-white">Bus</h44>
+                            <h44 class="text-black">Bus</h44>
                         </div>
                         <div class="me-2">
                             <img width="40px" height="30px" src="assets/images/buslogo.png" alt="" />
@@ -71,7 +71,7 @@
                 <a href="/add_route_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                         <div class="mx-2">
-                            <h44 class="text-white">Route</h44>
+                            <h44 class="text-black">Route</h44>
                         </div>
                         <div class="me-2">
                             <img width="40px" height="30px" src="assets/images/Frame 35.png" alt="" />
@@ -85,14 +85,14 @@
 
 
             <div class="col-10">
-                <div class="container-fluid mt-1 bg-white card-Shadow rounded-2 px-0">
+                <div class="container-fluid mt-1 bg-color card-Shadow rounded-2 px-0">
                     <div class="d-flex justify-content-between flex-wrap align-items-center p-4 pb-0">
                         <div class="input mb-3">
                             <input type="text" class="search-box ps-3 py-1" placeholder="Please Enter"
                                 aria-label="Recipient's username" aria-describedby="button-addon2" id="search-box" />
 
 
-                            <button class="btn bg-color mb-1" type="button" id="button-addon2">
+                            <button class="btn btn-primary mb-1" type="button" id="button-addon2">
                                 <span>
                                     <svg class="SearchIcon mb-1">
                                         <use href="assets/images/listing/search-icon.svg#search-icon"></use>
@@ -179,7 +179,7 @@
                     <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
                         <table class="table Search-Employees table-borderless table-striped table-hover">
                             <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
-                                <tr class="small">
+                                <tr class="small  border-solid ">
                                     <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
                                     <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Bus Id
                                     </th>
@@ -194,7 +194,7 @@
                                     <th scope="col" class="pb-3 text-end dashed-border-bottom">Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="small" id="student-table-body">
+                            <tbody class="small  border-solid " id="student-table-body">
                                 <% let a=0; %>
                                     <% stu.forEach( s=>{ %>
                                         <tr class="mt-4 student-row">
@@ -322,7 +322,7 @@
     <div class="container">
         <footer class="mxc">
             <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-                <h5 class="text-white">CUI Bus Portal</h5>
+                <h5 class="text-black">CUI Bus Portal</h5>
             </div>
         </footer>
 

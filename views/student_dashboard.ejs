@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body style="background:linear-gradient(to right, #D3DCF7, #959DB2);">
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
   <!--*** BARS END ***-->
@@ -22,16 +22,16 @@
 
     <div class="container-fluid  rounded-2 px-0">
 
-      <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
-        <div class="py-3">
+      <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow " >
+        <div class="py-3 " >
           <% let fullString=currentDate.toString(); %>
             <% let desiredPart=fullString.substring(0, 21); %>
 
-              <p class="small text-white my-5">
+              <p class="small text-black my-5">
                 <%= desiredPart%>
               </p>
-              <h2 class="mb-0 text-white">Welcome ,<%= student.name %> !</h2>
-              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+              <h2 class="mb-0 text-black">Welcome ,<%= student.name %> !</h2>
+              <p class="mb-0 text-black">Always stay updated in your Bus portal</p>
         </div>
         <div class="me-2">
 
@@ -42,9 +42,9 @@
         <div class="col-4">
           <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
             <div class="">
-              <h2 class="mb-lg-5 text-white">Bus info </h2>
+              <h2 class="mb-lg-5 text-black">Bus info </h2>
               <a href="/businfo">
-                <button class="btn btn-primary bg-dark btn-blue">view</button>
+                <button class="btn btn-primary  btn-blue">view</button>
               </a>
             </div>
             <div class="me-2">
@@ -53,9 +53,9 @@
           </div>
           <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow mt-3">
             <div class="">
-              <h2 class="mb-lg-5 text-white">Fee Info </h2>
+              <h2 class="mb-lg-5 text-black">Fee Info </h2>
               <a href="/feeinfo">
-                <button class="btn btn-primary bg-dark btn-blue w-75">view</button>
+                <button class="btn btn-primary  btn-blue w-75">view</button>
               </a>
             </div>
             <div class="me-2">
@@ -66,7 +66,7 @@
         <div class="col-lg-8" bis_skin_checked="1">
           <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
             <div class="flex-between" bis_skin_checked="1">
-              <h3 class="mb-0 text-white ">Notification !</h3>
+              <h3 class="mb-0 text-black ">Notification !</h3>
             </div>
             <div class="" bis_skin_checked="1">
               <div class="row overflow-auto  flex-nowrap" style="height: 250px;" bis_skin_checked="1">
@@ -146,7 +146,7 @@
                 </div>
               </div>
               <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
-                <button type="submit" class="btn btn-danger px-5 w-75 text-white bg-color">Register</button>
+                <button type="submit" class="btn btn-danger px-5 w-75 text-black bg-color">Register</button>
                 <!-- <a href="/challan" ></a> -->
               </div>
             </div>
@@ -209,11 +209,11 @@
 
     </script>
 
-    <footer class="mxc">
+    <!-- <footer class="mxc">
       <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-        <h5 class="text-white">CUI Bus Portal</h5>
+        <h5 class="text-black">CUI Bus Portal</h5>
       </div>
-    </footer>
+    </footer> -->
 
 </body>
 

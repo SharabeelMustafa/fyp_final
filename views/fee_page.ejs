@@ -16,22 +16,22 @@
   </style>
 </head>
 
-<body>
+<body style="background:linear-gradient(to right, #D3DCF7, #959DB2); ">
 
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
 
-  <div class="page-wrapper px-3">
+  <div class="page-wrapper px-3 ">
     <div class="container-fluid rounded-2 px-0">
       <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
         <div class="py-3">
           <% let fullString=currentDate.toString(); %>
             <% let desiredPart=fullString.substring(0, 21); %>
-              <p class="small text-white my-5">
+              <p class="small text-black my-5">
                 <%= desiredPart %>
               </p>
-              <h2 class="mb-0 text-white">Welcome, <%= student.name %>!</h2>
-              <p class="mb-0 text-white">Always stay updated in your Bus portal</p>
+              <h2 class="mb-0 text-black">Welcome, <%= student.name %>!</h2>
+              <p class="mb-0 text-black">Always stay updated in your Bus portal</p>
         </div>
         <div class="me-2">
 
@@ -39,7 +39,7 @@
         </div>
       </div>
       <!-- Fee Info Section (Second Div) -->
-      <div class="fee-info-card bg-light rounded-3 p-4 card-shadow ">
+      <div class="fee-info-card bg-light rounded-3 p-3 card-shadow  bg-color">
         <h4 class="text-center text-primary mb-3">Fee Information</h4>
 
         <!-- Fee Status Section -->
@@ -79,12 +79,11 @@
     $("#some-menu").load("navbars_stu.ejs");
   </script>
 
-  <div class="container">
-    <footer class="mxc12">
+    <!-- <footer class="mxc12">
       <div class=" mtc rounded-3 p-1 gap-2 bg-color">
-        <h5 class="text-white">CUI Bus Portal</h5>
+        <h5 class="text-black">CUI Bus Portal</h5>
       </div>
-    </footer>
+    </footer> -->
 </body>
 
 </html>
