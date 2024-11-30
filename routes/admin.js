@@ -5,7 +5,7 @@ const {ConfirmLogin,upload,DellNotificantion,getRouteDataById,ShowRount,ShowDash
        ShowStudenAt_ASN,ShowFacalityAt_ASN,ShowBusAt_ASN,ShowRountAt_ASN,SendNotificationTo_Stu,
        SendNotificationTo_Facality,SendNotificationTo_Bus,getStuBusData,SetStuData,getFacalityBusData,
        SetFacalityData,getBusRountDriverData,SetBusData,getDriverData,SetDriverData,getRountStopDriverData,
-       SetRouteData,SetStopeData,Logout}= require('../controllers/AdminController')
+       SetRouteData,SetStopeData,Logout,ShowInstallmentDashboard,ShowRouteChangeTable,ShowInstallmentTable}= require('../controllers/AdminController')
 
 // Middleware to check if admin is logged in
 
@@ -41,6 +41,9 @@ router.get('/add_route_data', checkAdminSession,getRountStopDriverData );
 router.post('/signup_route_by_admin', checkAdminSession, SetRouteData);
 router.post('/signup_stops_by_admin', checkAdminSession, SetStopeData);
 router.get('/admin/logout', Logout);
+router.get('/admin_appli', checkAdminSession, ShowInstallmentDashboard );
+router.get('/table_instll', checkAdminSession, ShowInstallmentTable );
+router.get('/table_route', checkAdminSession, ShowRouteChangeTable );
 module.exports = router;
 
 

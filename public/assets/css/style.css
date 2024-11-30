@@ -331,7 +331,7 @@ h5 {
 
 .card-Shadow {
   box-shadow: 0 4px 13px 2px hsla(133, 22%, 75%, 0.13);
-  
+
 }
 
 .navbar .navbar-collapse ul .active {
@@ -1251,11 +1251,11 @@ body {
   background-repeat: no-repeat; */
   /* background:linear-gradient(to right, #a91cd4, #0a30d8); */
   /* background-color: #c4c8c9; */
-   background:linear-gradient(to right, #D3DCF7, #959DB2);
+  background: linear-gradient(to right, #D3DCF7, #959DB2);
 }
 
 .bg-color {
-  
+
   background: linear-gradient(to right, #E3E9FC, #D7DEF3);
   /* background:linear-gradient(to right,  #959DB2,#D3DCF7); */
   border: 3px solid rgb(255, 255, 255);
@@ -1263,14 +1263,15 @@ body {
 }
 
 
-.border-route{
+.border-route {
   border: 3px solid rgb(255, 255, 255);
 }
 
 
-.border-solid{
+.border-solid {
   border: 1px solid rgb(0, 0, 0);
 }
+
 /* .navbar:hover .navbar-icon {
   margin-left: 62px;
   height: 100px;
@@ -1343,7 +1344,6 @@ img {
   font-size: 0%;
   opacity: 0;
   transition: all 0.5s;
-
 }
 
 .btn_sned svg {

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Demo 2</title>
+</head>
+
+<body>
+    <!-- Bars -->
+    <div class="container-fluid p-0" id="some-menu"></div>
+    <!--*** BARS END ***-->
+    <div class="page-wrapper px-3 ">
+
+        <div>
+            <div class="container-fluid  rounded-2 px-0">
+
+                <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+                    <div class="py-3">
+
+                        <p class="small text-black my-5">May 13,2024 </p>
+                        <h2 class="mb-0 text-black">Welcome Admin !</h2>
+                        <p class="mb-0 text-black">Always stay updated in your Bus portal</p>
+                    </div>
+                    <div class="me-2">
+
+                        <img src="uploads/download.png" class="r-img" alt="" width="200px" height="200px" />
+                    </div>
+                </div>
+                <!-- Application for Route Change Table -->
+                <div
+                    style=" margin-top: 10px;margin-bottom: 40px; padding: 20px; background: #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px;">
+                    <h2 style="color: #343a40; margin-bottom: 20px;">Application for Route Change</h2>
+                    <table style="width: 100%; border-collapse: collapse;" id="routeChangeTable">
+                        <thead style="background: #007bff; color: #ffffff;">
+                            <tr>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">Sr No</th>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">Student Name</th>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">Student Reg No</th>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">New Route</th>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #dddddd;">1</td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;">John Doe</td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;" data-id="12345">12345</td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;">Route A</td>
+                                <td style="padding: 10px; border: 1px solid #dddddd; text-align: center;">
+                                    <button
+                                        style="background-color: #28a745; color: #ffffff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;"
+                                        onclick="handleAction(this, 'approved')">Approve</button>
+                                    <button
+                                        style="background-color: #dc3545; color: #ffffff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;"
+                                        onclick="handleAction(this, 'declined')">Decline</button>
+                                    <button
+                                        style="background-color: #6c757d; color: #ffffff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; display: none;"
+                                        onclick="deleteRow(this)">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <script src="js/jquery.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="assets/js/jquery-3.6.3.min.js"></script>
+            <script src="assets/js/bootstrap.bundle.min.js"></script>
+            <script src="assets/js/main.js"></script>
+            <script src="assets/js/moment.min.js"></script>
+            <script src="assets/js/Toggels.js"></script>
+            <script>
+                $("#some-menu").load("navbars.ejs");
+                function handleAction(button, status) {
+                    const row = button.closest('tr');
+                    const studentId = row.querySelector('[data-id]').getAttribute('data-id');
+                    const deleteButton = row.querySelector('button[onclick="deleteRow(this)"]');
+
+                    // Change row style and actions based on status
+                    if (status === 'approved') {
+                        row.style.backgroundColor = '#d4edda'; // Light green for approval
+                        row.style.color = '#155724'; // Dark green text
+                        alert(`Student ID ${studentId}: Application Approved!`);
+                    } else if (status === 'declined') {
+                        row.style.backgroundColor = '#f8d7da'; // Light red for rejection
+                        row.style.color = '#721c24'; // Dark red text
+                        alert(`Student ID ${studentId}: Application Declined!`);
+                    }
+
+                    // Mark buttons for post-approval/rejection actions
+                    button.style.display = 'none';
+                    deleteButton.style.display = 'inline-block';
+                }
+
+                function deleteRow(button) {
+                    const row = button.closest('tr');
+                    row.remove(); // Remove the row from the table
+                    alert('Row deleted successfully!');
+                }
+            </script>
+            <!-- <div class="container">
+                <footer class="mxc">
+                    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+                        <h5 class="text-black">CUI Bus Portal</h5>
+                    </div>
+                </footer>
+            </div> -->
+
+
+</body>
+
+
+</html>
