@@ -309,12 +309,15 @@ function ShowFeePage(req, res) {
 
   const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
   con.query(selectQuery_student, [userId], (err, result) => {
-    if (err) throw err;
+    if (err) {
+      ShowErrorPage(err, res);
+    } 
+    else{
     //console.log(result);
     const currentDate = new Date()
     console.log(RESS);
     res.render("fee_page", { student: result[0], currentDate });
-
+    }
   });
 
 }
@@ -330,8 +333,8 @@ function Logout(req, res) {
   });
 }
 
-function ShowErrorPage(message, err, res) {
-  res.render('error', { message: message, error: err });
+function ShowErrorPage(err, res) {
+  res.render('error', { message: err.message, error: err });
 
 }
 
