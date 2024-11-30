@@ -59,7 +59,7 @@
   </style>
 </head>
 
-<body >
+<body>
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
 
@@ -82,113 +82,125 @@
       </div>
 
       <!-- Route Information Section -->
-    <div class="row">
-      <div class="info-card mx-5 my-4 px-5 col-5 rounded-3 p-4 bg-color card-shadow">
-        <h4 class="text-center text-primary mb-3">your Bus Route Information</h4>
+      <div class="row">
+        <div class="info-card mx-5 my-4 px-5 col-5 rounded-3 p-4 bg-color card-shadow">
+          <h4 class="text-center text-primary mb-3">Your Bus Route Information</h4>
 
-        <!-- Driver Information -->
-        <div class="info-item mb-3 d-flex align-items-center gap-3">
-          <!-- Placeholder for Driver Image -->
-          <img src="./assets/images/busImage.png"  alt=""  width="246px" height="189px " />
+          <!-- Driver Information -->
+          <div class="info-item mb-3 d-flex align-items-center gap-3">
+            <!-- Placeholder for Driver Image -->
+            <img src="./assets/images/busImage.png" alt="" width="246px" height="189px " />
 
-          <div>
-            <div class="info-label fw-bold">Route Name:</div>
-            <div class="info-value"><%=route.route_name %></div>
+            <div>
+              <div class="info-label fw-bold">Route Name:</div>
+              <div class="info-value">
+                <%=route.route_name %>
+              </div>
 
-            <div class="info-label fw-bold">Bus NO:</div>
-            <div class="info-value"><%=bus.bus_id %></div>
-          </div>
-        </div>
-
-        <!-- Student Pickup Information -->
-        <div class="d-flex">
-        <div class="info-item mb-3">
-          <span class="info-label fw-bold">Pickup Time:</span>
-          <span class="info-value"><%=stop.pickup_time %></span>
-        </div>
-        <div style="margin-left: 100px;">
-        <button id="route-chage" class="btn btn-primary btn-blue ">Apllay for route chage </button>
-        </div>
-       </div>
-        <!-- Student Stop Information -->
-        <div class="info-item mb-3">
-          <span class="info-label fw-bold">Pickup Stop:</span>
-          <span class="info-value"><%=stop.stop_name %></span>
-        </div>
-
-
-
-      </div>
-      <div class="info-card px-5 mx-5 my-4 col-5 rounded-3 p-4 bg-color card-shadow">
-        <h4 class="text-center text-primary mb-3">You'r Bus Driver Information</h4>
-
-       
-
-        <!-- Driver Information -->
-        <div class="info-item mb-3 d-flex align-items-center gap-3">
-          <!-- Placeholder for Driver Image -->
-          <img src="uploads/<%=driver.profile_img %>" class="" alt="Driver Image"  width="180px" height="200px "  />
-
-          <div>
-            <div class="info-label fw-bold">Driver Name:</div>
-            <div class="info-value"><%=driver.name%></div>
-
-            <div class="info-label fw-bold">Driver Phone:</div>
-            <div class="info-value"><%=driver.contact %></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-       
-     
-       <!-- applay for route chage  Overlay -->
-   <div class="overlay" id="signup-overlay">
-    <div class="overlay-content">
-      <button class="close-btn" id="close-signup">&times;</button>
-      <div class="text-center">
-        <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
-        <h2 class="mb-0">Apply for Route change </h2>
-        <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
-      </div>
-      <form action="" method="post">
-        <div class="row">
-          <div class="col-6">
-            <div class="mb-3">
-              <label for="" class="form-label regular small"> Name</label>
-              <label for="routeSelect" class="form-label regular small">Select Route</label>
-              <select name="route" id="routeSelect" class="form-control">
-                <% allRoutes.forEach(r=> { %>
-                  <option value="<%= r.r_id %>">
-                    <%= r.route_name %>
-                  </option>
-                  <% }); %>
-              </select>
+              <div class="info-label fw-bold">Bus NO:</div>
+              <div class="info-value">
+                <%=bus.bus_id %>
+              </div>
             </div>
-          </div>            
-          <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
-            <button type="submit"  class="btn btn-danger px-5 w-75 text-black btn-blue "> Apply</button>
-            <!-- <a href="/challan" ></a> -->
+          </div>
+
+          <!-- Student Pickup Information -->
+          <div class="d-flex">
+            <div class="info-item mb-3">
+              <span class="info-label fw-bold">Pickup Time:</span>
+              <span class="info-value">
+                <%=stop.pickup_time %>
+              </span>
+            </div>
+            <div style="margin-left: 100px;">
+              <button id="route-chage" class="btn btn-primary btn-blue ">Apply for Route Change</button>
+            </div>
+          </div>
+          <!-- Student Stop Information -->
+          <div class="info-item mb-3">
+            <span class="info-label fw-bold">Pickup Stop:</span>
+            <span class="info-value">
+              <%=stop.stop_name %>
+            </span>
+          </div>
+
+
+
+        </div>
+        <div class="info-card px-5 mx-5 my-4 col-5 rounded-3 p-4 bg-color card-shadow">
+          <h4 class="text-center text-primary mb-3">Your Bus Driver Information</h4>
+
+
+
+          <!-- Driver Information -->
+          <div class="info-item mb-3 d-flex align-items-center gap-3">
+            <!-- Placeholder for Driver Image -->
+            <img src="uploads/<%=driver.profile_img %>" class="" alt="Driver Image" width="180px" height="200px " />
+
+            <div>
+              <div class="info-label fw-bold">Driver Name:</div>
+              <div class="info-value">
+                <%=driver.name%>
+              </div>
+
+              <div class="info-label fw-bold">Driver Phone:</div>
+              <div class="info-value">
+                <%=driver.contact %>
+              </div>
+            </div>
           </div>
         </div>
-
-      </form>
+      </div>
     </div>
-  </div>
 
 
-  <script>
-    // Hide the signup overlay initially
-    document.getElementById('signup-overlay').style.display = 'none';
+    <!-- applay for route chage  Overlay -->
+    <div class="overlay" id="signup-overlay">
+      <div class="overlay-content">
+        <button class="close-btn" id="close-signup">&times;</button>
+        <div class="text-center">
+          <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
+          <h2 class="mb-0">Apply for Route change </h2>
+          <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
+        </div>
+        <form action="" method="post">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="" class="form-label regular small"> Name</label>
+                <label for="routeSelect" class="form-label regular small">Select Route</label>
+                <select name="route" id="routeSelect" class="form-control">
+                  <% allRoutes.forEach(r=> { %>
+                    <option value="<%= r.r_id %>">
+                      <%= r.route_name %>
+                    </option>
+                    <% }); %>
+                </select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
+              <button type="submit" class="btn btn-danger px-5 w-75 text-black btn-blue "> Apply</button>
+              <!-- <a href="/challan" ></a> -->
+            </div>
+          </div>
 
-    document.getElementById('close-signup').addEventListener('click', function () {
+        </form>
+      </div>
+    </div>
+
+
+    <script>
+      // Hide the signup overlay initially
       document.getElementById('signup-overlay').style.display = 'none';
-    });
-    // Add event listener for the route change button
-    document.getElementById('route-chage').addEventListener('click', function () {
-      document.getElementById('signup-overlay').style.display = 'flex';
-    });
-  </script>
+
+      document.getElementById('close-signup').addEventListener('click', function () {
+        document.getElementById('signup-overlay').style.display = 'none';
+      });
+      // Add event listener for the route change button
+      document.getElementById('route-chage').addEventListener('click', function () {
+        document.getElementById('signup-overlay').style.display = 'flex';
+      });
+    </script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="assets/js/jquery-3.6.3.min.js"></script>
@@ -200,7 +212,7 @@
       $("#some-menu").load("navbars_stu.ejs");
     </script>
 
-<!--     
+    <!--     
       <footer class="mxc">
         <div class="mtc rounded-3 p-1 gap-2 bg-color">
           <h5 class="text-black">CUI Bus Portal</h5>
