@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Demo 2</title>
+    <style>
+        .bus-card {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .bus-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .bus-title {
+            font-size: 1.5rem;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+
+        .bus-route {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        .bus-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .bus-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Bars -->
+    <div class="container-fluid p-0" id="some-menu"></div>
+    <!--*** BARS END ***-->
+    <div class="page-wrapper px-3 ">
+
+        <div>
+            <div class="container-fluid  rounded-2 px-0">
+
+                <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+                    <div class="py-3">
+
+                        <p class="small text-black my-5">May 13,2024 </p>
+                        <h2 class="mb-0 text-black">Welcome Admin !</h2>
+                        <p class="mb-0 text-black">Always stay updated in your Bus portal</p>
+                    </div>
+                    <div class="me-2">
+
+                        <img src="uploads/download.png" class="r-img" alt="" width="200px" height="200px" />
+                    </div>
+                </div>
+
+                <div class="bus-container">
+                    <div class="bus-card" onclick="showBusDetails('Route 1')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 1</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 2')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 2</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 3')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 3</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 4')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 4</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 5')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 5</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 6')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 6</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                    <div class="bus-card" onclick="showBusDetails('Route 7')">
+                        <img src="./assets/images/busImage.png" alt="Bus Icon">
+                        <div class="bus-title">Track Bus</div>
+                        <div class="bus-route">Route: 7</div>
+                        <div class="bus-route">Bus no: 1397</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2">
+                        <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow"
+                            style="height: 430px;">
+                            <div class="">
+                                <h2 class="mb-lg-5 text-black">Tracking info </h2>
+                            </div>
+                            <div class="me-2">
+                                <!-- <img width="246px" height="189px " src="./assets/images/busImage.png" alt="" /> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-10" bis_skin_checked="1">
+                        <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
+                            <div class="flex-between" bis_skin_checked="1">
+                                <h3 class="mb-0 text-black ">Tracking !</h3>
+                            </div>
+                            <div class="" bis_skin_checked="1">
+                                <div class="row overflow-auto  flex-nowrap" style="height: 345px;" bis_skin_checked="1">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</body>
+
+
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-3.6.3.min.js"></script>
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/moment.min.js"></script>
+<script src="assets/js/Toggels.js"></script>
+<script>
+    $("#some-menu").load("navbars.ejs");
+</script>
+<!-- <div class="container">
+                <footer class="mxc">
+                    <div class=" mtc rounded-3 p-1 gap-2 bg-color">
+                        <h5 class="text-black">CUI Bus Portal</h5>
+                    </div>
+                </footer>
+            </div> -->
+
+
+</body>
+
+
+</html>

@@ -105,6 +105,14 @@ function ShowInstallmentTable(req, res) {
     res.render('Installment_table', { notif: result1 });
   });
 }
+function TrackBuses(req, res) {
+  const ad = req.session.adminId;
+  console.log(ad);
+  con.query('SELECT * FROM ai_notification WHERE a_id = ?', [ad], function (err, result1) {
+    if (err) throw err;
+    res.render('track_buses', { notif: result1 });
+  });
+}
 
 
 function ShowStudenAt_ASN(req, res) {
@@ -529,4 +537,5 @@ module.exports = {
   ShowInstallmentDashboard,
   ShowInstallmentTable,
   ShowRouteChangeTable,
+  TrackBuses,
 };
