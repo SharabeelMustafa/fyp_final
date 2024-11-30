@@ -147,7 +147,7 @@ function ShowStuEcard(req, res) {
 
       con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
         if (err) throw err;
-      
+
         let RESS1 = regResult.length > 0 ? regResult[0] : null;
         const currentDate = new Date();
 
@@ -312,6 +312,27 @@ function ShowDashbord(req, res) {
   });
 
 }
+function TrackBus(req, res) {
+  const userId = req.session.userId;
+  //console.log(userId);
+
+  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  con.query(selectQuery_student, [userId], (err, result) => {
+    if (err) throw err;
+    //console.log(result);
+    const selectQuery_si_notification = 'SELECT * FROM si_notification WHERE reg_number = ? ';
+    con.query(selectQuery_si_notification, [userId], (err, result1) => {
+      if (err) throw err;
+      //console.log(result);
+
+
+      const currentDate = new Date()
+      //console.log(RESS);
+      res.render("student_track_bus", { student: result[0], notification: result1, rou: RESS1, stop: RESS3, RESS, currentDate });
+    });
+  });
+
+}
 function ShowFeePage(req, res) {
   const userId = req.session.userId;
 
@@ -319,12 +340,12 @@ function ShowFeePage(req, res) {
   con.query(selectQuery_student, [userId], (err, result) => {
     if (err) {
       ShowErrorPage(err, res);
-    } 
-    else{
-    //console.log(result);
-    const currentDate = new Date()
-    console.log(RESS);
-    res.render("fee_page", { student: result[0], currentDate });
+    }
+    else {
+      //console.log(result);
+      const currentDate = new Date()
+      console.log(RESS);
+      res.render("fee_page", { student: result[0], currentDate });
     }
   });
 
@@ -365,4 +386,5 @@ module.exports = {
   ShowFeePage,
   ShowStuEcard,
   ShowBusInfo,
+  TrackBus,
 };
