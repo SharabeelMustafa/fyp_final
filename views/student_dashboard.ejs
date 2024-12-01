@@ -40,176 +40,177 @@
       </div>
       <div class="row mt-3">
         <div class="col-4">
-
-          <a href="/businfo" class="text-decoration-none">
+          <a href="/feeinfo" class="text-decoration-none">
             <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
               <div class="">
-                <h2 class="mb-lg-5 text-black">Bus info </h2>
+                <h2 class="text-black">Fee Info</h2>
+
+              </div>
+              <div class="me-2">
+                <img width="136px" height="130px " src="./assets/images/arcticons_messages.png" alt="" />
+              </div>
+            </div>
+          </a>
+          <a href="/businfo" class="text-decoration-none">
+            <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow mt-3">
+              <div class="">
+                <h2 class="mb-lg-5 text-black">Bus Info</h2>
+
+              </div>
+              <div class="me-2">
+                <img width="136px" height="110px " src="./assets/images/Frame 35.png" alt="" />
+              </div>
+            </div>
           </a>
         </div>
-        <div class="me-2">
-          <img width="136px" height="130px " src="./assets/images/busImage.png" alt="" />
+
+        <div class="col-lg-8" bis_skin_checked="1">
+          <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
+            <div class="flex-between" bis_skin_checked="1">
+              <h3 class="mb-0 text-black ">Notification !</h3>
+            </div>
+            <div class="" bis_skin_checked="1">
+              <div class="row overflow-auto  flex-nowrap" style="height: 244px;" bis_skin_checked="1">
+
+                <% notification.forEach(notif=>{ %>
+
+
+                  <div class="col-lg-3 my-3">
+                    <div class="bg-white card-Shadow rounded-2 mb-3 p-2 " style="height:200px; width: 200px;"
+                      bis_skin_checked="1">
+
+                      <a href="/dell_si_notif/<%=notif.sin_id%>">
+                        <img src="assets/images/icons/close.svg" height="10px" width="10px" alt="" style="float:right">
+                      </a>
+
+
+                      <div class="m-2">
+
+                        <h5>
+                          <%=notif.heading %>
+                        </h5>
+                        <p>
+                          <%=notif.note %>
+                        </p>
+                        <br>
+
+                        <% let fullString=notif.update_at.toString(); %>
+                          <% let desiredPart=fullString.substring(0, 21); %>
+
+                            <p>
+                              <%=desiredPart %>
+                            </p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <% }); %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <a href="/feeinfo" class="text-decoration-none">
-        <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow mt-3">
-          <div class="">
-            <h2 class="mb-lg-5 text-black">Fee Info </h2>
-      </a>
-    </div>
-    <div class="me-2">
-      <img width="136px" height="130px " src="./assets/images/busImage.png" alt="" />
-    </div>
-  </div>
-  </div>
-  <div class="col-lg-8" bis_skin_checked="1">
-    <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
-      <div class="flex-between" bis_skin_checked="1">
-        <h3 class="mb-0 text-black ">Notification !</h3>
-      </div>
-      <div class="" bis_skin_checked="1">
-        <div class="row overflow-auto  flex-nowrap" style="height: 260px;" bis_skin_checked="1">
-
-          <% notification.forEach(notif=>{ %>
-
-
-            <div class="col-lg-3 my-3">
-              <div class="bg-white card-Shadow rounded-2 mb-3 p-2 " style="height:200px; width: 200px;"
-                bis_skin_checked="1">
-
-                <a href="/dell_si_notif/<%=notif.sin_id%>">
-                  <img src="assets/images/icons/close.svg" height="10px" width="10px" alt="" style="float:right">
-                </a>
-
-
-                <div class="m-2">
-
-                  <h5>
-                    <%=notif.heading %>
-                  </h5>
-                  <p>
-                    <%=notif.note %>
-                  </p>
-                  <br>
-
-                  <% let fullString=notif.update_at.toString(); %>
-                    <% let desiredPart=fullString.substring(0, 21); %>
-
-                      <p>
-                        <%=desiredPart %>
-                      </p>
+      <!-- Signup Overlay -->
+      <div class="overlay" id="signup-overlay">
+        <div class="overlay-content">
+          <div class="text-center">
+            <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
+            <h2 class="mb-0">Add new Registration account</h2>
+            <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
+          </div>
+          <form action="/stu/reg" method="post">
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="" class="form-label regular small"> Name</label>
+                  <label for="routeSelect" class="form-label regular small">Select Route</label>
+                  <select name="route" id="routeSelect" class="form-control">
+                    <% rou.forEach(r=> { %>
+                      <option value="<%= r.r_id %>">
+                        <%= r.route_name %>
+                      </option>
+                      <% }); %>
+                  </select>
                 </div>
-
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="" class="form-label regular small">Add stop</label>
+                  <select name="stop" id="stopSelect" class="form-control">
+                    <% stop.forEach(s=> { %>
+                      <option value="<%= s.s_id %>" data-rid="<%= s.r_id %>">
+                        <%= s.stop_name %>
+                      </option>
+                      <% }); %>
+                  </select>
+                </div>
+              </div>
+              <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
+                <button type="submit" class="btn btn-danger px-5 w-75 text-black bg-color">Register</button>
+                <!-- <a href="/challan" ></a> -->
               </div>
             </div>
 
-            <% }); %>
+          </form>
         </div>
       </div>
+
+
     </div>
-  </div>
-  </div>
-  <!-- Signup Overlay -->
-  <div class="overlay" id="signup-overlay">
-    <div class="overlay-content">
-      <div class="text-center">
-        <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
-        <h2 class="mb-0">Add new Registration account</h2>
-        <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
-      </div>
-      <form action="/stu/reg" method="post">
-        <div class="row">
-          <div class="col-6">
-            <div class="mb-3">
-              <label for="" class="form-label regular small"> Name</label>
-              <label for="routeSelect" class="form-label regular small">Select Route</label>
-              <select name="route" id="routeSelect" class="form-control">
-                <% rou.forEach(r=> { %>
-                  <option value="<%= r.r_id %>">
-                    <%= r.route_name %>
-                  </option>
-                  <% }); %>
-              </select>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="mb-3">
-              <label for="" class="form-label regular small">Add stop</label>
-              <select name="stop" id="stopSelect" class="form-control">
-                <% stop.forEach(s=> { %>
-                  <option value="<%= s.s_id %>" data-rid="<%= s.r_id %>">
-                    <%= s.stop_name %>
-                  </option>
-                  <% }); %>
-              </select>
-            </div>
-          </div>
-          <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
-            <button type="submit" class="btn btn-danger px-5 w-75 text-black bg-color">Register</button>
-            <!-- <a href="/challan" ></a> -->
-          </div>
-        </div>
-
-      </form>
-    </div>
-  </div>
 
 
-  </div>
+    <input type="hidden" id="show-signup" class="mxc1 text-danger" value="<%=RESS %>">
 
 
-  <input type="hidden" id="show-signup" class="mxc1 text-danger" value="<%=RESS %>">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-3.6.3.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/Toggels.js"></script>
+    <script>
+
+      $("#some-menu").load("navbars_stu.ejs");
 
 
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="assets/js/jquery-3.6.3.min.js"></script>
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/moment.min.js"></script>
-  <script src="assets/js/Toggels.js"></script>
-  <script>
+      const b = document.getElementById('show-signup');
+      const a = b.value;
 
-    $("#some-menu").load("navbars_stu.ejs");
+      if (a == 0) {
+        document.getElementById('signup-overlay').style.display = 'none';
+      } else {
 
-
-    const b = document.getElementById('show-signup');
-    const a = b.value;
-
-    if (a == 0) {
-      document.getElementById('signup-overlay').style.display = 'none';
-    } else {
-
-      document.getElementById('signup-overlay').style.display = 'flex';
-    }
+        document.getElementById('signup-overlay').style.display = 'flex';
+      }
 
 
-    document.getElementById('routeSelect').addEventListener('change', function () {
-      const selectedRoute = this.value;
-      const stopSelect = document.getElementById('stopSelect');
-      const options = stopSelect.querySelectorAll('option');
+      document.getElementById('routeSelect').addEventListener('change', function () {
+        const selectedRoute = this.value;
+        const stopSelect = document.getElementById('stopSelect');
+        const options = stopSelect.querySelectorAll('option');
 
-      options.forEach(option => {
-        if (option.getAttribute('data-rid') === selectedRoute) {
-          option.style.display = 'block';
-        } else {
-          option.style.display = 'none';
+        options.forEach(option => {
+          if (option.getAttribute('data-rid') === selectedRoute) {
+            option.style.display = 'block';
+          } else {
+            option.style.display = 'none';
+          }
+        });
+
+        // Optionally, reset the stop selection if the current selection is hidden
+        if (stopSelect.value && stopSelect.querySelector(`option[value="${stopSelect.value}"]`).style.display === 'none') {
+          stopSelect.value = '';
         }
       });
 
-      // Optionally, reset the stop selection if the current selection is hidden
-      if (stopSelect.value && stopSelect.querySelector(`option[value="${stopSelect.value}"]`).style.display === 'none') {
-        stopSelect.value = '';
-      }
-    });
+      // Trigger change event on page load to filter stops based on the initial route selection
+      document.getElementById('routeSelect').dispatchEvent(new Event('change'));
 
-    // Trigger change event on page load to filter stops based on the initial route selection
-    document.getElementById('routeSelect').dispatchEvent(new Event('change'));
+    </script>
 
-  </script>
-
-  <!-- <footer class="mxc">
+    <!-- <footer class="mxc">
       <div class=" mtc rounded-3 p-1 gap-2 bg-color">
         <h5 class="text-black">CUI Bus Portal</h5>
       </div>
