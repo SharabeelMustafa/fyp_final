@@ -40,16 +40,19 @@
       </div>
       <div class="row mt-3">
         <div class="col-2">
-          <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow" style="height: 430px;">
-            <div class="">
-              <h4 class="mb-lg-5 text-black">Tracking info </h4>
-            </div>
-            <div class="me-2">
-              <!-- <img width="246px" height="189px " src="./assets/images/busImage.png" alt="" /> -->
-            </div>
-          </div>
+          <div class="d-flex flex-column bg-color rounded-3 p-3 card-shadow" style="height: 430px;">
+            <!-- Main Heading -->
+            <h4 class="text-black mb-4">Tracking Info</h4>
 
+            <!-- Subheadings with consistent spacing -->
+            <h5 class="text-black mb-3">Bus Speed =</h5>
+            <h5 class="text-black mb-3">Bus Arriving In =</h5>
+            <h5 class="text-black mb-3">Longitude =</h5>
+            <h5 class="text-black mb-3">Latitude =</h5>
+            <h5 class="text-black">Active =</h5>
+          </div>
         </div>
+
         <div class="col-lg-10" bis_skin_checked="1">
           <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
             <div class="flex-between" bis_skin_checked="1">
@@ -91,106 +94,107 @@
           </div>
         </div>
       </div>
-      <!-- Signup Overlay -->
-      <div class="overlay" id="signup-overlay">
-        <div class="overlay-content">
-          <div class="text-center">
-            <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
-            <h2 class="mb-0">Add new Registration account</h2>
-            <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
-          </div>
-          <form action="/stu/reg" method="post">
-            <div class="row">
-              <div class="col-6">
-                <div class="mb-3">
-                  <label for="" class="form-label regular small"> Name</label>
-                  <label for="routeSelect" class="form-label regular small">Select Route</label>
-                  <select name="route" id="routeSelect" class="form-control">
-                    <% rou.forEach(r=> { %>
-                      <option value="<%= r.r_id %>">
-                        <%= r.route_name %>
-                      </option>
-                      <% }); %>
-                  </select>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="mb-3">
-                  <label for="" class="form-label regular small">Add stop</label>
-                  <select name="stop" id="stopSelect" class="form-control">
-                    <% stop.forEach(s=> { %>
-                      <option value="<%= s.s_id %>" data-rid="<%= s.r_id %>">
-                        <%= s.stop_name %>
-                      </option>
-                      <% }); %>
-                  </select>
-                </div>
-              </div>
-              <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
-                <button type="submit" class="btn btn-danger px-5 w-75 text-black bg-color">Register</button>
-                <!-- <a href="/challan" ></a> -->
+    </div>
+    <!-- Signup Overlay -->
+    <div class="overlay" id="signup-overlay">
+      <div class="overlay-content">
+        <div class="text-center">
+          <img src="./assets/images/logo1.png" width="150px" height="150px" alt="">
+          <h2 class="mb-0">Add new Registration account</h2>
+          <!-- <p class="small">Already have an account? <span><a href="#" id="hide-signup" class="text-danger">Sign-in here</a></span></p> -->
+        </div>
+        <form action="/stu/reg" method="post">
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="" class="form-label regular small"> Name</label>
+                <label for="routeSelect" class="form-label regular small">Select Route</label>
+                <select name="route" id="routeSelect" class="form-control">
+                  <% rou.forEach(r=> { %>
+                    <option value="<%= r.r_id %>">
+                      <%= r.route_name %>
+                    </option>
+                    <% }); %>
+                </select>
               </div>
             </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="" class="form-label regular small">Add stop</label>
+                <select name="stop" id="stopSelect" class="form-control">
+                  <% stop.forEach(s=> { %>
+                    <option value="<%= s.s_id %>" data-rid="<%= s.r_id %>">
+                      <%= s.stop_name %>
+                    </option>
+                    <% }); %>
+                </select>
+              </div>
+            </div>
+            <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
+              <button type="submit" class="btn btn-danger px-5 w-75 text-black bg-color">Register</button>
+              <!-- <a href="/challan" ></a> -->
+            </div>
+          </div>
 
-          </form>
-        </div>
+        </form>
       </div>
-
-
     </div>
 
 
-    <input type="hidden" id="show-signup" class="mxc1 text-danger" value="<%=RESS %>">
+  </div>
 
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery-3.6.3.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/Toggels.js"></script>
-    <script>
-
-      $("#some-menu").load("navbars_stu.ejs");
+  <input type="hidden" id="show-signup" class="mxc1 text-danger" value="<%=RESS %>">
 
 
-      const b = document.getElementById('show-signup');
-      const a = b.value;
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery-3.6.3.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/Toggels.js"></script>
+  <script>
 
-      if (a == 0) {
-        document.getElementById('signup-overlay').style.display = 'none';
-      } else {
-
-        document.getElementById('signup-overlay').style.display = 'flex';
-      }
+    $("#some-menu").load("navbars_stu.ejs");
 
 
-      document.getElementById('routeSelect').addEventListener('change', function () {
-        const selectedRoute = this.value;
-        const stopSelect = document.getElementById('stopSelect');
-        const options = stopSelect.querySelectorAll('option');
+    const b = document.getElementById('show-signup');
+    const a = b.value;
 
-        options.forEach(option => {
-          if (option.getAttribute('data-rid') === selectedRoute) {
-            option.style.display = 'block';
-          } else {
-            option.style.display = 'none';
-          }
-        });
+    if (a == 0) {
+      document.getElementById('signup-overlay').style.display = 'none';
+    } else {
 
-        // Optionally, reset the stop selection if the current selection is hidden
-        if (stopSelect.value && stopSelect.querySelector(`option[value="${stopSelect.value}"]`).style.display === 'none') {
-          stopSelect.value = '';
+      document.getElementById('signup-overlay').style.display = 'flex';
+    }
+
+
+    document.getElementById('routeSelect').addEventListener('change', function () {
+      const selectedRoute = this.value;
+      const stopSelect = document.getElementById('stopSelect');
+      const options = stopSelect.querySelectorAll('option');
+
+      options.forEach(option => {
+        if (option.getAttribute('data-rid') === selectedRoute) {
+          option.style.display = 'block';
+        } else {
+          option.style.display = 'none';
         }
       });
 
-      // Trigger change event on page load to filter stops based on the initial route selection
-      document.getElementById('routeSelect').dispatchEvent(new Event('change'));
+      // Optionally, reset the stop selection if the current selection is hidden
+      if (stopSelect.value && stopSelect.querySelector(`option[value="${stopSelect.value}"]`).style.display === 'none') {
+        stopSelect.value = '';
+      }
+    });
 
-    </script>
+    // Trigger change event on page load to filter stops based on the initial route selection
+    document.getElementById('routeSelect').dispatchEvent(new Event('change'));
 
-    <!-- <footer class="mxc">
+  </script>
+
+  <!-- <footer class="mxc">
       <div class=" mtc rounded-3 p-1 gap-2 bg-color">
         <h5 class="text-black">CUI Bus Portal</h5>
       </div>
