@@ -417,16 +417,10 @@ function TrackBus(req, res) {
   con.query(selectQuery_student, [userId], (err, result) => {
     if (err) throw err;
     //console.log(result);
-    const selectQuery_si_notification = 'SELECT * FROM si_notification WHERE reg_number = ? ';
-    con.query(selectQuery_si_notification, [userId], (err, result1) => {
-      if (err) throw err;
-      //console.log(result);
-
-
       const currentDate = new Date()
       //console.log(RESS);
-      res.render("student_track_bus", { student: result[0], notification: result1, rou: RESS1, stop: RESS3, RESS, currentDate });
-    });
+      res.render("student_track_bus", { student: result[0], currentDate });
+   
   });
 
 }
