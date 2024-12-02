@@ -75,12 +75,13 @@ function ShowRount(req, res) {
 
 function ShowDashbord(req, res) {
   const ad = req.session.adminId;
-  console.log(ad);
+  //console.log(ad);
   con.query('SELECT * FROM ai_notification WHERE a_id = ?', [ad], function (err, result1) {
     if (err) throw err;
     res.render('admin_dashboard', { notif: result1 });
   });
 }
+
 function ShowInstallmentDashboard(req, res) {
   const ad = req.session.adminId;
   console.log(ad);
@@ -89,14 +90,19 @@ function ShowInstallmentDashboard(req, res) {
     res.render('admin_application', { notif: result1 });
   });
 }
+
 function ShowRouteChangeTable(req, res) {
   const ad = req.session.adminId;
-  console.log(ad);
-  con.query('SELECT * FROM ai_notification WHERE a_id = ?', [ad], function (err, result1) {
+  //console.log(ad);
+  const typename = "Route Change";
+  con.query('SELECT * FROM aplical_for_aprovel WHERE type = ?', [typename], function (err,ApplicationResult) {
     if (err) throw err;
-    res.render('Route_change_table', { notif: result1 });
+    console.log(ApplicationResult);
+    res.render('Route_change_table', { Applications: ApplicationResult });
   });
 }
+
+
 function ShowInstallmentTable(req, res) {
   const ad = req.session.adminId;
   console.log(ad);

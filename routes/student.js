@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {index,upload,StuSingUp,DellNotificantion,ConfirmLogin,
-       CheckStuReg,ShowDashbord,ShowChallan,Logout,SetRegistration,ShowFeePage,ShowStuEcard,ShowBusInfo,TrackBus}= require('../controllers/StudentController');
+       CheckStuReg,ShowDashbord,ShowChallan,Logout,SetRegistration,ShowFeePage,ShowStuEcard,ShowBusInfo,TrackBus,setRouteChangeApplication}= require('../controllers/StudentController');
 
 
 router.get('/', index);
@@ -17,6 +17,7 @@ router.get('/feeinfo',ShowFeePage);
 router.get('/StuEcard',ShowStuEcard);
 router.get('/businfo',ShowBusInfo);
 router.get('/tracking',TrackBus);
+router.post('/rouChangeApplication',setRouteChangeApplication);
 module.exports = router;
 
 

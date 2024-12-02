@@ -39,18 +39,20 @@
                         <thead style="background: #007bff; color: #ffffff;">
                             <tr>
                                 <th style="padding: 10px; border: 1px solid #dddddd;">Sr No</th>
-                                <th style="padding: 10px; border: 1px solid #dddddd;">Student Name</th>
                                 <th style="padding: 10px; border: 1px solid #dddddd;">Student Reg No</th>
+                                <th style="padding: 10px; border: 1px solid #dddddd;">Old Route</th>
                                 <th style="padding: 10px; border: 1px solid #dddddd;">New Route</th>
                                 <th style="padding: 10px; border: 1px solid #dddddd;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                    <% let b=0; %>
+                    <% Applications.forEach( a=>{ %>
                             <tr>
-                                <td style="padding: 10px; border: 1px solid #dddddd;">1</td>
-                                <td style="padding: 10px; border: 1px solid #dddddd;">John Doe</td>
-                                <td style="padding: 10px; border: 1px solid #dddddd;" data-id="12345">12345</td>
-                                <td style="padding: 10px; border: 1px solid #dddddd;">Route A</td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;"> <%= ++b %></td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;"> <%=a.reg_number %></td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;" data-id="12345"> <%=a.old_route_name %></td>
+                                <td style="padding: 10px; border: 1px solid #dddddd;"><%=a.new_route_name %></td>
                                 <td style="padding: 10px; border: 1px solid #dddddd; text-align: center;">
                                     <button
                                         style="background-color: #28a745; color: #ffffff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;"
@@ -63,6 +65,7 @@
                                         onclick="deleteRow(this)">Delete</button>
                                 </td>
                             </tr>
+                    <% }); %>
                             <!-- Add more rows dynamically -->
                         </tbody>
                     </table>

@@ -3,6 +3,8 @@ const { ConnactMysql } = require('../connection');
 const bcrypt = require('bcrypt');
 const path = require('path');
 const { count } = require('console');
+const { type } = require('os');
+const { SendNotificationTo_Bus } = require('./AdminController');
 
 let RESS3;
 let RESS;
@@ -166,13 +168,17 @@ function ShowBusInfo(req, res) {
   const userId = req.session.userId;
   const regId = req.session.regId;
 
+  const alertMessage = req.session.alertMessage || null; // Get and clear the alert message
+  req.session.alertMessage = null;
+
   const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
   const selectQuery_bus = 'SELECT * FROM bus WHERE bus_id = ?';
-  const selectQuery_route = 'SELECT route_name FROM route WHERE r_id = ?';
+  const selectQuery_route = 'SELECT * FROM route WHERE r_id = ?';
   const selectQuery_stopid_reg = 'SELECT s_id FROM s_registration WHERE s_reg_id = ?';
   const selectQuery_stopName = 'SELECT * FROM stops WHERE s_id = ?';
   const selectQuery_driver = 'SELECT * FROM driver WHERE emp_id = ?';
   const selectQuery_allRoutes = 'SELECT * FROM route'; // New query for all routes
+  const selectQuery_allstop = 'SELECT * FROM stops';
 
   // Fetch student info
   con.query(selectQuery_student, [userId], (err, studentResult) => {
@@ -208,19 +214,22 @@ function ShowBusInfo(req, res) {
               con.query(selectQuery_driver, [driverId], (err, driverResult) => {
                 if (err) throw err;
 
-                // Render the bus_info page with all collected data
-                const currentDate = new Date();
+                con.query(selectQuery_allstop, (err, allstopResult) => {
+                  if (err) throw err;
 
-                console.log("Driver: ", driverResult[0]);
+                  const currentDate = new Date();
 
-                res.render("bus_info", {
-                  student: studentResult[0],
-                  bus: busResult[0],
-                  route: routeResult[0],
-                  stop: stopResult[0],
-                  driver: driverResult[0],
-                  allRoutes: allRoutesResult, // Include all routes data if needed in the view
-                  currentDate,
+                  res.render("bus_info", {
+                    student: studentResult[0],
+                    bus: busResult[0],
+                    route: routeResult[0],
+                    stop: stopResult[0],
+                    driver: driverResult[0],
+                    allRoutes: allRoutesResult,
+                    allstop: allstopResult,
+                    currentDate,
+                    alertMessage, // Pass the alert message
+                  });
                 });
               });
             });
@@ -231,7 +240,95 @@ function ShowBusInfo(req, res) {
   });
 }
 
+function setRouteChangeApplication(req, res) {
+  const {
+    route,
+    stop,
+    newStopName,
+    newrouteName,
+    old_stop,
+    old_route,
+    oldrouteName,
+    oldStopName
+  } = req.body;
+  const userId = req.session.userId;
+  const typename = "Route Change";
 
+  // Check if a similar application already exists
+  const checkQuery = `
+    SELECT COUNT(*) AS count FROM aplical_for_aprovel 
+    WHERE reg_number = ? AND type = ?
+  `;
+
+  con.query(checkQuery, [userId, typename], (err, result) => {
+    if (err) {
+      const message = "SQL database error occurred while checking existing application.";
+      return ShowErrorPage(message, err, res);
+    }
+
+    if (result[0].count > 0) {
+      // Application already exists
+      req.session.alertMessage = "An application for this route change already exists.";
+      return res.redirect('/businfo'); // Redirect to ShowBusInfo
+    }
+
+    // If no duplicate, proceed to insert the application
+    const insertQuery = `
+      INSERT INTO aplical_for_aprovel 
+      (reg_number, type, old_stop, new_stop, old_route, new_route, old_stop_name, new_stop_name, old_route_name, new_route_name) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const queryParams = [
+      userId,
+      typename,
+      old_stop,
+      stop,
+      old_route,
+      route,
+      oldStopName,
+      newStopName,
+      oldrouteName,
+      newrouteName
+    ];
+
+    con.query(insertQuery, queryParams, (err) => {
+      if (err) {
+        const message = "SQL database error occurred while inserting a record into aplical_for_aprovel.";
+        return ShowErrorPage(message, err, res);
+      }
+
+      SendNotificationTo_Admin(typename, `${userId} from ${oldrouteName} to ${newrouteName}`);
+      res.redirect('/businfo');
+    });
+  });
+}
+
+
+function SendNotificationTo_Admin(heading, note) {
+  const selectQuery_a_id = "SELECT a_id FROM admin";
+
+  // Fetch all admin IDs
+  con.query(selectQuery_a_id, (err, a_idResult) => {
+    if (err) {
+      console.error("Error fetching admin IDs:", err);
+      return;
+    }
+
+    // Loop through each admin ID and send the notification
+    a_idResult.forEach((admin) => {
+      const insertQuery = `
+        INSERT INTO ai_notification (heading, notes, a_id) 
+        VALUES (?, ?, ?)
+      `;
+      con.query(insertQuery, [heading, note, admin.a_id], (err) => {
+        if (err) {
+          console.error("Error inserting notification:", err);
+        }
+      });
+    });
+  });
+}
 
 
 function SetRegistration(req, res) {
@@ -372,6 +469,9 @@ function ShowChallan(req, res) {
 
 }
 
+
+
+
 module.exports = {
   index,
   upload,
@@ -387,4 +487,5 @@ module.exports = {
   ShowStuEcard,
   ShowBusInfo,
   TrackBus,
+  setRouteChangeApplication,
 };
