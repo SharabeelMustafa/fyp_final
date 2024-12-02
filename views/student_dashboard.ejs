@@ -47,7 +47,7 @@
 
               </div>
               <div class="me-2">
-                <img width="136px" height="130px " src="./assets/images/arcticons_messages.png" alt="" />
+                <img width="136px" height="130px " src="./assets/images/info1.png" alt="" />
               </div>
             </div>
           </a>
@@ -58,7 +58,7 @@
 
               </div>
               <div class="me-2">
-                <img width="136px" height="110px " src="./assets/images/Frame 35.png" alt="" />
+                <img width="136px" height="110px " src="./assets/images/buslogo.png" alt="" />
               </div>
             </div>
           </a>
@@ -76,7 +76,7 @@
 
 
                   <div class="col-lg-3 my-3">
-                    <div class="bg-white card-Shadow rounded-2 mb-3 p-2 " style="height:200px; width: 200px;"
+                    <div class="bg-blue card-Shadow rounded-2 mb-3 p-2 " style="height:200px; width: 200px;"
                       bis_skin_checked="1">
 
                       <a href="/dell_si_notif/<%=notif.sin_id%>">
@@ -89,15 +89,15 @@
                         <h5>
                           <%=notif.heading %>
                         </h5>
-                        <p>
-                          <%=notif.note %>
+                        <p style="color: black;">
+                          <%= notif.note %>
                         </p>
                         <br>
 
                         <% let fullString=notif.update_at.toString(); %>
                           <% let desiredPart=fullString.substring(0, 21); %>
 
-                            <p>
+                            <p style="color: black;">
                               <%=desiredPart %>
                             </p>
                       </div>

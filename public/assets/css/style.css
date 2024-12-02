@@ -103,8 +103,6 @@
   --bs-calender-bg: #f3f3f3;
 }
 
-
-
 .navbar {
   --bs-navbar-active-color: #8CAFE3 !important;
 }
@@ -118,6 +116,10 @@ h1,
 h2,
 h3 {
   font-family: outfit-bold;
+}
+
+.bg-blue {
+  background-color: #4383E3;
 }
 
 h4,
