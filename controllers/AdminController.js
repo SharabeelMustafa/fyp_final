@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const axios = require('axios');
 const { console } = require('inspector');
+const { error } = require('console');
 
 let RESS3;
 let RESS;
@@ -97,7 +98,7 @@ function ShowRouteChangeTable(req, res) {
   const ad = req.session.adminId;
   //console.log(ad);
   const typename = "Route Change";
-  con.query('SELECT * FROM aplical_for_aprovel WHERE type = ?', [typename], function (err,ApplicationResult) {
+  con.query('SELECT * FROM aplical_for_aprovel WHERE type = ?', [typename], function (err, ApplicationResult) {
     if (err) throw err;
     console.log(ApplicationResult);
     res.render('Route_change_table', { Applications: ApplicationResult });
@@ -356,7 +357,7 @@ function getBusRountDriverData(req, res) {
 
 async function SetBusData(req, res) {
 
-  // console.log(req.body);
+  console.log(req.body);
   // console.log(req.file);
 
   // return res.redirect("/add_stu_data");
@@ -373,8 +374,9 @@ async function SetBusData(req, res) {
 
   con.query(sql, values, (err, result) => {
     if (err) {
-      console.error('Error inserting data into the database:', err);
-      return res.status(500).send('Internal Server Error');
+      // console.error('Error inserting data into the database:', err);
+      // return res.status(500).send('Internal Server Error');
+      throw err
     }
     res.redirect('/add_bus_data');
   });
@@ -516,52 +518,52 @@ function Logout(req, res) {
 
 
 function showOptimalRoute(req, res) {
-    const { r_id, start_stop, end_stop } = req.body;
-    try {
-        // Fetch stops associated with the route
-        con.query('SELECT * FROM stops WHERE r_id = ?', [r_id], async (err, stops) => {
-            if (err) {
-                console.error("Error fetching stops:", err);
-                return res.status(500).send("Server Error");
-            }
+  const { r_id, start_stop, end_stop } = req.body;
+  try {
+    // Fetch stops associated with the route
+    con.query('SELECT * FROM stops WHERE r_id = ?', [r_id], async (err, stops) => {
+      if (err) {
+        console.error("Error fetching stops:", err);
+        return res.status(500).send("Server Error");
+      }
 
-            // Find the start and end stops
-            const start = stops.find(stop => stop.s_id === parseInt(start_stop));
-            const end = stops.find(stop => stop.s_id === parseInt(end_stop));
+      // Find the start and end stops
+      const start = stops.find(stop => stop.s_id === parseInt(start_stop));
+      const end = stops.find(stop => stop.s_id === parseInt(end_stop));
 
-            if (!start || !end) {
-                return res.status(404).send("Start or End stop not found in the route.");
-            }
+      if (!start || !end) {
+        return res.status(404).send("Start or End stop not found in the route.");
+      }
 
-            // Prepare coordinates for OSRM API
-            const waypoints = stops
-                .map(stop => `${stop.latitude},${stop.longitude}`)
-                .join(';');
+      // Prepare coordinates for OSRM API
+      const waypoints = stops
+        .map(stop => `${stop.latitude},${stop.longitude}`)
+        .join(';');
 
-            const osrmUrl = `http://router.project-osrm.org/route/v1/driving/${waypoints}?overview=full&geometries=geojson`;
-            console.log(osrmUrl)
-            // Call OSRM API
-            const osrmResponse = await axios.get(osrmUrl);
-            const route = osrmResponse.data.routes[0];
+      const osrmUrl = `http://router.project-osrm.org/route/v1/driving/${waypoints}?overview=full&geometries=geojson`;
+      console.log(osrmUrl)
+      // Call OSRM API
+      const osrmResponse = await axios.get(osrmUrl);
+      const route = osrmResponse.data.routes[0];
 
-            if (!route) {
-                return res.status(404).send("No route found by OSRM.");
-            }
+      if (!route) {
+        return res.status(404).send("No route found by OSRM.");
+      }
 
-            // Render the map with the optimal route
-            console.log(route);
-            
-            res.render('optimal_route', {
-                routeGeoJSON: route.geometry,
-                start,
-                end,
-                stops
-            });
-        });
-    } catch (error) {
-        console.error("Error processing route:", error);
-        res.status(500).send("Internal Server Error");
-    }
+      // Render the map with the optimal route
+      console.log(route);
+
+      res.render('optimal_route', {
+        routeGeoJSON: route.geometry,
+        start,
+        end,
+        stops
+      });
+    });
+  } catch (error) {
+    console.error("Error processing route:", error);
+    res.status(500).send("Internal Server Error");
+  }
 }
 
 

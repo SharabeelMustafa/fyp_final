@@ -142,7 +142,7 @@
   </style>
 </head>
 
-<body  >
+<body>
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
 
@@ -182,7 +182,7 @@
         <div class="name">
           <%= student.name %>
         </div>
-        <div class="student-info">CIIT/<%= student.reg_number %>/WAH</div>
+        <div class="student-info">CIIT/<%= student.reg_number || student.emp_id %>/WAH</div>
         <div class="footer">
           <div class="dept">Department of Computer Science</div>
         </div>

@@ -128,8 +128,7 @@
                                     <div class="row g-3">
                                         <div class="col-lg-6 col-md-6 col-12">
 
-                                            <form action="/signup_bus_by_admin" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="/signup_bus_by_admin" method="POST" enctype="">
                                                 <label class="form-label mb-1">Bus Id</label>
                                                 <input type="text" class="form-control mb-1 border-0 bg-body"
                                                     placeholder="Please Enter" name="bus_id">
@@ -138,7 +137,7 @@
                                             <label class="form-label mb-1">Driver Employee Id</label>
                                             <select class="form-control mb-1 border-0 bg-body" name="driver_emp_id">
                                                 <% driver.forEach( b=>{ %>
-                                                    <option>
+                                                    <option value="<%=b.emp_id%>">
                                                         <%=b.emp_id%>
                                                     </option>
                                                     <% }); %>
@@ -148,7 +147,7 @@
                                             <label class="form-label mb-1">Route Id</label>
                                             <select class="form-control mb-1 border-0 bg-body" name="route_id">
                                                 <% route.forEach( b=>{ %>
-                                                    <option>
+                                                    <option value="<%=b.r_id%>">
                                                         <%=b.r_id%>
                                                     </option>
                                                     <% }); %>
