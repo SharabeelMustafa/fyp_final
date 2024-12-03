@@ -2,6 +2,8 @@ const multer = require('multer');
 const { ConnactMysql } = require('../connection');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const axios = require('axios');
+const { console } = require('inspector');
 
 let RESS3;
 let RESS;
@@ -513,6 +515,55 @@ function Logout(req, res) {
 }
 
 
+function showOptimalRoute(req, res) {
+    const { r_id, start_stop, end_stop } = req.body;
+    try {
+        // Fetch stops associated with the route
+        con.query('SELECT * FROM stops WHERE r_id = ?', [r_id], async (err, stops) => {
+            if (err) {
+                console.error("Error fetching stops:", err);
+                return res.status(500).send("Server Error");
+            }
+
+            // Find the start and end stops
+            const start = stops.find(stop => stop.s_id === parseInt(start_stop));
+            const end = stops.find(stop => stop.s_id === parseInt(end_stop));
+
+            if (!start || !end) {
+                return res.status(404).send("Start or End stop not found in the route.");
+            }
+
+            // Prepare coordinates for OSRM API
+            const waypoints = stops
+                .map(stop => `${stop.latitude},${stop.longitude}`)
+                .join(';');
+
+            const osrmUrl = `http://router.project-osrm.org/route/v1/driving/${waypoints}?overview=full&geometries=geojson`;
+            console.log(osrmUrl)
+            // Call OSRM API
+            const osrmResponse = await axios.get(osrmUrl);
+            const route = osrmResponse.data.routes[0];
+
+            if (!route) {
+                return res.status(404).send("No route found by OSRM.");
+            }
+
+            // Render the map with the optimal route
+            console.log(route);
+            
+            res.render('optimal_route', {
+                routeGeoJSON: route.geometry,
+                start,
+                end,
+                stops
+            });
+        });
+    } catch (error) {
+        console.error("Error processing route:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
 
 module.exports = {
   ConfirmLogin,
@@ -544,4 +595,5 @@ module.exports = {
   ShowInstallmentTable,
   ShowRouteChangeTable,
   TrackBuses,
+  showOptimalRoute,
 };
