@@ -516,8 +516,92 @@ function ShowErrorPage(err, res) {
 }
 
 function ShowChallan(req, res) {
-  res.render('challan');
+  const regNo = req.session.userId; // Dynamically get the registration number from the session
 
+  // SQL Queries
+  const queryStudent = `SELECT bus_id, name FROM student WHERE reg_number = ?`;
+  const queryBusRoute = `SELECT route_id FROM bus WHERE bus_id = ?`;
+  const queryRouteInfo = `SELECT route_name, fee FROM route WHERE r_id = ?`;
+  const queryStopID = `SELECT s_id FROM s_registration WHERE reg_number = ?`;
+  const queryStopInfo = `SELECT stop_name FROM stops WHERE s_id = ?`;
+  const querySemester = `SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1`;
+
+  // Fetch student and bus information
+  con.query(queryStudent, [regNo], (err, studentResult) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).send('Internal Server Error');
+      }
+      if (studentResult.length === 0) {
+          return res.status(404).send('No data found for the given registration number');
+      }
+
+      const { bus_id, name } = studentResult[0];
+
+      // Fetch route ID for the bus
+      con.query(queryBusRoute, [bus_id], (err, busResult) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).send('Internal Server Error');
+          }
+          const route_id = busResult[0]?.route_id;
+
+          // Fetch route information
+          con.query(queryRouteInfo, [route_id], (err, routeResult) => {
+              if (err) {
+                  console.error(err);
+                  return res.status(500).send('Internal Server Error');
+              }
+              const { route_name, fee } = routeResult[0];
+
+              // Fetch stop ID for the student
+              con.query(queryStopID, [regNo], (err, stopIDResult) => {
+                  if (err) {
+                      console.error(err);
+                      return res.status(500).send('Internal Server Error');
+                  }
+                  const stop_id = stopIDResult[0]?.s_id;
+
+                  // Fetch stop name
+                  con.query(queryStopInfo, [stop_id], (err, stopResult) => {
+                      if (err) {
+                          console.error(err);
+                          return res.status(500).send('Internal Server Error');
+                      }
+                      const stop_name = stopResult[0]?.stop_name;
+
+                      // Fetch current semester
+                      con.query(querySemester, (err, semesterResult) => {
+                          if (err) {
+                              console.error(err);
+                              return res.status(500).send('Internal Server Error');
+                          }
+                          const semester_name = semesterResult[0]?.semester_name;
+
+                          // Compile all data for rendering
+                          const challanData = {
+                              regNo,
+                              name,
+                              routeName: route_name,
+                              stopName: stop_name,
+                              session: semester_name,
+                              fee,
+                              feesBreakdown: [
+                                  { description: 'Transport Fee-Students', amount: fee },
+                                  { description: 'Total Fee Upto 04-12-2024', amount: fee },
+                                  { description: 'Total Fee Upto 07-12-2024', amount: fee + 2000 },
+                                  { description: 'Total Fee Upto 10-112-2024', amount: fee + 5000 }
+                              ]
+                          };
+
+                          // Render the challan form
+                          res.render('challan', { challanData });
+                      });
+                  });
+              });
+          });
+      });
+  });
 }
 
 
