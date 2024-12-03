@@ -72,81 +72,23 @@
                         <img src="uploads/download.png" class="r-img" alt="" width="200px" height="200px" />
                     </div>
                 </div>
-
                 <div class="bus-container">
-                    <div class="bus-card" onclick="showBusDetails('Route 1')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 1</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 2')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 2</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 3')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 3</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 4')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 4</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 5')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 5</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 6')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 6</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
-                    <div class="bus-card" onclick="showBusDetails('Route 7')">
-                        <img src="./assets/images/buslogo.png" alt="Bus Icon">
-                        <div class="bus-title">Track Bus</div>
-                        <div class="bus-route">Route: 7</div>
-                        <div class="bus-route">Bus no: 1397</div>
-                    </div>
+                    <% busbtn.forEach(function(bus) { %>
+                        <div class="bus-card" onclick="showBusDetails('<%= bus.route_name %>')">
+                            <img src="./assets/images/buslogo.png" alt="Bus Icon">
+                            <div class="bus-title">Track Bus</div>
+                            <div class="bus-route"><%= bus.route_name %></div>
+                            <div class="bus-route"><%= bus.bus_id %></div>
+                        </div>
+                    <% }); %>
                 </div>
-                <div class="row mt-3">
-                    <div class="col-2">
-                        <div class="d-flex flex-column bg-color rounded-3 p-3 card-shadow" style="height: 430px;">
-                            <!-- Main Heading -->
-                            <h4 class="text-black mb-4">Tracking Info</h4>
+                <div class="mt-3" id="map-bus">
+                    <div class="bg-color card-Shadow rounded-2 mb-3 p-4">
+                      <iframe src="http://38.242.202.184/sharing/dcfa35e75635d5c70b0d3e5d3acf5ef5" width="100%" height="500" style="border:none;"></iframe>
+            
+                    </div> 
+                </div>
 
-                            <!-- Subheadings with consistent spacing -->
-                            <h5 class="text-black mb-3">Bus Speed =</h5>
-                            <h5 class="text-black mb-3">Bus Arriving In =</h5>
-                            <h5 class="text-black mb-3">Longitude =</h5>
-                            <h5 class="text-black mb-3">Latitude =</h5>
-                            <h5 class="text-black">Active =</h5>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-10" bis_skin_checked="1">
-                        <div class="bg-color card-Shadow rounded-2 mb-3 p-4" bis_skin_checked="1">
-                            <div class="flex-between" bis_skin_checked="1">
-                                <h3 class="mb-0 text-black">Tracking!</h3>
-
-                            </div>
-                            <!-- Embed Google Map -->
-                            <div class="mt-3">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d68181.33366899492!2d72.56084962054718!3d33.673592109238226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m14!3e1!4m5!1s0x38dfa6bc26bfa2db%3A0x2344c019578abeac!2sCOMSATS%20Wah%20Campus!3m2!1d33.7445424!2d72.7866556!4m5!1s0x38fdfd7a35432547%3A0x1d0b4d5f1f3454b8!2zMzPCsDM3JzQwLjAiTiA3M8KwMDQnMzMuMiJF!3m2!1d33.6277425!2d73.0759443!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
-                                    width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                    </div>
 
 </body>
 

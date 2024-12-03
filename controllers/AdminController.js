@@ -115,11 +115,11 @@ function ShowInstallmentTable(req, res) {
   });
 }
 function TrackBuses(req, res) {
-  const ad = req.session.adminId;
-  console.log(ad);
-  con.query('SELECT * FROM ai_notification WHERE a_id = ?', [ad], function (err, result1) {
+  
+  
+  con.query('SELECT bus.bus_id, route.route_name FROM bus JOIN route ON bus.route_id = route.r_id', function (err, result1) {
     if (err) throw err;
-    res.render('track_buses', { notif: result1 });
+    res.render('track_buses', { busbtn: result1 });
   });
 }
 
