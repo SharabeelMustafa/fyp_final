@@ -87,11 +87,7 @@
                         </div>
                     </div>
                 </a>
-
-
             </div>
-
-
 
             <div class="col-10">
                 <div class="container-fluid mt-1 bg-color card-Shadow rounded-2 px-0">
@@ -99,8 +95,6 @@
                         <div class="input mb-3">
                             <input type="text" class="search-box ps-3 py-1" placeholder="Please Enter"
                                 aria-label="Recipient's username" aria-describedby="button-addon2" id="search-box" />
-
-
                             <button class="btn btn-primary mb-1" type="button" id="button-addon2">
                                 <span>
                                     <svg class="SearchIcon mb-1">
@@ -123,9 +117,6 @@
 
                     <div class="modal fade" id="createticket" tabindex="-1" aria-labelledby="staticBackdropLabel"
                         style="display: none;" aria-hidden="true">
-
-
-
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header p-4">
@@ -133,21 +124,15 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-
                                 <div class="modal-body p-4 pb-0">
                                     <div class="row g-3">
-
-
                                         <div class="col-lg-6 col-md-6 col-12">
 
                                             <form action="/signup_bus_by_admin" method="POST"
                                                 enctype="multipart/form-data">
-
-
                                                 <label class="form-label mb-1">Bus Id</label>
                                                 <input type="text" class="form-control mb-1 border-0 bg-body"
                                                     placeholder="Please Enter" name="bus_id">
-
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-12">
                                             <label class="form-label mb-1">Driver Employee Id</label>
@@ -175,16 +160,10 @@
                                     <input type="submit" class="btn btn-primary" value="Create">
                                     </form>
                                     <button class="btn btn-light-light me-2" data-bs-dismiss="modal">Cancel</button>
-
-
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
-
                     <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
                         <table class="table Search-Employees table-borderless table-striped table-hover">
                             <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
@@ -296,11 +275,7 @@
         </div>
     </div>
 
-
     </div>
-
-
-
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="assets/js/jquery-3.6.3.min.js"></script>
@@ -310,8 +285,6 @@
     <script src="assets/js/Toggels.js"></script>
     <script>
         $("#some-menu").load("navbars.ejs");
-
-
         document.addEventListener('DOMContentLoaded', function () {
             const searchBox = document.getElementById('search-box');
             const tableBody = document.getElementById('student-table-body');
