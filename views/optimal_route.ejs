@@ -1,63 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/style_singup.css" />
-    <title>Demo 2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <div id="map" style="height: 500px;"></div>
+    <input type="hidden" id="routeGeoJSON" value='<%= JSON.stringify(routeGeoJSON) %>' />
+    <input type="hidden" id="startLat" value="<%= start.latitude %>" />
+    <input type="hidden" id="startLng" value="<%= start.longitude %>" />
+    <input type="hidden" id="endLat" value="<%= end.latitude %>" />
+    <input type="hidden" id="endLng" value="<%= end.longitude %>" />
 
-<!-- Hidden fields to store routeGeoJSON, start, and end data -->
-<input type="hidden" id="routeGeoJSON" value='<%= JSON.stringify(routeGeoJSON) %>' />
-<input type="hidden" id="startLat" value="<%= start.latitude %>" />
-<input type="hidden" id="startLng" value="<%= start.longitude %>" />
-<input type="hidden" id="endLat" value="<%= end.latitude %>" />
-<input type="hidden" id="endLng" value="<%= end.longitude %>" />
+    <script>
+        const startLat = parseFloat(document.getElementById('startLat').value);
+        const startLng = parseFloat(document.getElementById('startLng').value);
+        const endLat = parseFloat(document.getElementById('endLat').value);
+        const endLng = parseFloat(document.getElementById('endLng').value);
+        const routeGeoJSON = JSON.parse(document.getElementById('routeGeoJSON').value);
 
-<label for="">routeGeoJSON=<%= JSON.stringify(routeGeoJSON) %></label>
-<label for="">start.latitude=<%= start.latitude %></label>
-<label for="">start.longitude=<%= start.longitude %></label>
-<label for="">end.latitude=<%= end.latitude %></label>
-<label for="">end.longitude =<%= end.longitude %></label>
+        const map = L.map('map').setView([startLat, startLng], 13);
 
-<script>
-    // Initialize the map
-    const startLat = parseFloat(document.getElementById('startLat').value);
-    const startLng = parseFloat(document.getElementById('startLng').value);
-    const endLat = parseFloat(document.getElementById('endLat').value);
-    const endLng = parseFloat(document.getElementById('endLng').value);
-    const routeGeoJSON = JSON.parse(document.getElementById('routeGeoJSON').value);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
 
-    const map = L.map('map').setView([startLat, startLng], 13);
+        const route = L.geoJSON(routeGeoJSON);
+        route.addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-    }).addTo(map);
+        map.fitBounds(route.getBounds());
 
-    // Add the route as a GeoJSON layer
-    const route = L.geoJSON(routeGeoJSON);
-    route.addTo(map);
-
-    // Add markers for the start and end points
-    L.marker([startLat, startLng]).addTo(map).bindPopup('Start');
-    L.marker([endLat, endLng]).addTo(map).bindPopup('End');
-</script>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="assets/js/jquery-3.6.3.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/moment.min.js"></script>
-<script src="assets/js/Toggels.js"></script>
-
-        
-        
-        
-
+        L.marker([startLat, startLng]).addTo(map).bindPopup('Start');
+        L.marker([endLat, endLng]).addTo(map).bindPopup('End');
+    </script>
 </body>
-</html>

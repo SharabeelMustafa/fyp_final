@@ -535,7 +535,7 @@ function showOptimalRoute(req, res) {
 
             // Prepare coordinates for OSRM API
             const waypoints = stops
-                .map(stop => `${stop.longitude},${stop.latitude}`)
+                .map(stop => `${stop.latitude},${stop.longitude}`)
                 .join(';');
 
             const osrmUrl = `http://router.project-osrm.org/route/v1/driving/${waypoints}?overview=full&geometries=geojson`;
