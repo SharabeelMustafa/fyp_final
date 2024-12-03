@@ -22,8 +22,20 @@
 
 
         <!--          -->
+        <div class="d-flex justify-content-between bg-color rounded-3 p-3 gap-2 card-shadow">
+            <div class="py-3">
 
-        <div class="row flex-nowrap mt-3">
+                <p class="small text-black my-5">May 13,2024 </p>
+                <h2 class="mb-0 text-black">Welcome Admin !</h2>
+                <p class="mb-0 text-black">Always stay updated in your Bus portal</p>
+            </div>
+            <div class="me-2">
+
+                <img src="uploads/download.png" class="r-img" alt="" width="200px" height="200px" />
+            </div>
+        </div>
+        <div class=" row flex-nowrap mt-3">
+
             <div class="raja col-2">
                 <a href="/add_stu_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-5 py-4 card-shadow">
@@ -31,7 +43,7 @@
                             <h44 class="text-black">Student</h44>
                         </div>
                         <div class="me-2">
-                            <img width="40px" height="30px" src="assets/images/Student.png" />
+                            <img width="40px" height="30px" src="assets/images/student.png" />
                         </div>
                     </div>
                 </a>
@@ -42,7 +54,7 @@
                             <h44 class="text-black">Driver</h44>
                         </div>
                         <div class="me-2">
-                            <img width="40px" height="30px" src="assets/images/arcticons_messages.png" alt="" />
+                            <img width="40px" height="30px" src="assets/images/driver.png" alt="" />
                         </div>
                     </div>
                 </a>
@@ -53,10 +65,11 @@
                             <h44 class="text-black">Faculty</h44>
                         </div>
                         <div class="me-2">
-                            <img width="40px" height="30px" src="assets/images/2.png" alt="" />
+                            <img width="40px" height="30px" src="assets/images/faculty.png" alt="" />
                         </div>
                     </div>
                 </a>
+
                 <a href="/add_bus_data" class="text-decoration-none">
                     <div class="d-flex justify-content-between bg-color rounded-3 mt-2 py-4 card-shadow">
                         <div class="mx-2">
@@ -74,11 +87,13 @@
                             <h44 class="text-black">Route</h44>
                         </div>
                         <div class="me-2">
-                            <img width="40px" height="30px" src="assets/images/Frame 35.png" alt="" />
+                            <img width="40px" height="30px" src="assets/images/r_change.png" alt="" />
                         </div>
                     </div>
                 </a>
-            </div>
+
+
+            </div>>
 
 
 
@@ -179,8 +194,8 @@
                                                 <label class="form-label mb-1">Route Number</label>
                                                 <select class="form-control mb-1 border-0 bg-body" name="route_no">
                                                     <% rou.forEach( b=>{ %>
-                                                        <option>
-                                                            <%=b.r_id%>
+                                                        <option value="<%=b.r_id%>">
+                                                            <%=b.route_name%>
                                                         </option>
                                                         <% }); %>
                                                 </select>
@@ -207,12 +222,12 @@
                         <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
                             <table class="table Search-Employees table-borderless table-striped table-hover">
                                 <div class="d-flex justify-content-center">
-                                    <div class="border-route p-3 mb-2 w-100 bg-primary text-black rounded" style="min-width: 150px;">
-                                        <h3 class="text-center">Route No. <%=r.r_id%>
-                                        </h3>
-                                        <h5 class="text-center">
+                                    <div class="border-route p-3 mb-2 w-100 bg-primary text-black rounded"
+                                        style="min-width: 150px;">
+
+                                        <h3 class="text-center">
                                             <%=r.route_name%>
-                                        </h5>
+                                        </h3>
                                     </div>
                                 </div>
                                 <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
@@ -279,7 +294,9 @@
                                                     </td>
                                                 </tr>
                                 </tbody>
+            
                             </table>
+                            <button>show optimal Route</button>
                         </div>
                         <% }); %>
 

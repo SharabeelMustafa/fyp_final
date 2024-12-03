@@ -26,15 +26,18 @@ const upload = multer({ storage: storage });
 
 
 function index(req, res) {
-  con.query('SELECT bus.*,driver.name AS driver_name ,driver.contact AS driver_con FROM bus JOIN driver ON Bus.driver_emp_id = Driver.emp_id;', function (err, result) {
-    if (err) throw err;
-    con.query('SELECT * FROM route', function (err, result1) {
+  con.query(
+    'SELECT bus.*, driver.name AS driver_name, driver.contact AS driver_con, driver.profile_img FROM bus JOIN driver ON bus.driver_emp_id = driver.emp_id;',
+    function (err, result) {
       if (err) throw err;
-      res.render('login', { driver: result, route: result1 });
-    })
-
-  })
+      con.query('SELECT * FROM route', function (err, result1) {
+        if (err) throw err;
+        res.render('login', { driver: result, route: result1 });
+      });
+    }
+  );
 }
+
 
 async function StuSingUp(req, res) {
   const { name, reg_no, email, contact, password } = req.body;

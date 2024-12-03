@@ -114,6 +114,69 @@
                             </button>
                         </div>
                         <div class="mb-3 d-flex flex-wrap gap-2">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#optimalRouteModal">
+                                Show Optimal Route
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="optimalRouteModal" tabindex="-1" aria-labelledby="optimalRouteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="optimalRouteModalLabel">Select Route and Stops</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/optimalroute" method="POST" id="optimalRouteForm">
+                                                <!-- Select Route -->
+                                               
+                                                <div class="mb-3">
+                                                    <label for="routeSelect" class="form-label">Select Route</label>
+                                                    <select class="form-select" id="routeSelect" name="r_id" required>
+                                                        <option value="" disabled selected>Select a route</option>
+                                                        <% rou.forEach(route => { %>
+                                                            <option value="<%= route.r_id %>"><%= route.route_name %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                            
+                                                <!-- Select Start Stop -->
+                                                <div class="mb-3">
+                                                    <label for="startStopSelect" class="form-label">Select Start Stop</label>
+                                                    <select class="form-select" id="startStopSelect" name="start_stop" required>
+                                                        <option value="" disabled selected>Select a start stop</option>
+                                                        <% stu.forEach(stop => { %>
+                                                            <option value="<%= stop.s_id %>" data-route-id="<%= stop.r_id %>">
+                                                                <%= stop.stop_name %>
+                                                            </option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                            
+                                                <!-- Select End Stop -->
+                                                <div class="mb-3">
+                                                    <label for="endStopSelect" class="form-label">Select End Stop</label>
+                                                    <select class="form-select" id="endStopSelect" name="end_stop" required>
+                                                        <option value="" disabled selected>Select an end stop</option>
+                                                        <% stu.forEach(stop => { %>
+                                                            <option value="<%= stop.s_id %>" data-route-id="<%= stop.r_id %>">
+                                                                <%= stop.stop_name %>
+                                                            </option>
+                                                        <% }); %>
+                                                    </select>
+                                                </div>
+                            
+                                                <!-- Submit Button -->
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="button" class="btn btn-primary px-3 py-2" data-bs-toggle="modal"
                                 data-bs-target="#createticket">
                                 <svg class="PlusIcon">
@@ -194,8 +257,8 @@
                                                 <label class="form-label mb-1">Route Number</label>
                                                 <select class="form-control mb-1 border-0 bg-body" name="route_no">
                                                     <% rou.forEach( b=>{ %>
-                                                        <option>
-                                                            <%=b.r_id%>
+                                                        <option value="<%=b.r_id%>">
+                                                            <%=b.route_name%>
                                                         </option>
                                                         <% }); %>
                                                 </select>
@@ -281,7 +344,7 @@
                                                                 </use>
                                                             </svg>
                                                         </button>
-
+                                                       
 
                                                         <%} }); %>
                                                             <ul class="dropdown-menu border-0 Shadow"
@@ -294,7 +357,10 @@
                                                     </td>
                                                 </tr>
                                 </tbody>
+            
                             </table>
+                            
+                           
                         </div>
                         <% }); %>
 
@@ -346,8 +412,41 @@
 
 
     </div>
-
-
+  
+    <script>
+        // JavaScript to dynamically filter stops based on the selected route
+        document.getElementById('routeSelect').addEventListener('change', function () {
+            const selectedRouteId = this.value;
+    
+            // Filter start stops
+            const startStopSelect = document.getElementById('startStopSelect');
+            const startStopOptions = startStopSelect.querySelectorAll('option');
+            startStopOptions.forEach(option => {
+                if (option.getAttribute('data-route-id') === selectedRouteId || !option.value) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+    
+            // Reset the start stop selection
+            startStopSelect.value = '';
+    
+            // Filter end stops
+            const endStopSelect = document.getElementById('endStopSelect');
+            const endStopOptions = endStopSelect.querySelectorAll('option');
+            endStopOptions.forEach(option => {
+                if (option.getAttribute('data-route-id') === selectedRouteId || !option.value) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+    
+            // Reset the end stop selection
+            endStopSelect.value = '';
+        });
+    </script>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
