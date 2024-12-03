@@ -61,8 +61,13 @@ async function StuSingUp(req, res) {
 
 function DellNotificantion(req, res) {
   const n_Id = req.params.N_Id;
+  const role = req.session.role;
+
+  const table = role === 'faculty' ? 'fi_notification' : 'si_notification';
+  const idField = role === 'faculty' ? 'fin_id' : 'sin_id';
+  const deleteQuery_notification = `DELETE FROM ${table} WHERE ${idField} = ?`;
   //const userId = req.session.userId; // Current user's ID
-  con.query('DELETE FROM si_notification WHERE sin_id = ?', [n_Id], (err) => {
+  con.query(deleteQuery_notification, [n_Id], (err) => {
     if (err) throw err;
     res.redirect('/student_dashboard');
   });
@@ -70,17 +75,28 @@ function DellNotificantion(req, res) {
 
 
 function ConfirmLogin(req, res) {
-  const { reg_number, password } = req.body;
-  const selectQuery = 'SELECT * FROM student WHERE reg_number = ?';
+  const { reg_number, password, role } = req.body;
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+  let userId;
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
+  // const selectQuery = 'SELECT * FROM student WHERE reg_number = ?';
   con.query(selectQuery, [reg_number], (err, result) => {
     if (err) throw err;
     if (result.length > 0) {
       bcrypt.compare(password, result[0].password, (err, bcryptResult) => {
         if (err) throw err;
         if (password == result[0].password) {
-          const userId = result[0].reg_number;
+          if (role == "student") {
+
+             userId = result[0].reg_number;
+          } else {
+            
+             userId = result[0].emp_id;
+          }
           //console.log(userId);
           req.session.userId = userId;
+          req.session.role = role;
           res.redirect('/student_dashboard');
 
         } else {
@@ -98,8 +114,12 @@ function ConfirmLogin(req, res) {
 
 function CheckStuReg(req, res) {
   const userId = req.session.userId;
+  const role = req.session.role;
+  const table = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
-  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
+  const selectQuery_reg = `SELECT * FROM ${table} WHERE ${idField} = ? AND semester_name = ?`;
 
   let sem_name = null;
   RESS = 0;
@@ -112,7 +132,14 @@ function CheckStuReg(req, res) {
     con.query(selectQuery_reg, [userId, sem_name], function (err, result) {
       if (err) throw err;
       if (result.length > 0) {
-        req.session.regId = result[0].s_reg_id;
+        if (role == "student"){
+
+          req.session.regId = result[0].s_reg_id;
+        } 
+        else {
+          
+          req.session.regId = result[0].f_reg_id;
+        }
         RESS = 0;
       } else {
         RESS = 1;
@@ -138,16 +165,21 @@ function CheckStuReg(req, res) {
 
 function ShowStuEcard(req, res) {
   const userId = req.session.userId;
+  const role = req.session.role;
 
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
-  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
+  const selectQuery_reg = `SELECT * FROM ${table2} WHERE ${idField} = ? AND semester_name = ?`;
 
   con.query(selectQuery_semName, function (err, semResult) {
     if (err) throw err;
     const sem_name = semResult[0].semester_name;
 
-    con.query(selectQuery_student, [userId], (err, studentResult) => {
+    con.query(selectQuery, [userId], (err, studentResult) => {
       if (err) throw err;
 
       con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
@@ -170,21 +202,28 @@ function ShowStuEcard(req, res) {
 function ShowBusInfo(req, res) {
   const userId = req.session.userId;
   const regId = req.session.regId;
+  const role = req.session.role;
+  console.log(regId)
 
   const alertMessage = req.session.alertMessage || null; // Get and clear the alert message
   req.session.alertMessage = null;
 
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'f_reg_id' : 's_reg_id';
+  const table3 = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
   const selectQuery_bus = 'SELECT * FROM bus WHERE bus_id = ?';
   const selectQuery_route = 'SELECT * FROM route WHERE r_id = ?';
-  const selectQuery_stopid_reg = 'SELECT s_id FROM s_registration WHERE s_reg_id = ?';
+  const selectQuery_stopid_reg = `SELECT s_id FROM ${table3} WHERE ${table2} = ?`;
   const selectQuery_stopName = 'SELECT * FROM stops WHERE s_id = ?';
   const selectQuery_driver = 'SELECT * FROM driver WHERE emp_id = ?';
   const selectQuery_allRoutes = 'SELECT * FROM route'; // New query for all routes
   const selectQuery_allstop = 'SELECT * FROM stops';
 
   // Fetch student info
-  con.query(selectQuery_student, [userId], (err, studentResult) => {
+  con.query(selectQuery, [userId], (err, studentResult) => {
     if (err) throw err;
 
     const busId = studentResult[0].bus_id;
@@ -337,15 +376,17 @@ function SendNotificationTo_Admin(heading, note) {
 function SetRegistration(req, res) {
   const { route, stop } = req.body;
   const userId = req.session.userId;
+  const role = req.session.role;
   let sem_name = null;
 
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
   const selectQuery_Busid = 'SELECT bus_id FROM `bus` WHERE route_id = ?';
-  const insertQuery_Busid = `
-    INSERT INTO student (reg_number, bus_id) 
-    VALUES (?, ?) 
-    ON DUPLICATE KEY UPDATE bus_id = VALUES(bus_id);`;
+  const insertQuery_Busid = `INSERT INTO ${table} (${idField}, bus_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE bus_id = VALUES(bus_id);`;
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
-  const insertQuery_reg = 'INSERT INTO s_registration (fee_status,reg_number,semester_name,s_id) VALUES (?,?,?,?)';
+  const insertQuery_reg = `INSERT INTO ${table2} (fee_status,${idField},semester_name,s_id) VALUES (?,?,?,?)`;
 
   con.query(selectQuery_semName, function (err, result) {
     if (err) {
@@ -393,13 +434,18 @@ function SetRegistration(req, res) {
 
 function ShowDashbord(req, res) {
   const userId = req.session.userId;
+  const role = req.session.role;
   //console.log(userId);
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'fi_notification' : 'si_notification';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
 
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
-  con.query(selectQuery_student, [userId], (err, result) => {
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
+  const selectQuery_si_notification = `SELECT * FROM ${table2} WHERE ${idField} = ? `;
+
+  con.query(selectQuery, [userId], (err, result) => {
     if (err) throw err;
     //console.log(result);
-    const selectQuery_si_notification = 'SELECT * FROM si_notification WHERE reg_number = ? ';
     con.query(selectQuery_si_notification, [userId], (err, result1) => {
       if (err) throw err;
       //console.log(result);
@@ -415,9 +461,13 @@ function ShowDashbord(req, res) {
 function TrackBus(req, res) {
   const userId = req.session.userId;
   //console.log(userId);
-
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
-  con.query(selectQuery_student, [userId], (err, result) => {
+  const role= req.session.role;
+   
+    
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
+  con.query(selectQuery, [userId], (err, result) => {
     if (err) throw err;
     //console.log(result);
       const currentDate = new Date()
@@ -429,16 +479,20 @@ function TrackBus(req, res) {
 }
 function ShowFeePage(req, res) {
   const userId = req.session.userId;
-
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
-  con.query(selectQuery_student, [userId], (err, result) => {
+  const role= req.session.role;
+   
+    
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
+  con.query(selectQuery, [userId], (err, result) => {
     if (err) {
       ShowErrorPage(err, res);
     }
     else {
       //console.log(result);
       const currentDate = new Date()
-      console.log(RESS);
+      // console.log(RESS);
       res.render("fee_page", { student: result[0], currentDate });
     }
   });

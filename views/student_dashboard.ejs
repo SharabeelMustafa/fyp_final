@@ -79,7 +79,7 @@
                     <div class="bg-blue card-Shadow rounded-2 mb-3 p-2 " style="height:200px; width: 200px;"
                       bis_skin_checked="1">
 
-                      <a href="/dell_si_notif/<%=notif.sin_id%>">
+                      <a href="/dell_si_notif/<%= notif.sin_id || notif.fin_id %>">
                         <img src="assets/images/icons/close.svg" height="10px" width="10px" alt="" style="float:right">
                       </a>
 
@@ -91,7 +91,6 @@
                         </h5>
                         <p style="color: black;">
                           <%= notif.note %>
-                          <%= notif.notes %>
                         </p>
                         <br>
 
