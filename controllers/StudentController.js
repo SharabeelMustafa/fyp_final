@@ -346,6 +346,9 @@ function setRouteChangeApplication(req, res) {
   });
 }
 
+// function approteRouteChangeApplication(req, res){
+
+// }
 
 function SendNotificationTo_Admin(heading, note) {
   const selectQuery_a_id = "SELECT a_id FROM admin";

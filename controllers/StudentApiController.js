@@ -141,8 +141,12 @@ function ConfirmLogin(req, res) {
 
 function CheckStuReg(req, res) {
   const userId = req.session.userId;
+  const role = req.query.role;
+  const table = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
-  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
+  const selectQuery_reg = `SELECT * FROM ${table} WHERE ${idField} = ? AND semester_name = ?`;
 
   con.query(selectQuery_semName, function (err, result) {
     if (err) throw err;
@@ -152,7 +156,7 @@ function CheckStuReg(req, res) {
       if (err) return res.status(500).json({ error: err.message });
 
       if (result.length > 0) {
-        req.session.regId = result[0].s_reg_id;
+        req.session.regId = result[0].s_reg_id || result[0].f_reg_id;
         bool = 0;
       } else {
         bool = 1;
@@ -212,21 +216,28 @@ function ShowChallan(req, res) {
 function ShowBusInfo(req, res) {
   const userId = req.session.userId;
   const regId = req.session.regId;
-  console.log(userId, regId)
+  const role = req.query.role;
+  console.log(userId, regId, role)
 
   if (!userId || !regId) {
     return res.status(400).json({ error: 'Missing user session data' });
   }
 
-  const selectQuery_student = 'SELECT * FROM student WHERE reg_number = ?';
+
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'f_reg_id' : 's_reg_id';
+  const table3 = role === 'faculty' ? 'f_registration' : 's_registration';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+
+  const selectQuery = `SELECT * FROM ${table} WHERE ${idField} = ?`;
   const selectQuery_bus = 'SELECT * FROM bus WHERE bus_id = ?';
-  const selectQuery_route = 'SELECT route_name FROM route WHERE r_id = ?';
-  const selectQuery_stopid_reg = 'SELECT s_id FROM s_registration WHERE s_reg_id = ?';
+  const selectQuery_route = 'SELECT * FROM route WHERE r_id = ?';
+  const selectQuery_stopid_reg = `SELECT s_id FROM ${table3} WHERE ${table2} = ?`;
   const selectQuery_stopName = 'SELECT * FROM stops WHERE s_id = ?';
   const selectQuery_driver = 'SELECT * FROM driver WHERE emp_id = ?';
 
   // Fetch student info
-  con.query(selectQuery_student, [userId], (err, studentResult) => {
+  con.query(selectQuery, [userId], (err, studentResult) => {
     if (err) return res.status(500).json({ error: err.message });
 
     if (studentResult.length === 0) {
@@ -307,15 +318,8 @@ function ShowBusInfo(req, res) {
 
 
 function ShowStuEcard(req, res) {
-  const userId = req.session.userId;
-  console.log(userId)
-
-  if (!userId) {
-    return res.status(401).json({ error: 'Unauthorized access. Please log in.' });
-  }
 
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
-  const selectQuery_reg = 'SELECT * FROM s_registration WHERE reg_number = ? AND semester_name = ?';
 
   con.query(selectQuery_semName, function (err, semResult) {
     if (err) {
@@ -327,22 +331,9 @@ function ShowStuEcard(req, res) {
       return res.status(404).json({ error: 'No semester found.' });
     }
 
-    const sem_name = semResult[0].semester_name;
-
-    con.query(selectQuery_reg, [userId, sem_name], (err, regResult) => {
-      if (err) {
-        console.error('Error fetching registration:', err);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
-
-      const registrationInfo = regResult.length > 0 ? regResult[0] : null;
-      const currentDate = new Date();
-
-      res.json({
-        success: true,
-        registration: registrationInfo,
-        currentDate
-      });
+    res.json({
+      success: true,
+      sem_name: semResult[0].semester_name
     });
   });
 }
@@ -351,12 +342,20 @@ function SetRegistration(req, res) {
   const route = req.body.route;
   const stop = req.body.stop;
   const userId = req.session.userId;
-  console.log(route, stop, userId);
+  const role = req.body.rol;
+  console.log(route, stop, userId, role);
 
+
+  const table = role === 'faculty' ? 'facality' : 'student';
+  const table2 = role === 'faculty' ? 'f_registration' : 's_registration';
+  const table3 = role === 'faculty' ? 'f_reg_id' : 's_reg_id';
+  const idField = role === 'faculty' ? 'emp_id' : 'reg_number';
+  
   const selectQuery_semName = 'SELECT semester_name FROM semester ORDER BY created_at DESC LIMIT 1';
   const selectQuery_Busid = 'SELECT bus_id FROM `bus` WHERE route_id = ?';
-  const updateQuery_Busid = 'UPDATE student SET bus_id = ? WHERE reg_number = ?';
-  const insertQuery_reg = 'INSERT INTO s_registration (fee_status,reg_number,semester_name,s_id) VALUES (?,?,?,?)';
+  const updateQuery_Busid = `UPDATE ${table} SET bus_id = ? WHERE ${idField} = ?`;
+  const insertQuery_reg = `INSERT INTO ${table2} (fee_status,${idField},semester_name,s_id) VALUES (?,?,?,?)`;
+  const fetchQuery = `SELECT ${table3} FROM ${table2} WHERE ${idField} = ?`
 
 
   con.query(selectQuery_semName, (err, result) => {
@@ -366,6 +365,7 @@ function SetRegistration(req, res) {
     }
   
     const sem_name = result[0]?.semester_name;
+    console.log(sem_name)
   
     // Proceed to fetch bus_id
     con.query(selectQuery_Busid, [route], (err, result) => {
@@ -380,22 +380,25 @@ function SetRegistration(req, res) {
           if (err) {
             return res.status(100).json({ message: "Error updating bus_id in student record" });
           }
+          console.log("done")
   
           con.query(insertQuery_reg, ['unpaid', userId, sem_name, stop], (err) => {
             if (err) {
               const message = "Error inserting registration record";
               return res.status(120).json({ messag: "s_r error occurred" });
             }
+            console.log("done")
 
-            con.query('SELECT s_reg_id FROM `s_registration` WHERE reg_number = ?', [userId], (err, result) => {
+            con.query(fetchQuery, [userId], (err, result) => {
               if (err) {
                 const message = "Error inserting registration record";
                 return res.status(120).json({ messag: "s_r error occurred" });
               }
+              console.log("done")
             
               console.log(result[0]);
-              const s_reg_id = result[0].s_reg_id;
-              req.session.regId = s_reg_id;
+              const reg_id = result[0]?.s_reg_id || result[0]?.f_reg_id;
+              req.session.regId = reg_id;
     
               res.json({ success: true, newBusId: busId });
             });
