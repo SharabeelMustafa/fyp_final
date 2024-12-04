@@ -63,7 +63,7 @@
   <!-- Bars -->
   <div class="container-fluid p-0" id="some-menu"></div>
 
-  
+
   <input type="hidden" id="getalertMessage" value="<%= alertMessage || '' %>" />
 
 
@@ -109,51 +109,93 @@
           </div>
 
           <!-- Student Pickup Information -->
-          <div class="d-flex">
-            <div class="info-item mb-3">
-              <span class="info-label fw-bold">Pickup Time:</span>
-              <span class="info-value">
+          <div class="d-flex align-items-center justify-content-between mb-4 p-4" style="
+  background-color: #ffffff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+">
+            <!-- Pickup Time -->
+            <div>
+              <div style="font-weight: bold; color: #343a40; font-size: 18px; margin-bottom: 5px;">
+                Pickup Time:
+              </div>
+              <div style="color: #495057; font-size: 16px; font-weight: 500;">
                 <%=stop.pickup_time %>
-              </span>
+              </div>
             </div>
-            <div style="margin-left: 100px;">
-              <button id="route-chage" class="btn btn-primary btn-blue ">Apply for Route Change</button>
+
+            <!-- Route Change Button -->
+            <div>
+              <button id="route-chage" class="btn btn-primary btn-blue" style="
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease-in-out;
+    " onmouseover="this.style.backgroundColor='#0056b3'; this.style.boxShadow='0px 6px 15px rgba(0, 0, 0, 0.25)';"
+                onmouseout="this.style.backgroundColor='#007bff'; this.style.boxShadow='0px 4px 10px rgba(0, 0, 0, 0.15)';">
+                Apply for Route Change
+              </button>
             </div>
           </div>
+
           <!-- Student Stop Information -->
-          <div class="info-item mb-3">
-            <span class="info-label fw-bold">Pickup Stop:</span>
-            <span class="info-value">
+          <div class="mb-4 p-4" style="
+  background-color: #ffffff;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+">
+            <div style="font-weight: bold; color: #343a40; font-size: 18px; margin-bottom: 5px;">
+              Pickup Stop:
+            </div>
+            <div style="color: #495057; font-size: 16px; font-weight: 500;">
               <%=stop.stop_name %>
-            </span>
+            </div>
           </div>
+
 
 
 
         </div>
-        <div class="info-card px-5 mx-5 my-4 col-5 rounded-3 p-4 bg-color card-shadow">
-          <h4 class="text-center text-primary mb-3">Your Bus Driver Information</h4>
-
-
-
+        <div class="info-card px-5 mx-5 my-4 col-5 rounded-3 p-4 bg-color card-shadow"
+          style="background-color: #ffffff; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); border-radius: 15px;">
+          <h4 class="text-center" style="color: #007bff; margin-bottom: 20px; font-weight: bold;">
+            Your Bus Driver Information
+          </h4>
           <!-- Driver Information -->
-          <div class="info-item mb-3 d-flex align-items-center gap-3">
-            <!-- Placeholder for Driver Image -->
-            <img src="uploads/<%=driver.profile_img %>" class="" alt="Driver Image" width="180px" height="200px " />
-
+          <div class="text-center">
+            <!-- Driver Image -->
+            <img src="uploads/<%=driver.profile_img %>" alt="Driver Image" style="
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        margin-bottom: 20px;
+      " />
             <div>
-              <div class="info-label fw-bold">Driver Name:</div>
-              <div class="info-value">
+              <!-- Driver Name -->
+              <div style="font-weight: bold; color: #343a40; margin-top: 10px; font-size: 18px;">
+                Driver Name:
+              </div>
+              <div style="color: #495057; font-weight: 500; font-size: 16px; margin-bottom: 15px;">
                 <%=driver.name%>
               </div>
-
-              <div class="info-label fw-bold">Driver Phone:</div>
-              <div class="info-value">
+              <!-- Driver Contact -->
+              <div style="font-weight: bold; color: #343a40; font-size: 18px;">
+                Driver Phone:
+              </div>
+              <div style="color: #495057; font-weight: 500; font-size: 16px;">
                 <%=driver.contact %>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -173,10 +215,10 @@
               <div class="mb-3">
                 <label for="" class="form-label regular small"> Old </label>
                 <label for="routeSelect" class="form-label regular small">Route Name</label>
-                <label   class="form-control">
-                    
-                      <%=route.route_name %>
-                     
+                <label class="form-control">
+
+                  <%=route.route_name %>
+
                 </label>
               </div>
             </div>
@@ -199,12 +241,12 @@
               <div class="mb-3">
                 <label for="" class="form-label regular small">Old</label>
                 <label for="routeSelect" class="form-label regular small">stop Name</label>
-                <label   class="form-control">
-                  
-                    
-                      <%=stop.stop_name %>
-                    
-                   
+                <label class="form-control">
+
+
+                  <%=stop.stop_name %>
+
+
                 </label>
               </div>
             </div>
@@ -222,34 +264,34 @@
             </div>
           </div>
 
-          <input type="hidden"  name="newrouteName"   >
-          <input type="hidden"  name="oldrouteName"  value="<%=route.route_name %>" >
-          <input type="hidden"  name="old_route"  value="<%=route.r_id %>" >
-          <input type="hidden"  name="newStopName"    >
-          <input type="hidden"  name="oldStopName"  value="<%=stop.stop_name %>"  >
-          <input type="hidden"  name="old_stop"  value="<%=stop.s_id %>"  >
+          <input type="hidden" name="newrouteName">
+          <input type="hidden" name="oldrouteName" value="<%=route.route_name %>">
+          <input type="hidden" name="old_route" value="<%=route.r_id %>">
+          <input type="hidden" name="newStopName">
+          <input type="hidden" name="oldStopName" value="<%=stop.stop_name %>">
+          <input type="hidden" name="old_stop" value="<%=stop.s_id %>">
 
-            <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
-              <button type="submit" class="btn btn-danger px-5 w-75 text-black btn-blue "> Apply</button>
-              <!-- <a href="/challan" ></a> -->
-            </div>
-          
-        
+          <div class="d-flex justify-content-evenly align-items-center pt-5 mt-3">
+            <button type="submit" class="btn btn-danger px-5 w-75 text-black btn-blue "> Apply</button>
+            <!-- <a href="/challan" ></a> -->
+          </div>
+
+
         </form>
       </div>
     </div>
 
-    
-     
-    
+
+
+
     <script>
 
-          const alertMessage = document.getElementById("getalertMessage").value;
+      const alertMessage = document.getElementById("getalertMessage").value;
 
-          // If the value is not empty, show the alert
-          if (alertMessage) {
-            alert(alertMessage);
-          }
+      // If the value is not empty, show the alert
+      if (alertMessage) {
+        alert(alertMessage);
+      }
 
       // Function to update hidden input values based on the selected options
       function updateHiddenInputs() {
@@ -257,23 +299,23 @@
         const stopSelect = document.getElementById('stopSelect');
         const routeNameInput = document.querySelector('input[name="newrouteName"]');
         const stopNameInput = document.querySelector('input[name="newStopName"]');
-    
+
         // Get the selected option's text
         const selectedRouteOption = routeSelect.options[routeSelect.selectedIndex];
         const selectedStopOption = stopSelect.options[stopSelect.selectedIndex];
-    
+
         // Update hidden input values
         routeNameInput.value = selectedRouteOption ? selectedRouteOption.text : '';
         stopNameInput.value = selectedStopOption ? selectedStopOption.text : '';
       }
-    
+
       // Add event listeners for changes in the select elements
       document.getElementById('routeSelect').addEventListener('change', updateHiddenInputs);
       document.getElementById('stopSelect').addEventListener('change', updateHiddenInputs);
-    
+
       // Initialize the hidden inputs on page load
       document.addEventListener('DOMContentLoaded', updateHiddenInputs);
-  
+
       // Hide the signup overlay initially
       document.getElementById('signup-overlay').style.display = 'none';
 
