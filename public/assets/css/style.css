@@ -947,6 +947,10 @@ h5 {
   --bs-btn-padding-x: 1rem;
 }
 
+.hello-class {
+  background-color: #bcbcbc;
+}
+
 .btn-lg {
   --bs-btn-padding-y: 0.5rem;
   --bs-btn-padding-x: 1.25rem;
