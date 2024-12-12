@@ -30,62 +30,62 @@
         <div class="col-md-6  p-sm-5">
             <% rou.forEach( r=>{ %>
 
-                <div class="table-responsive p-4 pe-2 pt-0" style="height: 60vh">
-                    <table class="table Search-Employees table-borderless table-striped table-hover">
-                        <div class="d-flex justify-content-center">
-                            <div class="border p-3 w-100 bg-primary text-white rounded" style="min-width: 150px;">
-                                <h3 class="text-center">Route No. <%=r.r_id%>
+                <div class="table-responsive p-4 pe-2 pt-0" style="height: 80vh">
+                    <table
+                        style="width: 100%; border-collapse: collapse; background: #f9f9f9; border-radius: 10px; overflow: hidden;">
+                        <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+                            <div
+                                style="border: 2px solid #007bff; padding: 20px; background: linear-gradient(90deg, #007bff, #0056b3); color: white; text-align: center; border-radius: 10px;">
+                                <h3 style="margin: 0; font-size: 1.5rem;">Route No. <%=r.r_id%>
                                 </h3>
-                                <h5 class="text-center">
+                                <h5 style="margin: 5px 0 0 0; font-size: 1rem;">
                                     <%=r.route_name%>
                                 </h5>
                             </div>
                         </div>
-                        <thead class="Employees-border sticky-top bg-white" style="z-index: 1 !important">
-                            <tr class="small">
-                                <th scope="col" class="pb-3 ps-4 dashed-border-bottom">#</th>
-                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Stops
-                                </th>
-                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">
-                                    PickUp Time
-                                </th>
-                                <th scope="col" class="pb-3 dashed-border-bottom" style="min-width: 150px">Drop
-                                    Time
-                                </th>
-
+                        <thead style="background-color: #007bff; color: white;">
+                            <tr>
+                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid white;">#</th>
+                                <th
+                                    style="padding: 10px; text-align: left; border-bottom: 2px solid white; min-width: 150px;">
+                                    Stops</th>
+                                <th
+                                    style="padding: 10px; text-align: left; border-bottom: 2px solid white; min-width: 150px;">
+                                    PickUp Time</th>
+                                <th
+                                    style="padding: 10px; text-align: left; border-bottom: 2px solid white; min-width: 150px;">
+                                    Drop Time</th>
+                            </tr>
                         </thead>
-                        <tbody class="small" id="student-table-body">
+                        <tbody id="student-table-body" style="background-color: #ffffff;">
                             <% let a=0; %>
-                                <% stu.forEach( s=>{ %>
-                                    <% if(s.r_id==r.r_id ){ %>
-                                        <tr class="mt-4 student-row">
-
-                                            <th scope="row" class="ps-4 pe-2">
+                                <% stu.forEach(s=> { %>
+                                    <% if(s.r_id==r.r_id) { %>
+                                        <tr style="border-bottom: 1px solid #ddd; transition: background-color 0.3s;">
+                                            <th scope="row" style="padding: 10px; color: #555;">
                                                 <%= ++a %>
                                             </th>
-                                            <td>
-                                                <%=s.stop_name %>
+                                            <td style="padding: 10px; color: #555;">
+                                                <%= s.stop_name %>
                                             </td>
-                                            <td>
-                                                <%=s.pickup_time %>
+                                            <td style="padding: 10px; color: #555;">
+                                                <%= s.pickup_time %>
                                             </td>
-                                            <td>
-                                                <%=s.drop_time %>
+                                            <td style="padding: 10px; color: #555;">
+                                                <%= s.drop_time %>
                                             </td>
-
-
-                                            <%} }); %>
-                                                <ul class="dropdown-menu border-0 Shadow"
-                                                    style="font-size: 10px; min-width: 73px !important">
-                                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item dropdown-menu-hover" href="#">Action</a>
-                                                    </li>
-                                                </ul>
-                                                </td>
                                         </tr>
+                                        <% } %>
+                                            <% }); %>
                         </tbody>
                     </table>
+
+                    <style>
+                        table tbody tr:hover {
+                            background-color: #f1f1f1;
+                        }
+                    </style>
+
                 </div>
                 <% }); %>
 

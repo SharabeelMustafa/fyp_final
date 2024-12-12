@@ -114,7 +114,9 @@
                                                     </div>
                                                     <div class="form-control" aria-label="Text input with checkbox">
                                                         <h5 class="selectable-text">
-                                                            <%= s.reg_number %>
+                                                            <%= s.name %>
+                                                                <br>
+                                                                <%= s.reg_number %>
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -146,8 +148,9 @@
                                                 style="height: 350px;; background-color: #D9D9D9;"></textarea>
                                         </div>
 
-                                      
-                                        <button type="submit" class="btn btn-primary" style="margin-left: 260px;">   
+
+                                        <button type="submit" class="btn btn-primary" style="margin-left: 260px;"
+                                            id="sendButton">
                                             Send
                                         </button>
 
@@ -189,6 +192,9 @@
             const checkbox = this.parentElement.previousElementSibling.querySelector('input[type="checkbox"]');
             checkbox.checked = !checkbox.checked;
         });
+    });
+    document.getElementById('sendButton').addEventListener('click', function () {
+        alert('Notification sent successfully!');
     });
 
     // Click on Select All <h5> text to toggle the Select All checkbox
